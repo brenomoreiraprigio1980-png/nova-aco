@@ -1,0 +1,69 @@
+/* Nova Aco - acabamento visual 2026-09-29 */
+:root{--head:"Rajdhani","Arial Narrow",Arial,sans-serif}
+h1.mt,h2.mt{
+  font-family:var(--head)!important;font-weight:700!important;text-transform:uppercase!important;
+  letter-spacing:-.028em!important;line-height:.92!important;display:grid!important;justify-items:start!important;
+  width:fit-content;max-width:100%;padding:.045em .02em .10em!important;background:none!important;
+  color:inherit!important;-webkit-text-fill-color:currentColor!important;text-shadow:none!important;filter:none!important
+}
+h1.mt>span,h2.mt>span{grid-area:1/1}
+.mt-sh,.hero .mt-sh,.page-hero .mt-sh,.section-dark .mt-sh,.about-dark .mt-sh,.cta-band .mt-sh,.quote-card:not(.light) .mt-sh{
+  color:#d9e2e9!important;-webkit-text-fill-color:#d9e2e9!important;-webkit-text-stroke:.038em #eef3f6!important;
+  text-shadow:.010em .015em 0 #b9c5ce,.020em .030em 0 #82909c,.030em .050em 0 #53616d,.055em .085em .10em rgba(0,10,24,.34)!important
+}
+.mt-fg{
+  position:relative;background:
+    linear-gradient(108deg,transparent 0 17%,rgba(93,190,255,.18) 22%,rgba(113,203,255,.72) 28%,rgba(209,236,252,.30) 32%,transparent 39%,transparent 62%,rgba(61,155,221,.48) 72%,rgba(183,226,250,.18) 77%,transparent 84%),
+    repeating-linear-gradient(0deg,rgba(255,255,255,.075) 0 1px,rgba(3,16,31,.09) 1px 3px),
+    linear-gradient(180deg,#376f9e 0%,#173f68 14%,#0a2948 48%,#071a31 72%,#123b63 92%,#081e38 100%)!important;
+  -webkit-background-clip:text!important;background-clip:text!important;color:transparent!important;-webkit-text-fill-color:transparent!important;
+  -webkit-text-stroke:.014em rgba(3,18,35,.92)!important;paint-order:stroke fill;filter:drop-shadow(0 .045em .035em rgba(0,12,28,.24))!important
+}
+.mt-fg2{
+  background:linear-gradient(180deg,rgba(220,242,255,.72) 0%,rgba(92,181,240,.22) 9%,transparent 20% 72%,rgba(46,129,190,.16) 88%,transparent 100%)!important;
+  -webkit-background-clip:text!important;background-clip:text!important;color:transparent!important;-webkit-text-fill-color:transparent!important;
+  -webkit-text-stroke:.006em rgba(145,196,230,.48)!important;opacity:.62
+}
+.hero .mt-fg,.hero .mt-fg2,.page-hero .mt-fg,.page-hero .mt-fg2,.section-dark .mt-fg,.section-dark .mt-fg2,.about-dark .mt-fg,.about-dark .mt-fg2,.cta-band .mt-fg,.cta-band .mt-fg2,.quote-card:not(.light) .mt-fg,.quote-card:not(.light) .mt-fg2{
+  filter:brightness(1.30) saturate(.96) drop-shadow(0 .045em .035em rgba(0,8,20,.34))!important
+}
+.hero h1.mt{font-size:clamp(3.05rem,6.45vw,6.1rem)!important;max-width:900px}
+.section h2.mt{font-size:clamp(2.15rem,4vw,3.55rem)!important}
+.page-hero h1.mt{font-size:clamp(2.85rem,5.7vw,5.25rem)!important}
+.cta-band h2.mt{font-size:clamp(1.9rem,3.35vw,3rem)!important}
+.product-copy h2.mt{font-size:clamp(2.05rem,3.35vw,3.15rem)!important}
+body{background:#eef3f6!important}
+body:before{
+  opacity:.42!important;background:
+    linear-gradient(135deg,transparent 0 12.92%,rgba(255,255,255,.78) 12.98%,rgba(63,116,156,.14) 13.10%,rgba(255,255,255,.46) 13.20%,transparent 13.34%),
+    linear-gradient(135deg,transparent 0 86.62%,rgba(255,255,255,.70) 86.70%,rgba(63,116,156,.12) 86.82%,transparent 86.98%),
+    radial-gradient(70% 52% at 48% 35%,rgba(255,255,255,.95),rgba(255,255,255,.24) 58%,transparent 78%),
+    repeating-linear-gradient(0deg,rgba(255,255,255,.12) 0 1px,rgba(83,105,124,.022) 1px 4px),
+    linear-gradient(180deg,#fbfcfd 0%,#f0f4f7 55%,#e7edf1 100%)!important
+}
+.section-white{background:rgba(255,255,255,.72)!important}
+.section-blue{background:linear-gradient(160deg,rgba(226,237,245,.70),rgba(247,249,251,.74) 55%,rgba(218,231,239,.66))!important}
+.section-steel{background:linear-gradient(180deg,rgba(241,245,247,.74),rgba(224,233,239,.66))!important}
+.section-dark,.about-dark,.cta-band,.page-hero{
+  background:linear-gradient(180deg,rgba(6,22,43,.975),rgba(5,18,36,.982)),url("/assets/fundo-aco-azul.jpg") center/cover no-repeat!important
+}
+.service-bar,.brands{
+  background:linear-gradient(90deg,rgba(6,22,43,.978),rgba(7,27,51,.972)),url("/assets/fundo-aco-azul.jpg") center 40%/cover no-repeat!important
+}
+@media(min-width:1600px){
+  .hero h1.mt{font-size:clamp(5.3rem,5.25vw,7rem)!important}
+  .section h2.mt{font-size:clamp(3.25rem,3.05vw,4.25rem)!important}
+}
+@media(max-width:700px){
+  h1.mt,h2.mt{letter-spacing:-.020em!important;line-height:.95!important}
+  .hero h1.mt{font-size:clamp(2.8rem,13vw,4.15rem)!important}
+  .section h2.mt{font-size:clamp(2rem,9.2vw,3rem)!important}
+  .page-hero h1.mt{font-size:clamp(2.6rem,12vw,4rem)!important}
+  body:before{opacity:.31!important}
+  .section-dark,.about-dark,.cta-band,.page-hero{
+    background-image:linear-gradient(180deg,rgba(6,22,43,.98),rgba(5,18,36,.985)),url("/assets/fundo-aco-azul-sm.jpg")!important
+  }
+  .service-bar,.brands{
+    background-image:linear-gradient(90deg,rgba(6,22,43,.982),rgba(7,27,51,.977)),url("/assets/fundo-aco-azul-sm.jpg")!important
+  }
+}
