@@ -646,3 +646,41 @@ body::before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;ba
   .brand-list li{font-size:.8rem}
   .material .tt-sm{font-size:.95rem}
 }
+
+/* ===== Rodada 19h40: espaçamento, cards de produtos, faixa de marcas ===== */
+.section{padding:clamp(48px,5.2vw,76px) 0}
+.cta-band{padding:clamp(44px,4.6vw,64px) 0}
+.section-head{margin-bottom:clamp(26px,3vw,40px)}
+.hero+.section{padding-top:clamp(56px,6vw,84px)}
+@media (max-width:700px){.section{padding:44px 0}.cta-band{padding:40px 0}}
+/* cards de produtos */
+.tiles{gap:20px}
+.tile{display:flex;flex-direction:column;aspect-ratio:auto;border-radius:16px;background:linear-gradient(180deg,rgba(20,58,112,.55),rgba(6,22,50,.75));border:1px solid rgba(140,190,245,.22);box-shadow:0 14px 34px rgba(0,8,26,.35);transition:transform .3s ease,box-shadow .3s ease,border-color .3s ease}
+.tile::after{display:none}
+.tile-img{display:block;aspect-ratio:4/3;overflow:hidden;background:#07142a}
+.tile-img img{width:100%;height:100%;object-fit:cover;transition:transform .6s ease}
+.tile .tile-body{position:relative;display:grid;gap:4px;padding:16px 52px 18px 18px;border-top:2px solid #3d95ff}
+.tile .tile-name,.tile span.tile-name{position:static;font:700 1.02rem/1.25 var(--ui)!important;letter-spacing:.05em;text-transform:uppercase;color:#fff}
+.tile span::after{display:none}
+.tile .tile-txt{font-size:.88rem;line-height:1.4;color:#a9c1db}
+.tile .tile-body::after{content:"";position:absolute;right:16px;top:50%;width:28px;height:28px;margin-top:-14px;border-radius:50%;border:1px solid rgba(140,190,245,.45);background:rgba(61,149,255,.12) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'%3E%3Cpath d='M4.5 2.5 8 6l-3.5 3.5' fill='none' stroke='%239fd0ff' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/12px no-repeat;transition:background-color .25s,border-color .25s}
+.tile:hover{transform:translateY(-4px);border-color:rgba(120,185,255,.55);box-shadow:0 20px 44px rgba(0,8,26,.45),0 0 24px rgba(61,149,255,.25)}
+.tile:hover .tile-img img{transform:scale(1.06)}
+.tile:hover .tile-body::after{background-color:#1f6fe0;border-color:#3d95ff}
+@media (max-width:700px){
+  .tiles{gap:12px}
+  .tile .tile-body{padding:12px 12px 14px}
+  .tile .tile-body::after{display:none}
+  .tile span.tile-name{font-size:.82rem!important;letter-spacing:.03em}
+  .tile .tile-txt{font-size:.78rem}
+}
+/* faixa aço de marca: foto real enquadrada */
+.band-photo{margin:0;justify-self:center;width:100%;max-width:580px}
+.band-photo img{width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:16px;border:1px solid rgba(140,190,245,.28);box-shadow:0 24px 50px rgba(0,8,26,.45),0 0 34px rgba(61,149,255,.22)}
+.tile span.tile-img,.tile span.tile-body,.tile span.tile-name,.tile span.tile-txt{position:relative;left:auto;right:auto;bottom:auto;z-index:auto}
+.tile span.tile-img{display:block}
+.tile span.tile-body{display:grid}
+.tile span.tile-txt{font-weight:400!important;text-transform:none;letter-spacing:0;font-size:.88rem;line-height:1.4;color:#a9c1db}
+@media (max-width:700px){.tile span.tile-txt{font-size:.78rem}}
+.tile span.tile-body::after{display:block}
+@media (max-width:700px){.tile span.tile-body::after{display:none}}
