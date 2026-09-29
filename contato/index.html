@@ -18,7 +18,7 @@
 <meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@600;700&display=swap" rel="stylesheet">
 <link rel="icon" type="image/png" sizes="512x512" href="/assets/favicon-nova-aco.png?v=20260929">
 <link rel="apple-touch-icon" href="/assets/favicon-nova-aco.png?v=20260929">
 <link rel="preload" as="image" href="/assets/logo-metalica-transparente.png">
@@ -49,7 +49,7 @@
   --shadow:0 22px 50px rgba(8,40,68,.14);
   --shadow-sm:0 10px 26px rgba(8,40,68,.09);
   --max:1200px;
-  --head:"Anton",Impact,"Arial Narrow",sans-serif;
+  --head:"Rajdhani","Arial Narrow",Arial,sans-serif;
   --ui:Arial,Helvetica,sans-serif;
 }
 *{box-sizing:border-box}
@@ -697,18 +697,8 @@ body{font-family:Arial,Helvetica,sans-serif}
 .hero-media img{animation:slowZoom 2.4s cubic-bezier(.2,.7,.2,1) both}
 
 /* Palavras vazadas de fundo */
-[data-mark]{position:relative;overflow:hidden;isolation:isolate}
-[data-mark]>.container{position:relative;z-index:1}
-[data-mark]:after{content:attr(data-mark);position:absolute;right:-1.5vw;bottom:-.14em;z-index:0;pointer-events:none;
-  font:400 clamp(7rem,17vw,19rem)/1 var(--head);letter-spacing:.02em;white-space:nowrap;
-  color:transparent;-webkit-text-stroke:1.5px rgba(31,111,178,.13)}
-.section-dark[data-mark]:after,.about-dark[data-mark]:after{-webkit-text-stroke:1.5px rgba(140,210,255,.10);left:-1vw;right:auto;top:.1em;bottom:auto}
-/* manchas de luz decorativas nas áreas claras */
-.section-blue[data-mark],.section-steel[data-mark]{background:
-  radial-gradient(520px 520px at 88% 12%,rgba(92,196,255,.20),transparent 70%),
-  radial-gradient(460px 460px at 6% 92%,rgba(31,111,178,.12),transparent 70%),
-  rgba(226,238,248,.35)}
-
+.section-dark/* manchas de luz decorativas nas áreas claras */
+.section-blue
 /* Títulos vazados (área clara) */
 .section h2.t-outline{
   background:none;-webkit-background-clip:border-box;background-clip:border-box;
@@ -760,8 +750,7 @@ body{font-family:Arial,Helvetica,sans-serif}
   .collage-side{width:52%;height:40%}
   .collage-badge{left:12px;bottom:calc(16% + 12px);font-size:.78rem;padding:10px 12px}
   .about-actions{display:grid}
-  [data-mark]:after{font-size:6.5rem;-webkit-text-stroke-width:1px}
-}
+  }
 
 /* Enquadramento das fotos de produtos */
 .product-photo{aspect-ratio:4/3;min-height:0}
@@ -786,10 +775,83 @@ body{font-family:Arial,Helvetica,sans-serif}
   .hero-content>*,.hero-media img,.t-led{animation:none!important}
   .js .stagger>.tile{opacity:1;transform:none}
 }
+
+
+/* =========================================================
+   Estilo aço azul (referência do cliente): títulos metálicos
+   em Rajdhani e fundos de aço escovado com faixas diagonais
+   ========================================================= */
+:root{
+  --metal-dark:
+    repeating-linear-gradient(0deg,rgba(255,255,255,.07) 0 1px,rgba(0,0,0,.10) 1px 3px),
+    radial-gradient(55% 90% at 28% 35%,rgba(84,168,240,.60),transparent 62%),
+    radial-gradient(45% 80% at 78% 60%,rgba(66,148,228,.45),transparent 62%),
+    linear-gradient(180deg,#1d4675 0%,#0f2b50 46%,#15396a 56%,#0a1f3b 100%);
+  --metal-light:
+    repeating-linear-gradient(0deg,rgba(255,255,255,.10) 0 1px,rgba(0,0,0,.08) 1px 3px),
+    radial-gradient(55% 90% at 30% 30%,rgba(255,255,255,.85),transparent 60%),
+    linear-gradient(180deg,#eef7fd 0%,#b9dcf5 34%,#5f9fd6 49%,#2a68a8 53%,#5d9bd3 72%,#cfe7f8 100%);
+}
+h1,h2,.section h2,.page-hero h1,.hero h1,.cta-band h2,.product-copy h2,.material h3,.quote-card h3,.contact-block h2{
+  font-family:var(--head);font-weight:700;letter-spacing:.005em;line-height:1}
+
+/* Títulos em fundo claro: aço azul-marinho escovado com borda prateada */
+.section h2,.copy h2,.product-copy h2,.material h3,.quote-card.light h3,.contact-block h2{
+  background:var(--metal-dark)!important;background-size:100% 1em!important;background-repeat:repeat-y!important;
+  -webkit-background-clip:text!important;background-clip:text!important;color:transparent!important;-webkit-text-fill-color:transparent!important;
+  -webkit-text-stroke:1.2px #dfe7ee;paint-order:stroke fill;
+  filter:drop-shadow(0 2px 0 #8d9cab) drop-shadow(0 3px 0 #5d6e80) drop-shadow(0 8px 10px rgba(6,24,48,.28))!important;
+  text-shadow:none!important;animation:none!important;padding-bottom:.06em}
+
+/* Títulos em fundo escuro: aço azul claro escovado com borda prateada */
+.hero h1,.hero h1 em,.page-hero h1,.section-dark h2,.about-dark h2,.cta-band h2,.quote-card:not(.light) h3{
+  background:var(--metal-light)!important;background-size:100% 1em!important;background-repeat:repeat-y!important;
+  -webkit-background-clip:text!important;background-clip:text!important;color:transparent!important;-webkit-text-fill-color:transparent!important;
+  -webkit-text-stroke:1.2px rgba(235,244,250,.95);paint-order:stroke fill;
+  filter:drop-shadow(0 2px 0 #0b2442) drop-shadow(0 3px 0 #06172c) drop-shadow(0 10px 16px rgba(0,0,0,.45)) drop-shadow(0 0 18px rgba(80,170,240,.25))!important;
+  text-shadow:none!important;animation:none!important;padding-bottom:.06em}
+.hero h1 em{font-style:normal;filter:none!important}
+.page-hero h1:hover{-webkit-text-fill-color:transparent}
+
+/* Tamanhos com a Rajdhani (mais larga que a anterior) */
+.hero h1{font-size:clamp(3rem,6.4vw,6rem)}
+.section h2{font-size:clamp(2.2rem,4vw,3.6rem)}
+.page-hero h1{font-size:clamp(2.8rem,6vw,5.4rem)}
+.cta-band h2{font-size:clamp(1.9rem,3.4vw,3rem)}
+.product-copy h2{font-size:clamp(2.2rem,3.4vw,3.2rem)}
+.material h3{font-size:2rem}
+@media(min-width:1600px){.hero h1{font-size:clamp(5.4rem,5.4vw,7.2rem)}.section h2{font-size:clamp(3.4rem,3.2vw,4.4rem)}}
+
+/* Fundo geral: aço claro escovado com faixas diagonais prateadas */
+body{background:#e6ecf1}
+body:before{background:
+  linear-gradient(135deg,transparent 0 14%,rgba(255,255,255,.95) 14.15%,rgba(150,172,194,.55) 14.45%,transparent 14.7%),
+  linear-gradient(135deg,transparent 0 17%,rgba(160,182,204,.35) 17.1%,transparent 17.25%),
+  linear-gradient(135deg,transparent 0 82.8%,rgba(160,182,204,.35) 82.9%,transparent 83.05%),
+  linear-gradient(135deg,transparent 0 85.4%,rgba(255,255,255,.95) 85.55%,rgba(150,172,194,.55) 85.85%,transparent 86.1%),
+  radial-gradient(60% 55% at 50% 40%,rgba(255,255,255,.95),transparent 70%),
+  repeating-linear-gradient(0deg,rgba(255,255,255,.18) 0 1px,rgba(120,140,160,.05) 1px 3px),
+  linear-gradient(180deg,#f3f6f9 0%,#e3e9ee 60%,#d6dee5 100%)!important}
+.section-white,.section-blue,.section-steel{background:transparent!important}
+
+/* Áreas escuras: fundo de aço azul com faixas prateadas iluminadas */
+.section-dark,.about-dark,.cta-band,.page-hero{
+  background:linear-gradient(180deg,rgba(3,12,26,.25),rgba(3,12,26,.35)),url("/assets/fundo-aco-azul.jpg") center/cover no-repeat!important}
+.service-bar,.brands{background:linear-gradient(90deg,rgba(3,12,26,.55),rgba(3,12,26,.35)),url("/assets/fundo-aco-azul.jpg") center 40%/cover no-repeat!important}
+.page-hero:before{display:none}
+@media(max-width:700px){
+  .section-dark,.about-dark,.cta-band,.page-hero{background-image:linear-gradient(180deg,rgba(3,12,26,.3),rgba(3,12,26,.45)),url("/assets/fundo-aco-azul-sm.jpg")!important}
+  .service-bar,.brands{background-image:linear-gradient(90deg,rgba(3,12,26,.6),rgba(3,12,26,.45)),url("/assets/fundo-aco-azul-sm.jpg")!important}
+}
+
+/* Mosaico com 6 produtos principais */
+.tiles.tiles-6{grid-template-columns:repeat(3,1fr)}
+.tiles.tiles-6 .tile,.tiles.tiles-6 .tile:nth-child(1){grid-column:auto;aspect-ratio:4/3}
+@media(max-width:620px){.tiles.tiles-6{grid-template-columns:1fr 1fr}.tiles.tiles-6 .tile:nth-child(1){grid-column:auto;aspect-ratio:4/5}.tiles.tiles-6 .tile{aspect-ratio:4/5}}
 </style>
 <script>document.documentElement.classList.add('js')</script>
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "LocalBusiness", "name": "Nova Aço", "url": "https://novaacoarmado.com.br/", "image": "https://novaacoarmado.com.br/assets/capa-nova-aco.png", "logo": "https://novaacoarmado.com.br/assets/logo-metalica-transparente.png", "telephone": "+5511984531598", "email": "novaco2505@gmail.com", "address": {"@type": "PostalAddress", "streetAddress": "Rua Macapá, 46 - Jardim do Líbano", "addressLocality": "Barueri", "addressRegion": "SP", "postalCode": "06448-200", "addressCountry": "BR"}, "openingHoursSpecification": [{"@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"], "opens": "08:00", "closes": "17:48"}], "areaServed": ["Barueri", "Jandira", "Itapevi", "Osasco", "Carapicuíba", "Cotia", "Santana de Parnaíba"], "sameAs": ["https://www.instagram.com/nova_aco_armado/"], "brand": [{"@type": "Brand", "name": "Gerdau"}, {"@type": "Brand", "name": "ArcelorMittal"}, {"@type": "Brand", "name": "Cimec"}]}</script>
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "O que preciso enviar para solicitar um orçamento?", "acceptedAnswer": {"@type": "Answer", "text": "Envie o projeto estrutural, a tabela de ferro ou uma lista com materiais, medidas e quantidades. Informe também o endereço da obra."}}, {"@type": "Question", "name": "Posso enviar o projeto pelo WhatsApp?", "acceptedAnswer": {"@type": "Answer", "text": "Sim. Você pode enviar o projeto em PDF ou DWG, além da lista de ferros e outras informações do pedido."}}, {"@type": "Question", "name": "Como funciona a programação das entregas?", "acceptedAnswer": {"@type": "Answer", "text": "Informe as etapas previstas da obra e quando os materiais serão necessários. A equipe verifica a produção e combina o fornecimento."}}, {"@type": "Question", "name": "Como consulto a entrega?", "acceptedAnswer": {"@type": "Answer", "text": "Informe cidade, bairro e endereço da obra para verificar disponibilidade e condições."}}, {"@type": "Question", "name": "Quais cidades vocês atendem?", "acceptedAnswer": {"@type": "Answer", "text": "Barueri, Jandira, Itapevi, Osasco, Carapicuíba, Cotia e Santana de Parnaíba. Entregas mais distantes são avaliadas caso a caso."}}, {"@type": "Question", "name": "Qual a marca do aço?", "acceptedAnswer": {"@type": "Answer", "text": "Trabalhamos com material de qualidade das marcas Gerdau, ArcelorMittal e Cimec."}}, {"@type": "Question", "name": "Qual o horário de atendimento?", "acceptedAnswer": {"@type": "Answer", "text": "Segunda a sexta, das 8h às 17h48. Para visitas e retirada de material, confirme antes com a equipe."}}]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "O que preciso enviar para pedir um orçamento?", "acceptedAnswer": {"@type": "Answer", "text": "Envie pelo WhatsApp o projeto estrutural em PDF ou DWG, a tabela de ferro ou uma lista com materiais, medidas e quantidades. Informe também o endereço da obra."}}, {"@type": "Question", "name": "Como funciona a programação das entregas?", "acceptedAnswer": {"@type": "Answer", "text": "Informe as etapas previstas da obra e quando os materiais serão necessários. A equipe verifica a produção e combina o fornecimento."}}, {"@type": "Question", "name": "Quais cidades vocês atendem?", "acceptedAnswer": {"@type": "Answer", "text": "Barueri, Jandira, Itapevi, Osasco, Carapicuíba, Cotia e Santana de Parnaíba. Entregas mais distantes são avaliadas caso a caso."}}, {"@type": "Question", "name": "Qual a marca do aço?", "acceptedAnswer": {"@type": "Answer", "text": "Trabalhamos com material de qualidade das marcas Gerdau, ArcelorMittal e Cimec."}}, {"@type": "Question", "name": "Qual o horário de atendimento?", "acceptedAnswer": {"@type": "Answer", "text": "Segunda a sexta, das 8h às 17h48. Para visitas e retirada de material, confirme antes com a equipe."}}]}</script>
 </head><body>
 <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
 <div class="topbar"><div class="container topbar-inner">
@@ -835,8 +897,8 @@ body{font-family:Arial,Helvetica,sans-serif}
       <p class="quote-status" aria-live="polite"></p>
       <button class="btn btn-accent btn-block" type="submit"><svg viewBox="0 0 24 24" aria-hidden="true" class="ico"><path fill="currentColor" d="M19.05 4.91A9.82 9.82 0 0 0 12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38a9.9 9.9 0 0 0 4.74 1.21h.01c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.91-7.01Zm-7.01 15.24h-.01a8.2 8.2 0 0 1-4.19-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.2 8.2 0 0 1-1.26-4.38c0-4.54 3.7-8.23 8.24-8.23 2.2 0 4.27.86 5.82 2.42a8.18 8.18 0 0 1 2.41 5.82c0 4.54-3.7 8.23-8.22 8.23Zm4.52-6.16c-.25-.12-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.13-.16.24-.64.8-.78.97-.14.16-.29.18-.54.06-.25-.12-1.05-.39-1.99-1.23-.74-.66-1.23-1.47-1.38-1.72-.14-.25-.01-.38.11-.5.11-.11.25-.29.37-.43.13-.15.17-.25.25-.41.08-.17.04-.31-.02-.43-.06-.12-.56-1.34-.76-1.84-.2-.48-.41-.42-.56-.43h-.48c-.17 0-.43.06-.66.31-.22.25-.86.85-.86 2.07 0 1.22.89 2.4 1.01 2.56.12.17 1.75 2.67 4.23 3.74.59.26 1.05.41 1.41.52.59.19 1.13.16 1.56.1.48-.07 1.47-.6 1.67-1.18.21-.58.21-1.07.14-1.18-.06-.1-.22-.16-.47-.28Z"/></svg> Enviar pelo WhatsApp</button>
     </form></div>
-      <div class="copy" id="perguntas" style="margin-top:56px"><h2 class="t-outline">Perguntas frequentes</h2></div>
-      <div class="faq"><details><summary>O que preciso enviar para solicitar um orçamento?</summary><p>Envie o projeto estrutural, a tabela de ferro ou uma lista com materiais, medidas e quantidades. Informe também o endereço da obra.</p></details><details><summary>Posso enviar o projeto pelo WhatsApp?</summary><p>Sim. Você pode enviar o projeto em PDF ou DWG, além da lista de ferros e outras informações do pedido.</p></details><details><summary>Como funciona a programação das entregas?</summary><p>Informe as etapas previstas da obra e quando os materiais serão necessários. A equipe verifica a produção e combina o fornecimento.</p></details><details><summary>Como consulto a entrega?</summary><p>Informe cidade, bairro e endereço da obra para verificar disponibilidade e condições.</p></details><details><summary>Quais cidades vocês atendem?</summary><p>Barueri, Jandira, Itapevi, Osasco, Carapicuíba, Cotia e Santana de Parnaíba. Entregas mais distantes são avaliadas caso a caso.</p></details><details><summary>Qual a marca do aço?</summary><p>Trabalhamos com material de qualidade das marcas Gerdau, ArcelorMittal e Cimec.</p></details><details><summary>Qual o horário de atendimento?</summary><p>Segunda a sexta, das 8h às 17h48. Para visitas e retirada de material, confirme antes com a equipe.</p></details></div>
+      <div class="copy" id="perguntas" style="margin-top:56px"><h2>Perguntas frequentes</h2></div>
+      <div class="faq"><details><summary>O que preciso enviar para pedir um orçamento?</summary><p>Envie pelo WhatsApp o projeto estrutural em PDF ou DWG, a tabela de ferro ou uma lista com materiais, medidas e quantidades. Informe também o endereço da obra.</p></details><details><summary>Como funciona a programação das entregas?</summary><p>Informe as etapas previstas da obra e quando os materiais serão necessários. A equipe verifica a produção e combina o fornecimento.</p></details><details><summary>Quais cidades vocês atendem?</summary><p>Barueri, Jandira, Itapevi, Osasco, Carapicuíba, Cotia e Santana de Parnaíba. Entregas mais distantes são avaliadas caso a caso.</p></details><details><summary>Qual a marca do aço?</summary><p>Trabalhamos com material de qualidade das marcas Gerdau, ArcelorMittal e Cimec.</p></details><details><summary>Qual o horário de atendimento?</summary><p>Segunda a sexta, das 8h às 17h48. Para visitas e retirada de material, confirme antes com a equipe.</p></details></div>
       <div class="copy" id="avaliar" style="margin-top:56px"><h2>Avalie a Nova Aço</h2><p>Se você já comprou conosco, pode enviar sua experiência pelo formulário.</p></div>
       <form class="review-form" data-review-form novalidate>
         <div><label>Sua nota</label><div class="rating" role="radiogroup" aria-label="Sua nota"><button type="button" data-rating="1" aria-label="1 estrela">★</button><button type="button" data-rating="2" aria-label="2 estrelas">★</button><button type="button" data-rating="3" aria-label="3 estrelas">★</button><button type="button" data-rating="4" aria-label="4 estrelas">★</button><button type="button" data-rating="5" aria-label="5 estrelas">★</button></div></div>
@@ -848,43 +910,6 @@ body{font-family:Arial,Helvetica,sans-serif}
       </form>
     </div>
   </div></section>
-  <section class="section section-dark" id="avaliacoes" data-mark="CLIENTES">
-    <div class="container">
-      <div class="section-head"><div><h2 class="t-led">O que os clientes relatam</h2></div>
-        <div class="section-head-side"><p>Avaliações públicas sobre atendimento, prazo e fornecimento da Nova Aço.</p>
-        <div class="carousel-controls"><button type="button" class="round-btn" data-carousel-prev aria-label="Avaliação anterior"><svg viewBox="0 0 24 24" aria-hidden="true" class="ico"><path d="m15 5-7 7 7 7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></button><button type="button" class="round-btn" data-carousel-next aria-label="Próxima avaliação"><svg viewBox="0 0 24 24" aria-hidden="true" class="ico"><path d="m9 5 7 7-7 7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div></div></div>
-      <div class="review-row" data-carousel tabindex="0" aria-label="Avaliações de clientes"><article class="review">
-          <div class="review-top"><img class="review-avatar" src="/assets/clientes/deivisom-lourenco.jpg" alt="Foto de Deivisom Lourenço" width="46" height="46" loading="lazy"><div class="review-person"><strong>Deivisom Lourenço</strong><span>Avaliação no Google</span></div></div>
-          <div class="review-stars" aria-label="5 de 5 estrelas">★★★★★</div>
-          <blockquote>“Muito bom, ótimo atendimento, entrega ágil. Super indico, serviço de excelente qualidade. Logo faço outro pedido.”</blockquote>
-        </article><article class="review">
-          <div class="review-top"><span class="review-avatar" aria-hidden="true">H</span><div class="review-person"><strong>Helvecio Silva</strong><span>Avaliação no Google</span></div></div>
-          <div class="review-stars" aria-label="5 de 5 estrelas">★★★★★</div>
-          <blockquote>“Muito feliz com minha obra. O pessoal da Nova Aço atendeu todos os prazos, incluindo emergências que surgiram no decorrer da obra. Qualidade e atendimento impecável.”</blockquote>
-        </article><article class="review">
-          <div class="review-top"><img class="review-avatar" src="/assets/clientes/pedro-henrique.jpg" alt="Foto de Pedro Henrique" width="46" height="46" loading="lazy"><div class="review-person"><strong>Pedro Henrique</strong><span>Avaliação no Google</span></div></div>
-          <div class="review-stars" aria-label="5 de 5 estrelas">★★★★★</div>
-          <blockquote>“Ótimo atendimento, rápido e a entrega perfeita. Antes do dia eles já tinham feito e me entregaram, adiantando minha obra. Podem confiar.”</blockquote>
-        </article><article class="review">
-          <div class="review-top"><span class="review-avatar" aria-hidden="true">N</span><div class="review-person"><strong>Nadia Ribeiro</strong><span>Avaliação no Google</span></div></div>
-          <div class="review-stars" aria-label="5 de 5 estrelas">★★★★★</div>
-          <blockquote>“Fui muito bem atendida, o serviço foi impecável, entrega no prazo e o preço é super diferenciado. Recomendo demais!”</blockquote>
-        </article><article class="review">
-          <div class="review-top"><span class="review-avatar" aria-hidden="true">L</span><div class="review-person"><strong>Lucas da Silva</strong><span>Avaliação no Google</span></div></div>
-          <div class="review-stars" aria-label="5 de 5 estrelas">★★★★★</div>
-          <blockquote>“Entrega rápida, ferragem de qualidade, atendimento excelente e preço justo.”</blockquote>
-        </article><article class="review">
-          <div class="review-top"><img class="review-avatar" src="/assets/clientes/tatiana-marques.jpg" alt="Foto de Tatiana Marques" width="46" height="46" loading="lazy"><div class="review-person"><strong>Tatiana Marques</strong><span>Avaliação no Google</span></div></div>
-          <div class="review-stars" aria-label="5 de 5 estrelas">★★★★★</div>
-          <blockquote>“Ótimo atendimento, profissionalismo e atenção no pós-venda.”</blockquote>
-        </article><article class="review">
-          <div class="review-top"><img class="review-avatar" src="/assets/clientes/silvana-pereira-de-sousa.jpg" alt="Foto de Silvana Pereira de Sousa" width="46" height="46" loading="lazy"><div class="review-person"><strong>Silvana Pereira de Sousa</strong><span>Avaliação no Google</span></div></div>
-          <div class="review-stars" aria-label="5 de 5 estrelas">★★★★★</div>
-          <blockquote>“São profissionais capacitados, com comprometimento com o cliente.”</blockquote>
-        </article></div>
-      <div class="reviews-meta">Fonte: avaliações públicas do perfil da Nova Aço no Google.</div>
-    </div>
-  </section>
 </main>
 <footer class="site-footer">
   <div class="container">
