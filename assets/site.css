@@ -599,3 +599,14 @@ a.contact-card:hover{border-color:var(--blue);transform:translateY(-2px)}
   .collage-cap span{font-size:.78rem}
 }
 .tt.tt-hero{font-size:clamp(3.1rem,1.6rem + 6vw,6.8rem);line-height:.98}
+
+/* =========================================================
+   Fundo único: azul com luz no centro (base na imagem enviada),
+   fixo atrás de todo o site, mesmo tom em todas as seções
+   ========================================================= */
+body{background:#01102f}
+body::before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;background:radial-gradient(ellipse 75% 70% at 50% 50%,#0a4792 0%,#06306a 42%,#031d4a 70%,#01102f 100%)}
+.section.tone-dark,.section.tone-alt,.section.reviews-blue,.cta-band.tone-dark,.cta-band.tone-alt{background:transparent!important;border-top:0!important}
+.service-bar{background:rgba(1,16,47,.55);border-color:rgba(120,175,240,.16)}
+.brands{background:rgba(1,16,47,.35)}
+.site-footer{background:rgba(1,12,36,.92)}
