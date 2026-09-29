@@ -13,27 +13,25 @@ jobs:
         with:
           python-version: '3.12'
       - run: python -m pip install pillow==12.3.0
-      - name: Find remaining exact recipes
+      - name: Find special WebP recipes
         shell: python
         run: |
           from PIL import Image,ImageOps
           import io,hashlib
           def sha(b): return hashlib.sha256(b).hexdigest()
-
-          # Find small-image recipe using vigas.
-          src=ImageOps.exif_transpose(Image.open("assets/produto-vigas-real.jpg")).convert("RGB")
-          full=src.resize((900,1200),Image.Resampling.LANCZOS)
-          bb=io.BytesIO(); full.save(bb,"WEBP",quality=78,method=6,exact=False)
-          full_dec=Image.open(io.BytesIO(bb.getvalue())).convert("RGB")
-          expected="949d68e6231114ba872c84de83f69dc32dd919192f287e65a46820a4e219d64b"
-          found=False
-          for input_name,base in [("original",src),("full_decoded",full_dec)]:
-            for res_name,res in [("LANCZOS",Image.Resampling.LANCZOS),("BICUBIC",Image.Resampling.BICUBIC),("BILINEAR",Image.Resampling.BILINEAR)]:
-              im=base.resize((480,640),res)
-              for q in range(45,91):
-                for method in range(0,7):
-                  for exact in (False,True):
-                    b=io.BytesIO(); im.save(b,"WEBP",quality=q,method=method,exact=exact)
-                    if sha(b.getvalue())==expected:
-                      print("SM_EXACT",input_name,res_name,q,method,exact,len(b.getvalue())); found=True; raise SystemExit(0)
-          print("SM_NO_MATCH")
+          def search(label,sources,size,expected):
+            qorder=[80,82,85,78,75,90,88,84,83,81,79,77,76,74,72,71,70,86,87,89,91,92,93,94,95,96,97,98,99,100,69,68,67,66,65]
+            for srcpath in sources:
+              src=ImageOps.exif_transpose(Image.open(srcpath))
+              for res_name,res in [("LANCZOS",Image.Resampling.LANCZOS),("BICUBIC",Image.Resampling.BICUBIC)]:
+                im=src.resize(size,res)
+                for q in qorder:
+                  for method in (6,4,5,3,2,1,0):
+                    for exact in (False,True):
+                      b=io.BytesIO(); im.save(b,"WEBP",quality=q,method=method,exact=exact)
+                      if sha(b.getvalue())==expected:
+                        print("SPECIAL_EXACT",label,srcpath,res_name,q,method,exact,len(b.getvalue()))
+                        return
+            print("SPECIAL_NO_MATCH",label)
+          search("capa-logo",["assets/capa-logo-azul.png"],(900,1599),"e1e479b2da9016604e4d23e0612da02022b06297f2c43e4a23393b3bfb9fbb48")
+          search("logo",["assets/logo-metalica-transparente.png","assets/logo-transparent.png"],(520,207),"ea9e7d76b298446fe307c1128ab80c847016db7e35e924a7f6199a6a49367ef3")
