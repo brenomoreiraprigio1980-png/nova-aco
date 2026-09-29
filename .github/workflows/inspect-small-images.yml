@@ -1,0 +1,65 @@
+name: inspect-small-images
+on:
+  push:
+    branches: [staging-upload-claude-2026-09-29]
+permissions:
+  contents: read
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install pillow==12.3.0
+      - name: Find exact thumbnail recipes
+        shell: python
+        run: |
+          from PIL import Image,ImageOps
+          import io,hashlib
+          expected={
+            'acompanhamento-nova-aco':('assets/acompanhamento-nova-aco.jpeg',(900,1200),(480,640),'3c3e23509782a43321d682b1879b0bdda1c93f3992b50cb26ab7d1057591da16'),
+            'obra-1':('assets/obra-1.jpg',(900,1200),(480,640),'868ecdf69590e75cea884359513e2599dfde84423e658724b8e19f5600bc4b78'),
+            'obra-2':('assets/obra-2.jpg',(900,1200),(480,640),'eae00c8de8f0dfaafaafddce0864d6b0bb445cf3cfcab11a90e2871df2f74abe'),
+            'produto-arame-12-nova-aco':('assets/produto-arame-12-nova-aco.jpg',(900,1200),(480,640),'44581bd84663f073cda3c7857b68677c3753c1e7dc5a638e099b7156ebe0254b'),
+            'produto-arames-final':('assets/produto-arames-final.jpg',(1200,900),(640,480),'9efe17129f8b4a650dfe3c6cf36d35f1361302b84b2ba7a2f32f34a3a1fe38cb'),
+            'produto-arames-real':('assets/produto-arames-real.jpg',(900,1200),(480,640),'f50efc0b3c44bad1e97c742105b85c3cb980e827162710d31d87e24692fcb6fe'),
+            'produto-colunas-catalogo':('assets/produto-colunas-catalogo.png',(960,1200),(512,640),'7dcf3af2c0291c566f27e93a2c033ab7a2f8f3829a84ac1512f4771e4999f4ac'),
+            'produto-colunas-real':('assets/produto-colunas-real.jpg',(900,1200),(480,640),'f18f2d2f7fe83309b96c918084ace9da79b8f3807b78c8f6ca12847b5295fdf6'),
+            'produto-corte-dobra-real':('assets/produto-corte-dobra-real.jpg',(900,1200),(480,640),'b8da5e231915c118c9d7889cc23e276c91df6044aaf223acff5f1a6c6519abfa'),
+            'produto-estacas-final':('assets/produto-estacas-final.jpg',(1200,1064),(640,567),'3d83b2fe88e5a452921aef5abac4662c539ce6fa2868a134e3bd4f74439520d1'),
+            'produto-estacas-realista':('assets/produto-estacas-realista.png',(900,1200),(480,640),'0ce53dd578d2117b8b9ab63360c6feedb0403113c5e621568fb82027eaccad2c'),
+            'produto-malha-pop-real':('assets/produto-malha-pop-real.jpg',(900,1200),(480,640),'9337d7c7ea097ccc1bdcec1124e9b16a946f1b4563a1f6e710ca28057a36002d'),
+            'produto-pregos-final':('assets/produto-pregos-final.jpg',(1200,900),(640,480),'c11340891c53cb4ebeb7e842403d61d85fea906ba6680b06d6324794309f2694'),
+            'produto-pregos-real':('assets/produto-pregos-real.jpg',(900,1200),(480,640),'e982522d1772bd4b4824f070795715f6de705ad89005bd559d1504fc9c085ef5'),
+            'produto-sapatas-final':('assets/produto-sapatas-final.jpg',(900,1200),(480,640),'2744454f0d28d80aea0aedb04f93910a1d1105a311b0c89bc49f070b1d7ffa84'),
+            'produto-sapatas-real':('assets/produto-sapatas-real.jpg',(900,1200),(480,640),'3c3e23509782a43321d682b1879b0bdda1c93f3992b50cb26ab7d1057591da16'),
+            'produto-sapatas-sem-dedo':('assets/produto-sapatas-sem-dedo.jpg',(986,1200),(526,640),'a07dbe7df9091aab550f6ec16c8719cbc8bbbff23ae31830a386ebf78eb4c625'),
+            'produto-vergalhoes-final':('assets/produto-vergalhoes-final.jpg',(1200,900),(640,480),'c903f4ac10ce33aa667d101a421171460510edc311b37b5edfd9ab2b097cc1fa'),
+            'produto-vergalhoes-realista':('assets/produto-vergalhoes-realista.png',(900,1200),(480,640),'a6f967d087d339a51d1310b7f55f37ee1a3a2597c1f961a496b5f3ebc655d586'),
+          }
+          def norm(path):
+              im=ImageOps.exif_transpose(Image.open(path))
+              if 'A' not in im.mode: im=im.convert('RGB')
+              return im
+          for name,(srcpath,full_size,sm_size,want) in expected.items():
+              src=norm(srcpath)
+              full_raw=src.resize(full_size,Image.Resampling.LANCZOS)
+              fb=io.BytesIO(); full_raw.save(fb,'WEBP',quality=78,method=6,exact=False)
+              full_dec=Image.open(io.BytesIO(fb.getvalue()))
+              inputs=[('original',src),('full_raw',full_raw),('full_dec',full_dec)]
+              found=None
+              for input_name,base in inputs:
+                for res_name,res in [('LANCZOS',Image.Resampling.LANCZOS),('BICUBIC',Image.Resampling.BICUBIC)]:
+                  small=base.resize(sm_size,res)
+                  for q in range(50,86):
+                    for method in range(0,7):
+                      b=io.BytesIO(); small.save(b,'WEBP',quality=q,method=method,exact=False)
+                      if hashlib.sha256(b.getvalue()).hexdigest()==want:
+                        found=(input_name,res_name,q,method,False,len(b.getvalue()))
+                        break
+                    if found: break
+                  if found: break
+                if found: break
+              print('SM_RESULT',name,found)
