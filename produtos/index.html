@@ -943,6 +943,28 @@ body:before{background:
   color:#0e3a6e!important;-webkit-text-fill-color:#0e3a6e!important;-webkit-text-stroke:.02em #0e3a6e!important;
   text-shadow:0 .03em 0 #0a2a52,0 .06em .12em rgba(0,0,0,.45)!important}
 .hero .mt,.page-hero .mt,.section-dark .mt,.about-dark .mt,.cta-band .mt,.quote-card:not(.light) .mt{filter:drop-shadow(0 0 .18em rgba(80,165,245,.35))!important}
+
+/* === Títulos azuis com acabamento metálico liso (cromado) === */
+.mt-fg{background:linear-gradient(180deg,#6fb0ee 0%,#3c84d2 30%,#1d5ca8 47%,#0c3669 50%,#154a8c 56%,#2a6fbd 78%,#5a9fe4 100%)!important;
+  background-size:100% 1em!important;background-repeat:repeat-y!important;
+  -webkit-background-clip:text!important;background-clip:text!important;-webkit-text-stroke:.02em #1d5ca8!important}
+.hero .mt-fg,.page-hero .mt-fg,.section-dark .mt-fg,.about-dark .mt-fg,.cta-band .mt-fg,.quote-card:not(.light) .mt-fg{
+  background:linear-gradient(180deg,#e2f2ff 0%,#a9d6fb 28%,#5ea9ef 46%,#1f5fae 50%,#2f76c9 57%,#6db6f5 80%,#bfe2ff 100%)!important;
+  background-size:100% 1em!important;background-repeat:repeat-y!important;
+  -webkit-background-clip:text!important;background-clip:text!important;-webkit-text-stroke:.02em #4f9be6!important}
+
+/* === Fundo com a imagem de aço em opacidade bem baixa === */
+body:before{background:
+  linear-gradient(180deg,rgba(247,249,251,.93),rgba(240,244,247,.93)),
+  url("/assets/fundo-aco-azul.jpg") center/cover no-repeat!important}
+.section-dark,.about-dark,.cta-band,.page-hero{
+  background:linear-gradient(180deg,rgba(8,26,50,.88),rgba(6,20,40,.9)),url("/assets/fundo-aco-azul.jpg") center/cover no-repeat!important}
+.service-bar,.brands{background:linear-gradient(90deg,rgba(8,26,50,.9),rgba(8,26,50,.88)),url("/assets/fundo-aco-azul.jpg") center 40%/cover no-repeat!important}
+@media(max-width:700px){
+  body:before{background:linear-gradient(180deg,rgba(247,249,251,.93),rgba(240,244,247,.93)),url("/assets/fundo-aco-azul-sm.jpg") center/cover no-repeat!important}
+  .section-dark,.about-dark,.cta-band,.page-hero{background-image:linear-gradient(180deg,rgba(8,26,50,.88),rgba(6,20,40,.9)),url("/assets/fundo-aco-azul-sm.jpg")!important}
+  .service-bar,.brands{background-image:linear-gradient(90deg,rgba(8,26,50,.9),rgba(8,26,50,.88)),url("/assets/fundo-aco-azul-sm.jpg")!important}
+}
 </style>
 <script>document.documentElement.classList.add('js')</script>
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "LocalBusiness", "name": "Nova Aço", "url": "https://novaacoarmado.com.br/", "image": "https://novaacoarmado.com.br/assets/capa-nova-aco.png", "logo": "https://novaacoarmado.com.br/assets/logo-metalica-transparente.png", "telephone": "+5511984531598", "email": "novaco2505@gmail.com", "address": {"@type": "PostalAddress", "streetAddress": "Rua Macapá, 46 - Jardim do Líbano", "addressLocality": "Barueri", "addressRegion": "SP", "postalCode": "06448-200", "addressCountry": "BR"}, "openingHoursSpecification": [{"@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"], "opens": "08:00", "closes": "17:48"}], "areaServed": ["Barueri", "Jandira", "Itapevi", "Osasco", "Carapicuíba", "Cotia", "Santana de Parnaíba"], "sameAs": ["https://www.instagram.com/nova_aco_armado/"], "brand": [{"@type": "Brand", "name": "Gerdau"}, {"@type": "Brand", "name": "ArcelorMittal"}, {"@type": "Brand", "name": "Cimec"}]}</script>
