@@ -556,3 +556,46 @@ a.contact-card:hover{border-color:var(--blue);transform:translateY(-2px)}
 .tone-light .quote-card .tt-sm .f{color:#7cbcff}
 .tone-light .product-copy{background:radial-gradient(420px 260px at 100% 0%,rgba(61,149,255,.12),rgba(61,149,255,0) 70%),linear-gradient(135deg,#fff 55%,#f1f6fd)}
 .tone-light .about-points li,.tone-light .fact-list li,.tone-light .contact-card:not(.highlight){background:linear-gradient(135deg,#fff 60%,#f1f6fd)}
+
+/* =========================================================
+   Rodada 29/09 19h: site todo em azul, títulos em uma linha,
+   sem linhas decorativas
+   ========================================================= */
+.section.tone-alt,.cta-band.tone-alt{background:radial-gradient(900px 460px at 100% 0%,rgba(96,170,255,.20),rgba(96,170,255,0) 62%),radial-gradient(700px 380px at 0% 100%,rgba(61,149,255,.12),rgba(61,149,255,0) 60%),linear-gradient(180deg,#133b72 0%,#0e2f5c 100%);border-top:1px solid rgba(120,175,240,.22)}
+.section.reviews-blue{background:radial-gradient(800px 420px at 85% 0%,rgba(120,185,255,.22),rgba(120,185,255,0) 65%),linear-gradient(135deg,#0a2146 0%,#17498f 55%,#0b2550 100%)}
+.section[class*="deco-"]::before,.cta-band::before,.section::after,.cta-band::after,
+.product-copy::before,.frame-a::after,.about-collage::after,.process-video::before,.process-video::after,.photo-band::after,.quote-card::before{display:none!important}
+.tt-rule{display:none!important}
+/* títulos: uma linha só quando cabe, maiores */
+.tt{display:block;font-size:clamp(2.3rem,1.45rem + 3vw,3.9rem);line-height:1.02;text-wrap:balance}
+.tt .tl,.tt .tl>span{display:inline}
+.tt-hero .tl{display:block}
+.page-hero .tt{font-size:clamp(2.7rem,1.6rem + 3.8vw,4.6rem)}
+.tt-sm{display:block;font-size:clamp(1.5rem,1.25rem + .8vw,2rem)}
+.section-head{align-items:center}
+.section-head>div>.tt,.copy>.tt,.about-copy>.tt,.area-grid .tt,.faq-col>.tt,.review-col>.tt,.pb-panel>.tt{margin-bottom:22px}
+.section-head>div>.tt{margin-bottom:0}
+.cta-copy>.tt{margin-bottom:14px}
+/* molduras visíveis no azul */
+.frame-a::before,.about-collage::before{background:linear-gradient(160deg,#2b6fd0,#123a70)!important;box-shadow:0 0 50px rgba(61,149,255,.35)}
+.frame-b::before{border-color:#5aa9ff}
+.frame-b::after{border-color:rgba(160,195,235,.45)}
+.collage-side{border-color:#dbe8f7}
+.video-frame{border-color:rgba(160,195,235,.3)}
+/* legenda da foto da equipe */
+.collage-cap{position:absolute;z-index:2;top:16px;left:16px;display:grid;gap:3px;max-width:78%;padding:12px 16px;border-radius:10px;background:linear-gradient(135deg,rgba(43,130,246,.96),rgba(21,88,191,.96));box-shadow:0 10px 24px rgba(0,20,60,.35),0 0 18px rgba(61,149,255,.45);color:#fff}
+.collage-cap strong{font:400 1.3rem/1.05 var(--head);letter-spacing:.04em;text-transform:uppercase;text-shadow:0 0 8px rgba(255,255,255,.35)}
+.collage-cap span{font-size:.86rem;line-height:1.35;color:#e3eeff}
+/* barra de produtos no azul */
+.chip-nav{background:rgba(8,20,38,.95);border-bottom-color:rgba(120,170,230,.2);box-shadow:0 6px 18px rgba(0,0,0,.25)}
+.chip-scroll a{background:rgba(255,255,255,.06);border-color:rgba(170,200,235,.26);color:#dbe6f1}
+.chip-scroll a:hover{border-color:#3d95ff;color:#fff}
+.chip-sep{background:rgba(170,200,235,.3)}
+@media (max-width:700px){
+  .tt{font-size:clamp(2.1rem,1.3rem + 4vw,2.8rem)}
+  .page-hero .tt{font-size:clamp(2.5rem,1.6rem + 5vw,3.2rem)}
+  .collage-cap{top:12px;left:12px;padding:10px 12px}
+  .collage-cap strong{font-size:1.1rem}
+  .collage-cap span{font-size:.78rem}
+}
+.tt.tt-hero{font-size:clamp(3.1rem,1.6rem + 6vw,6.8rem);line-height:.98}
