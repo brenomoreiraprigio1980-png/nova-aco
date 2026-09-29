@@ -376,7 +376,6 @@ img.review-avatar{object-fit:cover}
 .footer-bottom{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-top:48px;padding-top:22px;border-top:1px solid rgba(255,255,255,.1);font-size:.85rem}
 
 /* ---------- botão flutuante WhatsApp ---------- */
-.fab-wa{position:fixed;right:20px;bottom:20px;z-index:80;display:inline-flex;align-items:center;gap:10px;height:58px;padding:0 22px 0 18px;border-radius:999px;background:var(--wa);color:#fff;font:700 1rem var(--ui);box-shadow:0 14px 34px rgba(10,50,100,.4);transition:transform .2s ease,box-shadow .2s ease}
 .fab-wa .ico{width:28px;height:28px}
 .fab-wa:hover{transform:translateY(-3px);box-shadow:0 18px 40px rgba(10,50,100,.5)}
 
@@ -461,7 +460,6 @@ img.review-avatar{object-fit:cover}
   .gallery-pair{grid-template-columns:1fr}
   .gallery-pair img{height:360px}
   .footer-top{grid-template-columns:1fr;gap:32px}
-  .fab-wa{right:14px;bottom:14px;width:58px;padding:0;justify-content:center}
   .fab-wa span{display:none}
   .map-wrap iframe{height:240px}
 }
@@ -470,16 +468,168 @@ img.review-avatar{object-fit:cover}
   *,*:before,*:after{animation:none!important;transition:none!important}
   .js .reveal{opacity:1;transform:none}
 }
+
+/* =========================================================
+   Camada visual 2026-09-29: luzes em azul (LED), letras vazadas,
+   fundos com textura técnica e ajustes para telas grandes
+   ========================================================= */
+:root{
+  --led:#5cc4ff;
+  --led-soft:rgba(92,196,255,.45);
+  --led-glow:0 0 6px rgba(92,196,255,.8),0 0 18px rgba(92,196,255,.45),0 0 42px rgba(40,140,230,.25);
+}
+
+/* Fundos das seções */
+.section-white{background:
+  radial-gradient(900px 420px at 100% 0%,rgba(92,196,255,.10),transparent 60%),
+  radial-gradient(700px 380px at 0% 100%,rgba(20,90,160,.07),transparent 60%),
+  linear-gradient(rgba(16,60,100,.035) 1px,transparent 1px) 0 0/48px 48px,
+  linear-gradient(90deg,rgba(16,60,100,.035) 1px,transparent 1px) 0 0/48px 48px,
+  #f9fbfd}
+.section-blue,.section-steel{background:
+  radial-gradient(1000px 500px at 0% 0%,rgba(92,196,255,.16),transparent 60%),
+  radial-gradient(800px 420px at 100% 100%,rgba(20,90,160,.12),transparent 60%),
+  linear-gradient(rgba(16,60,100,.045) 1px,transparent 1px) 0 0/48px 48px,
+  linear-gradient(90deg,rgba(16,60,100,.045) 1px,transparent 1px) 0 0/48px 48px,
+  linear-gradient(160deg,#e4eef5,#eef4f8 55%,#dde9f1)}
+.section-dark{background:
+  radial-gradient(900px 480px at 85% 0%,rgba(92,196,255,.22),transparent 60%),
+  radial-gradient(700px 400px at 0% 100%,rgba(40,120,210,.18),transparent 60%),
+  linear-gradient(rgba(120,190,240,.06) 1px,transparent 1px) 0 0/56px 56px,
+  linear-gradient(90deg,rgba(120,190,240,.06) 1px,transparent 1px) 0 0/56px 56px,
+  linear-gradient(150deg,#030d1c,#072545 60%,#0a3a68)}
+
+/* Faixa de luz LED nas bordas das áreas escuras */
+.section-dark,.cta-band,.page-hero,.brands,.service-bar{position:relative}
+.section-dark:before,.cta-band:after,.page-hero:after,.brands:before,.service-bar:after{
+  content:"";position:absolute;left:0;right:0;height:2px;z-index:2;pointer-events:none;
+  background:linear-gradient(90deg,transparent,var(--led) 20%,#bfe7ff 50%,var(--led) 80%,transparent);
+  box-shadow:var(--led-glow)}
+.section-dark:before,.brands:before{top:0}
+.cta-band:after,.page-hero:after,.service-bar:after{bottom:0}
+.page-hero:after{width:auto;border:0;border-radius:0;right:0;top:auto}
+
+/* Letras vazadas com brilho */
+.hero h1 em{
+  background:none;color:transparent;-webkit-text-fill-color:transparent;
+  -webkit-text-stroke:2px #9fdcff;text-shadow:0 0 14px rgba(92,196,255,.55),0 0 36px rgba(40,140,230,.35)}
+.page-hero h1{
+  color:transparent;-webkit-text-fill-color:transparent;-webkit-text-stroke:2px #bfe7ff;
+  text-shadow:0 0 16px rgba(92,196,255,.5),0 0 44px rgba(40,140,230,.3);letter-spacing:.02em}
+.page-hero h1:hover{-webkit-text-fill-color:rgba(191,231,255,.08)}
+.cta-band h2{text-shadow:0 0 22px rgba(92,196,255,.35)}
+.section-dark h2{text-shadow:0 0 26px rgba(92,196,255,.3)}
+@supports not (-webkit-text-stroke:1px #000){
+  .hero h1 em,.page-hero h1{color:#d9f0ff;-webkit-text-fill-color:currentColor}
+}
+
+/* Brilho em botões, bordas e cartões */
+.btn-accent,.nav-links .nav-cta{box-shadow:0 0 0 1px rgba(160,220,255,.35) inset,0 10px 26px rgba(20,100,180,.35),0 0 22px rgba(92,196,255,.25)}
+.btn-accent:hover,.nav-links .nav-cta:hover{box-shadow:0 0 0 1px rgba(190,235,255,.6) inset,0 14px 30px rgba(20,100,180,.45),0 0 30px rgba(92,196,255,.45)}
+.btn-ghost:hover{box-shadow:0 0 18px rgba(92,196,255,.35)}
+.nav-links a[aria-current="page"]:after{background:var(--led);box-shadow:0 0 8px var(--led),0 0 18px rgba(92,196,255,.5)}
+.review{border-color:rgba(120,200,250,.22);transition:border-color .25s ease,box-shadow .25s ease,transform .25s ease}
+.review:hover{border-color:rgba(140,215,255,.65);box-shadow:0 0 0 1px rgba(92,196,255,.25),0 0 28px rgba(92,196,255,.22),0 18px 42px rgba(0,8,25,.25);transform:translateY(-3px)}
+.quote-card:not(.light){border:1px solid rgba(120,200,250,.25);box-shadow:0 0 0 1px rgba(92,196,255,.08),0 0 40px rgba(40,140,230,.18),0 30px 60px rgba(6,30,60,.3)}
+.tile{outline:1px solid transparent;transition:outline-color .25s ease,box-shadow .25s ease}
+.tile:hover{outline-color:rgba(92,196,255,.8);box-shadow:0 0 26px rgba(92,196,255,.35),var(--shadow)}
+.product-card:hover,.material:hover,.step:hover,.contact-card:not(.static):hover{border-color:rgba(60,160,230,.6);box-shadow:0 0 0 1px rgba(92,196,255,.2),0 0 26px rgba(92,196,255,.16),var(--shadow)}
+.step{transition:box-shadow .25s ease,border-color .25s ease}
+.service-point>.ico,.step .ico{box-shadow:0 0 14px rgba(92,196,255,.25)}
+.brands li{box-shadow:inset 0 0 12px rgba(92,196,255,.12)}
+.brands li:hover{border-color:var(--led);box-shadow:inset 0 0 12px rgba(92,196,255,.2),0 0 16px rgba(92,196,255,.35)}
+.timeline li:before{border-color:var(--led);box-shadow:0 0 10px rgba(92,196,255,.7)}
+.city-chips li:first-child{box-shadow:0 0 16px rgba(92,196,255,.3)}
+
+/* Capa com vídeo da obra */
+.hero-media video{object-position:center 45%;filter:saturate(.85) contrast(1.05)}
+.hero:after{background:
+  linear-gradient(90deg,rgba(3,12,26,.95) 0%,rgba(4,22,46,.82) 42%,rgba(6,36,68,.45) 75%,rgba(6,36,68,.3) 100%),
+  radial-gradient(900px 500px at 80% 30%,rgba(92,196,255,.18),transparent 60%)}
+.hero-grid{z-index:1;background-size:72px 72px}
+.hero h1{text-shadow:0 0 30px rgba(92,196,255,.2),0 4px 18px rgba(0,0,0,.45)}
+
+/* Vídeo institucional enquadrado (vertical) */
+.process-home{grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr)}
+.process-video{background:none;box-shadow:none;border-radius:0;overflow:visible;display:flex;justify-content:center}
+.video-frame{position:relative;width:min(100%,400px);aspect-ratio:9/16;border-radius:26px;overflow:hidden;background:#041426;
+  border:1px solid rgba(120,200,250,.35);box-shadow:0 0 0 6px rgba(10,43,80,.08),0 0 34px rgba(92,196,255,.28),0 30px 60px rgba(6,30,60,.3)}
+.video-frame video{width:100%;height:100%;max-height:none;object-fit:cover}
+.content-split .process-video{align-self:center}
+
+/* Atalhos flutuantes: WhatsApp e Instagram */
+.fab-wa{position:static}
+.fab-stack{position:fixed;right:20px;bottom:20px;z-index:80;display:flex;flex-direction:column;align-items:flex-end;gap:12px}
+.fab{display:inline-flex;align-items:center;justify-content:center;gap:10px;height:58px;border-radius:999px;color:#fff;font:700 1rem var(--ui);transition:transform .2s ease,box-shadow .2s ease}
+.fab .ico{width:27px;height:27px}
+.fab:hover{transform:translateY(-3px)}
+.fab-wa{padding:0 22px 0 18px;background:linear-gradient(135deg,#1f6fb2,#0a2b50);border:1px solid rgba(150,215,255,.45);box-shadow:0 0 22px rgba(92,196,255,.35),0 14px 30px rgba(6,30,60,.35)}
+.fab-ig{width:58px;background:rgba(6,20,40,.9);border:1px solid rgba(150,215,255,.45);box-shadow:0 0 18px rgba(92,196,255,.25),0 12px 26px rgba(6,30,60,.3);backdrop-filter:blur(8px)}
+.fab-wa:hover,.fab-ig:hover{box-shadow:0 0 30px rgba(92,196,255,.55),0 16px 34px rgba(6,30,60,.4)}
+.topbar-links{display:inline-flex;gap:20px}
+.topbar-links a{display:inline-flex;align-items:center;gap:7px}
+.topbar-links a .ico{color:#8ccaf0}
+
+/* Tipografia mais fina e legível */
+body{font-feature-settings:"kern" 1,"liga" 1}
+.section h2,.page-hero h1,.hero h1{text-wrap:balance}
+.section p,.hero-text,.page-hero-text{text-wrap:pretty}
+
+/* Monitores grandes */
+@media(min-width:1600px){
+  :root{--max:1440px}
+  body{font-size:18px}
+  .nav{height:88px}
+  .brand img{width:210px}
+  .nav-links{font-size:.95rem;gap:10px}
+  .hero{min-height:min(880px,90vh)}
+  .hero-content{max-width:980px}
+  .hero h1{font-size:clamp(5rem,5.6vw,7.6rem)}
+  .section{padding:128px 0}
+  .section h2{font-size:clamp(3.4rem,3.4vw,4.4rem)}
+  .tiles{gap:20px}
+  .photo-frame img,.gallery-pair img{height:620px}
+  .product-photo{min-height:520px}
+  .video-frame{width:min(100%,460px)}
+  .page-hero{padding:110px 0 96px}
+  .page-hero h1{font-size:clamp(5rem,5.2vw,7rem)}
+}
+@media(min-width:2200px){
+  :root{--max:1720px}
+  body{font-size:19px}
+  .hero h1{font-size:8.4rem}
+  .product-photo{min-height:600px}
+  .video-frame{width:520px}
+  .review-row{grid-auto-columns:calc((100% - 66px)/4)}
+}
+
+/* Celular */
+@media(max-width:960px){
+  .process-home{grid-template-columns:1fr}
+  .video-frame{width:min(100%,360px)}
+}
+@media(max-width:620px){
+  .fab-stack{right:14px;bottom:14px;gap:10px}
+  .fab{height:54px}
+  .fab-wa{width:54px;padding:0}
+  .fab-wa span{display:none}
+  .fab-ig{width:54px}
+  .hero h1 em,.page-hero h1{-webkit-text-stroke-width:1.5px}
+  .topbar-links{gap:14px}
+  .video-frame{width:min(100%,320px);border-radius:22px}
+}
+@media(prefers-reduced-motion:reduce){.tile:hover,.review:hover{transform:none}}
+@media(max-width:620px){.section h2,.page-hero h1{hyphens:auto;-webkit-hyphens:auto;overflow-wrap:break-word}.section h2{font-size:clamp(2rem,9.4vw,2.6rem)}}
 </style>
 <script>document.documentElement.classList.add('js')</script>
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "LocalBusiness", "name": "Nova Aço", "url": "https://novaacoarmado.com.br/", "image": "https://novaacoarmado.com.br/assets/capa-nova-aco.png", "logo": "https://novaacoarmado.com.br/assets/logo-metalica-transparente.png", "telephone": "+5511984531598", "email": "novaco2505@gmail.com", "address": {"@type": "PostalAddress", "streetAddress": "Rua Macapá, 46 - Jardim do Líbano", "addressLocality": "Barueri", "addressRegion": "SP", "postalCode": "06448-200", "addressCountry": "BR"}, "openingHoursSpecification": [{"@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"], "opens": "08:00", "closes": "17:48"}], "areaServed": ["Barueri", "Jandira", "Itapevi", "Osasco", "Carapicuíba", "Cotia", "Santana de Parnaíba"], "sameAs": ["https://www.instagram.com/nova_aco_barueri/"], "brand": [{"@type": "Brand", "name": "Gerdau"}, {"@type": "Brand", "name": "ArcelorMittal"}, {"@type": "Brand", "name": "Cimec"}]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "LocalBusiness", "name": "Nova Aço", "url": "https://novaacoarmado.com.br/", "image": "https://novaacoarmado.com.br/assets/capa-nova-aco.png", "logo": "https://novaacoarmado.com.br/assets/logo-metalica-transparente.png", "telephone": "+5511984531598", "email": "novaco2505@gmail.com", "address": {"@type": "PostalAddress", "streetAddress": "Rua Macapá, 46 - Jardim do Líbano", "addressLocality": "Barueri", "addressRegion": "SP", "postalCode": "06448-200", "addressCountry": "BR"}, "openingHoursSpecification": [{"@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"], "opens": "08:00", "closes": "17:48"}], "areaServed": ["Barueri", "Jandira", "Itapevi", "Osasco", "Carapicuíba", "Cotia", "Santana de Parnaíba"], "sameAs": ["https://www.instagram.com/nova_aco_armado/"], "brand": [{"@type": "Brand", "name": "Gerdau"}, {"@type": "Brand", "name": "ArcelorMittal"}, {"@type": "Brand", "name": "Cimec"}]}</script>
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "O que preciso enviar para solicitar um orçamento?", "acceptedAnswer": {"@type": "Answer", "text": "Envie o projeto estrutural, a tabela de ferro ou uma lista com materiais, medidas e quantidades. Informe também o endereço da obra."}}, {"@type": "Question", "name": "Posso enviar o projeto pelo WhatsApp?", "acceptedAnswer": {"@type": "Answer", "text": "Sim. Você pode enviar o projeto em PDF ou DWG, além da lista de ferros e outras informações do pedido."}}, {"@type": "Question", "name": "Como funciona a programação das entregas?", "acceptedAnswer": {"@type": "Answer", "text": "Informe as etapas previstas da obra e quando os materiais serão necessários. A equipe verifica a produção e combina o fornecimento."}}, {"@type": "Question", "name": "Como consulto a entrega?", "acceptedAnswer": {"@type": "Answer", "text": "Informe cidade, bairro e endereço da obra para verificar disponibilidade e condições."}}, {"@type": "Question", "name": "Quais cidades vocês atendem?", "acceptedAnswer": {"@type": "Answer", "text": "Barueri, Jandira, Itapevi, Osasco, Carapicuíba, Cotia e Santana de Parnaíba. Entregas mais distantes são avaliadas caso a caso."}}, {"@type": "Question", "name": "Qual a marca do aço?", "acceptedAnswer": {"@type": "Answer", "text": "Trabalhamos com material de qualidade das marcas Gerdau, ArcelorMittal e Cimec."}}, {"@type": "Question", "name": "Qual o horário de atendimento?", "acceptedAnswer": {"@type": "Answer", "text": "Segunda a sexta, das 8h às 17h48. Para visitas e retirada de material, confirme antes com a equipe."}}]}</script>
 </head><body>
 <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
 <div class="topbar"><div class="container topbar-inner">
   <span><svg viewBox="0 0 24 24" aria-hidden="true" class="ico"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 7v5l3 2" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg> Seg a sex, 8h às 17h48</span>
   <span class="topbar-hide"><svg viewBox="0 0 24 24" aria-hidden="true" class="ico"><path fill="none" stroke="currentColor" stroke-width="2" d="M12 21s-7-6.1-7-11.5a7 7 0 0 1 14 0C19 14.9 12 21 12 21Z"/><circle cx="12" cy="9.5" r="2.5" fill="none" stroke="currentColor" stroke-width="2"/></svg> Rua Macapá, 46 · Barueri - SP</span>
-  <a href="https://wa.me/5511984531598" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true" class="ico"><path fill="currentColor" d="M19.05 4.91A9.82 9.82 0 0 0 12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38a9.9 9.9 0 0 0 4.74 1.21h.01c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.91-7.01Zm-7.01 15.24h-.01a8.2 8.2 0 0 1-4.19-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.2 8.2 0 0 1-1.26-4.38c0-4.54 3.7-8.23 8.24-8.23 2.2 0 4.27.86 5.82 2.42a8.18 8.18 0 0 1 2.41 5.82c0 4.54-3.7 8.23-8.22 8.23Zm4.52-6.16c-.25-.12-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.13-.16.24-.64.8-.78.97-.14.16-.29.18-.54.06-.25-.12-1.05-.39-1.99-1.23-.74-.66-1.23-1.47-1.38-1.72-.14-.25-.01-.38.11-.5.11-.11.25-.29.37-.43.13-.15.17-.25.25-.41.08-.17.04-.31-.02-.43-.06-.12-.56-1.34-.76-1.84-.2-.48-.41-.42-.56-.43h-.48c-.17 0-.43.06-.66.31-.22.25-.86.85-.86 2.07 0 1.22.89 2.4 1.01 2.56.12.17 1.75 2.67 4.23 3.74.59.26 1.05.41 1.41.52.59.19 1.13.16 1.56.1.48-.07 1.47-.6 1.67-1.18.21-.58.21-1.07.14-1.18-.06-.1-.22-.16-.47-.28Z"/></svg> (11) 98453-1598</a>
+  <span class="topbar-links"><a href="https://www.instagram.com/nova_aco_armado/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true" class="ico"><rect x="3" y="3" width="18" height="18" rx="5" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="17.5" cy="6.5" r="1.2" fill="currentColor"/></svg> <span class="topbar-hide">@nova_aco_armado</span></a><a href="https://wa.me/5511984531598" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true" class="ico"><path fill="currentColor" d="M19.05 4.91A9.82 9.82 0 0 0 12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38a9.9 9.9 0 0 0 4.74 1.21h.01c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.91-7.01Zm-7.01 15.24h-.01a8.2 8.2 0 0 1-4.19-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.2 8.2 0 0 1-1.26-4.38c0-4.54 3.7-8.23 8.24-8.23 2.2 0 4.27.86 5.82 2.42a8.18 8.18 0 0 1 2.41 5.82c0 4.54-3.7 8.23-8.22 8.23Zm4.52-6.16c-.25-.12-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.13-.16.24-.64.8-.78.97-.14.16-.29.18-.54.06-.25-.12-1.05-.39-1.99-1.23-.74-.66-1.23-1.47-1.38-1.72-.14-.25-.01-.38.11-.5.11-.11.25-.29.37-.43.13-.15.17-.25.25-.41.08-.17.04-.31-.02-.43-.06-.12-.56-1.34-.76-1.84-.2-.48-.41-.42-.56-.43h-.48c-.17 0-.43.06-.66.31-.22.25-.86.85-.86 2.07 0 1.22.89 2.4 1.01 2.56.12.17 1.75 2.67 4.23 3.74.59.26 1.05.41 1.41.52.59.19 1.13.16 1.56.1.48-.07 1.47-.6 1.67-1.18.21-.58.21-1.07.14-1.18-.06-.1-.22-.16-.47-.28Z"/></svg> (11) 98453-1598</a></span>
 </div></div>
 <header class="site-header" data-header>
   <div class="container nav">
@@ -500,7 +650,7 @@ img.review-avatar{object-fit:cover}
     <div class="contact-cards">
       <a class="contact-card highlight" href="https://wa.me/5511984531598?text=Ol%C3%A1%20Nova%20A%C3%A7o%21%20Gostaria%20de%20solicitar%20um%20or%C3%A7amento." target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true" class="ico"><path fill="currentColor" d="M19.05 4.91A9.82 9.82 0 0 0 12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38a9.9 9.9 0 0 0 4.74 1.21h.01c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.91-7.01Zm-7.01 15.24h-.01a8.2 8.2 0 0 1-4.19-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.2 8.2 0 0 1-1.26-4.38c0-4.54 3.7-8.23 8.24-8.23 2.2 0 4.27.86 5.82 2.42a8.18 8.18 0 0 1 2.41 5.82c0 4.54-3.7 8.23-8.22 8.23Zm4.52-6.16c-.25-.12-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.13-.16.24-.64.8-.78.97-.14.16-.29.18-.54.06-.25-.12-1.05-.39-1.99-1.23-.74-.66-1.23-1.47-1.38-1.72-.14-.25-.01-.38.11-.5.11-.11.25-.29.37-.43.13-.15.17-.25.25-.41.08-.17.04-.31-.02-.43-.06-.12-.56-1.34-.76-1.84-.2-.48-.41-.42-.56-.43h-.48c-.17 0-.43.06-.66.31-.22.25-.86.85-.86 2.07 0 1.22.89 2.4 1.01 2.56.12.17 1.75 2.67 4.23 3.74.59.26 1.05.41 1.41.52.59.19 1.13.16 1.56.1.48-.07 1.47-.6 1.67-1.18.21-.58.21-1.07.14-1.18-.06-.1-.22-.16-.47-.28Z"/></svg><div><h3>WhatsApp</h3><span>(11) 98453-1598</span></div><svg viewBox="0 0 24 24" aria-hidden="true" class="ico ico-arrow"><path d="M5 12h14m-6-6 6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
       <a class="contact-card" href="mailto:novaco2505@gmail.com"><svg viewBox="0 0 24 24" aria-hidden="true" class="ico"><rect x="3" y="5" width="18" height="14" rx="2" fill="none" stroke="currentColor" stroke-width="2"/><path d="m4 7 8 6 8-6" fill="none" stroke="currentColor" stroke-width="2"/></svg><div><h3>E-mail</h3><span>novaco2505@gmail.com</span></div><svg viewBox="0 0 24 24" aria-hidden="true" class="ico ico-arrow"><path d="M5 12h14m-6-6 6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
-      <a class="contact-card" href="https://www.instagram.com/nova_aco_barueri/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true" class="ico"><rect x="3" y="3" width="18" height="18" rx="5" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="17.5" cy="6.5" r="1.2" fill="currentColor"/></svg><div><h3>Instagram</h3><span>@nova_aco_barueri</span></div><svg viewBox="0 0 24 24" aria-hidden="true" class="ico ico-arrow"><path d="M5 12h14m-6-6 6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+      <a class="contact-card" href="https://www.instagram.com/nova_aco_armado/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true" class="ico"><rect x="3" y="3" width="18" height="18" rx="5" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="17.5" cy="6.5" r="1.2" fill="currentColor"/></svg><div><h3>Instagram</h3><span>@nova_aco_armado</span></div><svg viewBox="0 0 24 24" aria-hidden="true" class="ico ico-arrow"><path d="M5 12h14m-6-6 6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
       <div class="contact-card static"><svg viewBox="0 0 24 24" aria-hidden="true" class="ico"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 7v5l3 2" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><div><h3>Horário</h3><span>Segunda a sexta, 8h às 17h48</span></div></div>
       <div class="contact-block"><h2>Nova Aço</h2><p>Rua Macapá, 46<br>Jardim do Líbano, Barueri - SP</p>
         <div class="map-wrap"><iframe title="Mapa da Nova Aço em Barueri" src="https://maps.google.com/maps?q=Rua%20Macap%C3%A1%2C%2046%20-%20Jardim%20do%20L%C3%ADbano%2C%20Barueri%20-%20SP%2C%2006448-200&z=16&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe></div>
@@ -574,16 +724,16 @@ img.review-avatar{object-fit:cover}
   <div class="container">
     <div class="footer-top">
       <div class="footer-brand"><img src="/assets/logo-metalica-transparente.png" alt="Nova Aço" width="180" height="72" loading="lazy"><p>Ferragem armada, corte e dobra, programação e acompanhamento para obras em Barueri e região.</p>
-        <div class="footer-social"><a href="https://www.instagram.com/nova_aco_barueri/" target="_blank" rel="noopener" aria-label="Instagram da Nova Aço"><svg viewBox="0 0 24 24" aria-hidden="true" class="ico"><rect x="3" y="3" width="18" height="18" rx="5" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="17.5" cy="6.5" r="1.2" fill="currentColor"/></svg></a><a href="https://wa.me/5511984531598" target="_blank" rel="noopener" aria-label="WhatsApp da Nova Aço"><svg viewBox="0 0 24 24" aria-hidden="true" class="ico"><path fill="currentColor" d="M19.05 4.91A9.82 9.82 0 0 0 12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38a9.9 9.9 0 0 0 4.74 1.21h.01c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.91-7.01Zm-7.01 15.24h-.01a8.2 8.2 0 0 1-4.19-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.2 8.2 0 0 1-1.26-4.38c0-4.54 3.7-8.23 8.24-8.23 2.2 0 4.27.86 5.82 2.42a8.18 8.18 0 0 1 2.41 5.82c0 4.54-3.7 8.23-8.22 8.23Zm4.52-6.16c-.25-.12-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.13-.16.24-.64.8-.78.97-.14.16-.29.18-.54.06-.25-.12-1.05-.39-1.99-1.23-.74-.66-1.23-1.47-1.38-1.72-.14-.25-.01-.38.11-.5.11-.11.25-.29.37-.43.13-.15.17-.25.25-.41.08-.17.04-.31-.02-.43-.06-.12-.56-1.34-.76-1.84-.2-.48-.41-.42-.56-.43h-.48c-.17 0-.43.06-.66.31-.22.25-.86.85-.86 2.07 0 1.22.89 2.4 1.01 2.56.12.17 1.75 2.67 4.23 3.74.59.26 1.05.41 1.41.52.59.19 1.13.16 1.56.1.48-.07 1.47-.6 1.67-1.18.21-.58.21-1.07.14-1.18-.06-.1-.22-.16-.47-.28Z"/></svg></a><a href="mailto:novaco2505@gmail.com" aria-label="E-mail da Nova Aço"><svg viewBox="0 0 24 24" aria-hidden="true" class="ico"><rect x="3" y="5" width="18" height="14" rx="2" fill="none" stroke="currentColor" stroke-width="2"/><path d="m4 7 8 6 8-6" fill="none" stroke="currentColor" stroke-width="2"/></svg></a></div>
+        <div class="footer-social"><a href="https://www.instagram.com/nova_aco_armado/" target="_blank" rel="noopener" aria-label="Instagram da Nova Aço"><svg viewBox="0 0 24 24" aria-hidden="true" class="ico"><rect x="3" y="3" width="18" height="18" rx="5" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="17.5" cy="6.5" r="1.2" fill="currentColor"/></svg></a><a href="https://wa.me/5511984531598" target="_blank" rel="noopener" aria-label="WhatsApp da Nova Aço"><svg viewBox="0 0 24 24" aria-hidden="true" class="ico"><path fill="currentColor" d="M19.05 4.91A9.82 9.82 0 0 0 12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38a9.9 9.9 0 0 0 4.74 1.21h.01c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.91-7.01Zm-7.01 15.24h-.01a8.2 8.2 0 0 1-4.19-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.2 8.2 0 0 1-1.26-4.38c0-4.54 3.7-8.23 8.24-8.23 2.2 0 4.27.86 5.82 2.42a8.18 8.18 0 0 1 2.41 5.82c0 4.54-3.7 8.23-8.22 8.23Zm4.52-6.16c-.25-.12-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.13-.16.24-.64.8-.78.97-.14.16-.29.18-.54.06-.25-.12-1.05-.39-1.99-1.23-.74-.66-1.23-1.47-1.38-1.72-.14-.25-.01-.38.11-.5.11-.11.25-.29.37-.43.13-.15.17-.25.25-.41.08-.17.04-.31-.02-.43-.06-.12-.56-1.34-.76-1.84-.2-.48-.41-.42-.56-.43h-.48c-.17 0-.43.06-.66.31-.22.25-.86.85-.86 2.07 0 1.22.89 2.4 1.01 2.56.12.17 1.75 2.67 4.23 3.74.59.26 1.05.41 1.41.52.59.19 1.13.16 1.56.1.48-.07 1.47-.6 1.67-1.18.21-.58.21-1.07.14-1.18-.06-.1-.22-.16-.47-.28Z"/></svg></a><a href="mailto:novaco2505@gmail.com" aria-label="E-mail da Nova Aço"><svg viewBox="0 0 24 24" aria-hidden="true" class="ico"><rect x="3" y="5" width="18" height="14" rx="2" fill="none" stroke="currentColor" stroke-width="2"/><path d="m4 7 8 6 8-6" fill="none" stroke="currentColor" stroke-width="2"/></svg></a></div>
       </div>
       <div><strong>Navegação</strong><a href="/quem-somos/">Quem somos</a><a href="/produtos/">Produtos</a><a href="/acompanhamento/">Acompanhamento</a><a href="/contato/">Contato</a><a href="/contato/#perguntas">Perguntas frequentes</a></div>
-      <div><strong>Contato</strong><a href="https://wa.me/5511984531598" target="_blank" rel="noopener">(11) 98453-1598</a><a href="mailto:novaco2505@gmail.com">novaco2505@gmail.com</a><a href="https://www.instagram.com/nova_aco_barueri/" target="_blank" rel="noopener">@nova_aco_barueri</a><p>Rua Macapá, 46, Jardim do Líbano<br>Barueri - SP, 06448-200</p></div>
+      <div><strong>Contato</strong><a href="https://wa.me/5511984531598" target="_blank" rel="noopener">(11) 98453-1598</a><a href="mailto:novaco2505@gmail.com">novaco2505@gmail.com</a><a href="https://www.instagram.com/nova_aco_armado/" target="_blank" rel="noopener">@nova_aco_armado</a><p>Rua Macapá, 46, Jardim do Líbano<br>Barueri - SP, 06448-200</p></div>
       <div><strong>Atendimento</strong><p>Segunda a sexta<br>8h às 17h48</p><strong class="mt">Entregamos em</strong><p>Barueri · Jandira · Itapevi · Osasco · Carapicuíba · Cotia · Santana de Parnaíba</p></div>
     </div>
     <div class="footer-bottom"><span>© 2026 Nova Aço. Todos os direitos reservados.</span><span>Aço Gerdau, ArcelorMittal e Cimec</span></div>
   </div>
 </footer>
-<a class="fab-wa" href="https://wa.me/5511984531598?text=Ol%C3%A1%20Nova%20A%C3%A7o%21%20Gostaria%20de%20solicitar%20um%20or%C3%A7amento." target="_blank" rel="noopener" aria-label="Falar com a Nova Aço no WhatsApp"><svg viewBox="0 0 24 24" aria-hidden="true" class="ico"><path fill="currentColor" d="M19.05 4.91A9.82 9.82 0 0 0 12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38a9.9 9.9 0 0 0 4.74 1.21h.01c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.91-7.01Zm-7.01 15.24h-.01a8.2 8.2 0 0 1-4.19-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.2 8.2 0 0 1-1.26-4.38c0-4.54 3.7-8.23 8.24-8.23 2.2 0 4.27.86 5.82 2.42a8.18 8.18 0 0 1 2.41 5.82c0 4.54-3.7 8.23-8.22 8.23Zm4.52-6.16c-.25-.12-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.13-.16.24-.64.8-.78.97-.14.16-.29.18-.54.06-.25-.12-1.05-.39-1.99-1.23-.74-.66-1.23-1.47-1.38-1.72-.14-.25-.01-.38.11-.5.11-.11.25-.29.37-.43.13-.15.17-.25.25-.41.08-.17.04-.31-.02-.43-.06-.12-.56-1.34-.76-1.84-.2-.48-.41-.42-.56-.43h-.48c-.17 0-.43.06-.66.31-.22.25-.86.85-.86 2.07 0 1.22.89 2.4 1.01 2.56.12.17 1.75 2.67 4.23 3.74.59.26 1.05.41 1.41.52.59.19 1.13.16 1.56.1.48-.07 1.47-.6 1.67-1.18.21-.58.21-1.07.14-1.18-.06-.1-.22-.16-.47-.28Z"/></svg><span>Orçamento</span></a>
+<div class="fab-stack"><a class="fab fab-ig" href="https://www.instagram.com/nova_aco_armado/" target="_blank" rel="noopener" aria-label="Instagram da Nova Aço"><svg viewBox="0 0 24 24" aria-hidden="true" class="ico"><rect x="3" y="3" width="18" height="18" rx="5" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="17.5" cy="6.5" r="1.2" fill="currentColor"/></svg></a><a class="fab fab-wa" href="https://wa.me/5511984531598?text=Ol%C3%A1%20Nova%20A%C3%A7o%21%20Gostaria%20de%20solicitar%20um%20or%C3%A7amento." target="_blank" rel="noopener" aria-label="Falar com a Nova Aço no WhatsApp"><svg viewBox="0 0 24 24" aria-hidden="true" class="ico"><path fill="currentColor" d="M19.05 4.91A9.82 9.82 0 0 0 12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38a9.9 9.9 0 0 0 4.74 1.21h.01c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.91-7.01Zm-7.01 15.24h-.01a8.2 8.2 0 0 1-4.19-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.2 8.2 0 0 1-1.26-4.38c0-4.54 3.7-8.23 8.24-8.23 2.2 0 4.27.86 5.82 2.42a8.18 8.18 0 0 1 2.41 5.82c0 4.54-3.7 8.23-8.22 8.23Zm4.52-6.16c-.25-.12-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.13-.16.24-.64.8-.78.97-.14.16-.29.18-.54.06-.25-.12-1.05-.39-1.99-1.23-.74-.66-1.23-1.47-1.38-1.72-.14-.25-.01-.38.11-.5.11-.11.25-.29.37-.43.13-.15.17-.25.25-.41.08-.17.04-.31-.02-.43-.06-.12-.56-1.34-.76-1.84-.2-.48-.41-.42-.56-.43h-.48c-.17 0-.43.06-.66.31-.22.25-.86.85-.86 2.07 0 1.22.89 2.4 1.01 2.56.12.17 1.75 2.67 4.23 3.74.59.26 1.05.41 1.41.52.59.19 1.13.16 1.56.1.48-.07 1.47-.6 1.67-1.18.21-.58.21-1.07.14-1.18-.06-.1-.22-.16-.47-.28Z"/></svg><span>WhatsApp</span></a></div>
 <script>
 (() => {
   document.documentElement.classList.add('js');
