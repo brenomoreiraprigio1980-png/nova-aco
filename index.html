@@ -796,24 +796,6 @@ body{font-family:Arial,Helvetica,sans-serif}
 h1,h2,.section h2,.page-hero h1,.hero h1,.cta-band h2,.product-copy h2,.material h3,.quote-card h3,.contact-block h2{
   font-family:var(--head);font-weight:700;letter-spacing:.005em;line-height:1}
 
-/* Títulos em fundo claro: aço azul-marinho escovado com borda prateada */
-.section h2,.copy h2,.product-copy h2,.material h3,.quote-card.light h3,.contact-block h2{
-  background:var(--metal-dark)!important;background-size:100% 1em!important;background-repeat:repeat-y!important;
-  -webkit-background-clip:text!important;background-clip:text!important;color:transparent!important;-webkit-text-fill-color:transparent!important;
-  -webkit-text-stroke:1.2px #dfe7ee;paint-order:stroke fill;
-  filter:drop-shadow(0 2px 0 #8d9cab) drop-shadow(0 3px 0 #5d6e80) drop-shadow(0 8px 10px rgba(6,24,48,.28))!important;
-  text-shadow:none!important;animation:none!important;padding-bottom:.06em}
-
-/* Títulos em fundo escuro: aço azul claro escovado com borda prateada */
-.hero h1,.hero h1 em,.page-hero h1,.section-dark h2,.about-dark h2,.cta-band h2,.quote-card:not(.light) h3{
-  background:var(--metal-light)!important;background-size:100% 1em!important;background-repeat:repeat-y!important;
-  -webkit-background-clip:text!important;background-clip:text!important;color:transparent!important;-webkit-text-fill-color:transparent!important;
-  -webkit-text-stroke:1.2px rgba(235,244,250,.95);paint-order:stroke fill;
-  filter:drop-shadow(0 2px 0 #0b2442) drop-shadow(0 3px 0 #06172c) drop-shadow(0 10px 16px rgba(0,0,0,.45)) drop-shadow(0 0 18px rgba(80,170,240,.25))!important;
-  text-shadow:none!important;animation:none!important;padding-bottom:.06em}
-.hero h1 em{font-style:normal;filter:none!important}
-.page-hero h1:hover{-webkit-text-fill-color:transparent}
-
 /* Tamanhos com a Rajdhani (mais larga que a anterior) */
 .hero h1{font-size:clamp(3rem,6.4vw,6rem)}
 .section h2{font-size:clamp(2.2rem,4vw,3.6rem)}
@@ -823,32 +805,67 @@ h1,h2,.section h2,.page-hero h1,.hero h1,.cta-band h2,.product-copy h2,.material
 .material h3{font-size:2rem}
 @media(min-width:1600px){.hero h1{font-size:clamp(5.4rem,5.4vw,7.2rem)}.section h2{font-size:clamp(3.4rem,3.2vw,4.4rem)}}
 
-/* Fundo geral: aço claro escovado com faixas diagonais prateadas */
-body{background:#e6ecf1}
+/* =========================================================
+   Títulos no estilo da referência: letra em aço azul-marinho
+   escovado com reflexos azuis e borda prateada com relevo.
+   Cada título tem duas camadas: .mt-sh (borda/relevo) e .mt-fg (metal)
+   ========================================================= */
+.mt{display:grid!important;justify-items:start;background:none!important;-webkit-background-clip:border-box!important;background-clip:border-box!important;
+  color:inherit!important;-webkit-text-fill-color:currentColor!important;-webkit-text-stroke:0!important;filter:none!important;text-shadow:none!important;animation:none!important;padding-bottom:.08em}
+.mt>span{grid-area:1/1}
+.mt-sh{color:#e6ecf1;-webkit-text-fill-color:#e6ecf1;-webkit-text-stroke:.07em #d3dbe2;
+  text-shadow:0 .012em 0 #c0cad3,0 .025em 0 #a3afba,0 .04em 0 #8894a0,0 .055em 0 #6f7b87,0 .09em .12em rgba(0,0,0,.30)}
+.mt-fg{position:relative;
+  background:
+    linear-gradient(112deg,transparent 18%,rgba(90,176,255,.55) 30%,rgba(140,205,255,.20) 36%,transparent 44%,transparent 60%,rgba(90,176,255,.45) 72%,transparent 84%),
+    repeating-linear-gradient(0deg,rgba(255,255,255,.06) 0 1px,rgba(0,0,0,.13) 1px 2px),
+    linear-gradient(180deg,#21497a 0%,#143762 42%,#0e2a4d 70%,#0a2140 100%);
+  -webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent;
+  -webkit-text-stroke:.012em rgba(4,18,36,.6)}
+/* em áreas escuras a borda prateada ganha um leve brilho para destacar do fundo */
+.hero .mt-sh,.page-hero .mt-sh,.section-dark .mt-sh,.about-dark .mt-sh,.cta-band .mt-sh,.quote-card:not(.light) .mt-sh{
+  text-shadow:0 .012em 0 #c0cad3,0 .025em 0 #a3afba,0 .04em 0 #8894a0,0 .055em 0 #6f7b87,0 .1em .18em rgba(0,0,0,.55),0 0 .35em rgba(120,190,255,.25)}
+.hero h1.mt{font-size:clamp(3rem,6.4vw,6rem)}
+@media(min-width:1600px){.hero h1.mt{font-size:clamp(5.4rem,5.4vw,7.2rem)}}
+
+/* Fundo geral leve: aço claro com duas faixas diagonais discretas */
+body{background:#eef2f5}
 body:before{background:
-  linear-gradient(135deg,transparent 0 14%,rgba(255,255,255,.95) 14.15%,rgba(150,172,194,.55) 14.45%,transparent 14.7%),
-  linear-gradient(135deg,transparent 0 17%,rgba(160,182,204,.35) 17.1%,transparent 17.25%),
-  linear-gradient(135deg,transparent 0 82.8%,rgba(160,182,204,.35) 82.9%,transparent 83.05%),
-  linear-gradient(135deg,transparent 0 85.4%,rgba(255,255,255,.95) 85.55%,rgba(150,172,194,.55) 85.85%,transparent 86.1%),
-  radial-gradient(60% 55% at 50% 40%,rgba(255,255,255,.95),transparent 70%),
-  repeating-linear-gradient(0deg,rgba(255,255,255,.18) 0 1px,rgba(120,140,160,.05) 1px 3px),
-  linear-gradient(180deg,#f3f6f9 0%,#e3e9ee 60%,#d6dee5 100%)!important}
+  linear-gradient(135deg,transparent 0 13%,rgba(255,255,255,.9) 13.12%,rgba(160,180,200,.30) 13.35%,transparent 13.55%),
+  linear-gradient(135deg,transparent 0 86.4%,rgba(255,255,255,.9) 86.52%,rgba(160,180,200,.30) 86.75%,transparent 86.95%),
+  radial-gradient(60% 55% at 50% 40%,rgba(255,255,255,.9),transparent 70%),
+  repeating-linear-gradient(0deg,rgba(255,255,255,.10) 0 1px,rgba(120,140,160,.025) 1px 3px),
+  linear-gradient(180deg,#f5f7f9 0%,#eaeff3 60%,#e2e8ed 100%)!important}
 .section-white,.section-blue,.section-steel{background:transparent!important}
 
-/* Áreas escuras: fundo de aço azul com faixas prateadas iluminadas */
+/* Áreas escuras: azul-marinho sólido com a textura de aço bem suave ao fundo */
 .section-dark,.about-dark,.cta-band,.page-hero{
-  background:linear-gradient(180deg,rgba(3,12,26,.25),rgba(3,12,26,.35)),url("/assets/fundo-aco-azul.jpg") center/cover no-repeat!important}
-.service-bar,.brands{background:linear-gradient(90deg,rgba(3,12,26,.55),rgba(3,12,26,.35)),url("/assets/fundo-aco-azul.jpg") center 40%/cover no-repeat!important}
+  background:linear-gradient(180deg,rgba(7,24,46,.86),rgba(5,18,36,.9)),url("/assets/fundo-aco-azul.jpg") center/cover no-repeat!important}
+.service-bar,.brands{background:linear-gradient(90deg,rgba(7,24,46,.9),rgba(7,24,46,.86)),url("/assets/fundo-aco-azul.jpg") center 40%/cover no-repeat!important}
 .page-hero:before{display:none}
 @media(max-width:700px){
-  .section-dark,.about-dark,.cta-band,.page-hero{background-image:linear-gradient(180deg,rgba(3,12,26,.3),rgba(3,12,26,.45)),url("/assets/fundo-aco-azul-sm.jpg")!important}
-  .service-bar,.brands{background-image:linear-gradient(90deg,rgba(3,12,26,.6),rgba(3,12,26,.45)),url("/assets/fundo-aco-azul-sm.jpg")!important}
+  .section-dark,.about-dark,.cta-band,.page-hero{background-image:linear-gradient(180deg,rgba(7,24,46,.86),rgba(5,18,36,.9)),url("/assets/fundo-aco-azul-sm.jpg")!important}
+  .service-bar,.brands{background-image:linear-gradient(90deg,rgba(7,24,46,.9),rgba(7,24,46,.86)),url("/assets/fundo-aco-azul-sm.jpg")!important}
 }
 
 /* Mosaico com 6 produtos principais */
 .tiles.tiles-6{grid-template-columns:repeat(3,1fr)}
 .tiles.tiles-6 .tile,.tiles.tiles-6 .tile:nth-child(1){grid-column:auto;aspect-ratio:4/3}
-@media(max-width:620px){.tiles.tiles-6{grid-template-columns:1fr 1fr}.tiles.tiles-6 .tile:nth-child(1){grid-column:auto;aspect-ratio:4/5}.tiles.tiles-6 .tile{aspect-ratio:4/5}}
+@media(max-width:620px){.tiles.tiles-6{grid-template-columns:1fr 1fr}.tiles.tiles-6 .tile,.tiles.tiles-6 .tile:nth-child(1){grid-column:auto;aspect-ratio:4/5}}
+/* Ajuste fino do metal: contorno escuro por fora, aro prateado brilhante e reflexos azuis mais vivos */
+.mt{position:relative;isolation:isolate}
+.mt:before{content:attr(data-t);grid-area:1/1;z-index:-1;color:#5f6d7b;-webkit-text-fill-color:#5f6d7b;-webkit-text-stroke:.1em #5f6d7b;
+  text-shadow:0 .06em .1em rgba(0,0,0,.28)}
+.mt-sh{-webkit-text-stroke:.066em #f1f5f8;color:#f1f5f8;-webkit-text-fill-color:#f1f5f8;
+  text-shadow:0 .015em 0 #c5ced6,0 .03em 0 #9aa6b1,0 .045em 0 #7c8894}
+.hero .mt-sh,.page-hero .mt-sh,.section-dark .mt-sh,.about-dark .mt-sh,.cta-band .mt-sh,.quote-card:not(.light) .mt-sh{
+  text-shadow:0 .015em 0 #c5ced6,0 .03em 0 #9aa6b1,0 .045em 0 #7c8894,0 0 .3em rgba(120,190,255,.28)}
+.mt-fg{background:
+    radial-gradient(40% 70% at 22% 30%,rgba(120,195,255,.55),transparent 70%),
+    linear-gradient(112deg,transparent 16%,rgba(60,150,245,.75) 30%,rgba(150,210,255,.35) 35%,transparent 44%,transparent 58%,rgba(60,150,245,.6) 71%,transparent 84%),
+    repeating-linear-gradient(0deg,rgba(255,255,255,.07) 0 1px,rgba(0,0,0,.14) 1px 2px),
+    linear-gradient(180deg,#1f4a7e 0%,#14386a 40%,#0d2a4f 72%,#09203f 100%)}
+.mt-fg{-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent}
 </style>
 <script>document.documentElement.classList.add('js')</script>
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "LocalBusiness", "name": "Nova Aço", "url": "https://novaacoarmado.com.br/", "image": "https://novaacoarmado.com.br/assets/capa-nova-aco.png", "logo": "https://novaacoarmado.com.br/assets/logo-metalica-transparente.png", "telephone": "+5511984531598", "email": "novaco2505@gmail.com", "address": {"@type": "PostalAddress", "streetAddress": "Rua Macapá, 46 - Jardim do Líbano", "addressLocality": "Barueri", "addressRegion": "SP", "postalCode": "06448-200", "addressCountry": "BR"}, "openingHoursSpecification": [{"@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"], "opens": "08:00", "closes": "17:48"}], "areaServed": ["Barueri", "Jandira", "Itapevi", "Osasco", "Carapicuíba", "Cotia", "Santana de Parnaíba"], "sameAs": ["https://www.instagram.com/nova_aco_armado/"], "brand": [{"@type": "Brand", "name": "Gerdau"}, {"@type": "Brand", "name": "ArcelorMittal"}, {"@type": "Brand", "name": "Cimec"}]}</script>
@@ -875,7 +892,7 @@ body:before{background:
     
     <div class="container hero-content">
       
-      <h1>Ferragem preparada para a sua obra <em>avançar.</em></h1>
+      <h1 class="mt" data-t="Ferragem preparada para a sua obra avançar."><span class="mt-sh" aria-hidden="true">Ferragem preparada para a sua obra avançar.</span><span class="mt-fg">Ferragem preparada para a sua obra avançar.</span></h1>
       <p class="hero-text">Leitura das informações do projeto, corte, dobra e montagem de ferragens para vigas, colunas, estacas e sapatas. Atendimento direto em Barueri e região.</p>
       <div class="actions"><a class="btn btn-accent" href="https://wa.me/5511984531598?text=Ol%C3%A1%20Nova%20A%C3%A7o%21%20Gostaria%20de%20solicitar%20um%20or%C3%A7amento." target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true" class="ico"><path fill="currentColor" d="M19.05 4.91A9.82 9.82 0 0 0 12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38a9.9 9.9 0 0 0 4.74 1.21h.01c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.91-7.01Zm-7.01 15.24h-.01a8.2 8.2 0 0 1-4.19-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.2 8.2 0 0 1-1.26-4.38c0-4.54 3.7-8.23 8.24-8.23 2.2 0 4.27.86 5.82 2.42a8.18 8.18 0 0 1 2.41 5.82c0 4.54-3.7 8.23-8.22 8.23Zm4.52-6.16c-.25-.12-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.13-.16.24-.64.8-.78.97-.14.16-.29.18-.54.06-.25-.12-1.05-.39-1.99-1.23-.74-.66-1.23-1.47-1.38-1.72-.14-.25-.01-.38.11-.5.11-.11.25-.29.37-.43.13-.15.17-.25.25-.41.08-.17.04-.31-.02-.43-.06-.12-.56-1.34-.76-1.84-.2-.48-.41-.42-.56-.43h-.48c-.17 0-.43.06-.66.31-.22.25-.86.85-.86 2.07 0 1.22.89 2.4 1.01 2.56.12.17 1.75 2.67 4.23 3.74.59.26 1.05.41 1.41.52.59.19 1.13.16 1.56.1.48-.07 1.47-.6 1.67-1.18.21-.58.21-1.07.14-1.18-.06-.1-.22-.16-.47-.28Z"/></svg> Solicitar orçamento</a><a class="btn btn-ghost" href="/produtos/">Ver produtos <svg viewBox="0 0 24 24" aria-hidden="true" class="ico ico-arrow"><path d="M5 12h14m-6-6 6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></a></div>
     </div>
@@ -890,7 +907,7 @@ body:before{background:
 
   <section class="section about-dark">
     <div class="container about-home">
-      <div class="about-copy reveal"><h2>Nova Aço em Barueri</h2><p>Preparamos ferragens para obras a partir das medidas e informações fornecidas pelo cliente. O atendimento acompanha o pedido desde o orçamento até a programação de entrega.</p><p>A proposta é simples: facilitar a organização da obra, evitar improvisos no canteiro e manter uma comunicação direta durante o fornecimento.</p>
+      <div class="about-copy reveal"><h2 class="mt" data-t="Nova Aço em Barueri"><span class="mt-sh" aria-hidden="true">Nova Aço em Barueri</span><span class="mt-fg">Nova Aço em Barueri</span></h2><p>Preparamos ferragens para obras a partir das medidas e informações fornecidas pelo cliente. O atendimento acompanha o pedido desde o orçamento até a programação de entrega.</p><p>A proposta é simples: facilitar a organização da obra, evitar improvisos no canteiro e manter uma comunicação direta durante o fornecimento.</p>
         <ul class="about-points">
           <li><svg viewBox="0 0 24 24" aria-hidden="true" class="ico"><path fill="none" stroke="currentColor" stroke-width="2" d="M12 21s-7-6.1-7-11.5a7 7 0 0 1 14 0C19 14.9 12 21 12 21Z"/><circle cx="12" cy="9.5" r="2.5" fill="none" stroke="currentColor" stroke-width="2"/></svg><div><strong>Base em Barueri</strong><span>Rua Macapá, 46, Jardim do Líbano</span></div></li>
           <li><svg viewBox="0 0 24 24" aria-hidden="true" class="ico"><path d="m12 3 9 5-9 5-9-5 9-5Zm-9 9 9 5 9-5M3 16l9 5 9-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg><div><strong>Aço de marca</strong><span>Gerdau, ArcelorMittal e Cimec</span></div></li>
@@ -908,7 +925,7 @@ body:before{background:
 
   <section class="section section-blue" id="produtos">
     <div class="container">
-      <div class="section-head reveal"><div><h2>Produtos para estrutura e obra</h2></div><p>Vigas, colunas, sapatas, estacas, vergalhões, malha pop, arames, pregos e serviço de corte e dobra. A página de produtos reúne as opções e imagens de cada item.</p></div>
+      <div class="section-head reveal"><div><h2 class="mt" data-t="Produtos para estrutura e obra"><span class="mt-sh" aria-hidden="true">Produtos para estrutura e obra</span><span class="mt-fg">Produtos para estrutura e obra</span></h2></div><p>Vigas, colunas, sapatas, estacas, vergalhões, malha pop, arames, pregos e serviço de corte e dobra. A página de produtos reúne as opções e imagens de cada item.</p></div>
       <div class="tiles tiles-6 stagger"><a class="tile" href="/produtos/#vigas"><img src="/assets/produto-vigas-real.jpg" alt="Vigas armadas Nova Aço" loading="lazy" decoding="async"><span>Vigas<svg viewBox="0 0 24 24" aria-hidden="true" class="ico ico-arrow"><path d="M5 12h14m-6-6 6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a><a class="tile" href="/produtos/#colunas"><img src="/assets/produto-colunas-catalogo.png" alt="Colunas armadas Nova Aço" loading="lazy" decoding="async"><span>Colunas<svg viewBox="0 0 24 24" aria-hidden="true" class="ico ico-arrow"><path d="M5 12h14m-6-6 6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a><a class="tile" href="/produtos/#sapatas"><img src="/assets/produto-sapatas-final.jpg" alt="Sapatas armadas Nova Aço" loading="lazy" decoding="async"><span>Sapatas<svg viewBox="0 0 24 24" aria-hidden="true" class="ico ico-arrow"><path d="M5 12h14m-6-6 6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a><a class="tile" href="/produtos/#estacas"><img src="/assets/produto-estacas-realista.png" alt="Ferragens para estacas Nova Aço" loading="lazy" decoding="async"><span>Estacas<svg viewBox="0 0 24 24" aria-hidden="true" class="ico ico-arrow"><path d="M5 12h14m-6-6 6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a><a class="tile" href="/produtos/#ferragens-armadas"><img src="/assets/obra-1.jpg" alt="Ferragens armadas Nova Aço prontas para entrega" loading="lazy" decoding="async"><span>Ferragens armadas<svg viewBox="0 0 24 24" aria-hidden="true" class="ico ico-arrow"><path d="M5 12h14m-6-6 6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a><a class="tile" href="/produtos/#corte-dobra"><img src="/assets/produto-corte-dobra-final.jpg" alt="Serviço de corte e dobra de aço" loading="lazy" decoding="async"><span>Corte e dobra<svg viewBox="0 0 24 24" aria-hidden="true" class="ico ico-arrow"><path d="M5 12h14m-6-6 6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a></div>
       <div class="center-link"><a class="btn btn-dark" href="/produtos/">Ver todos os produtos <svg viewBox="0 0 24 24" aria-hidden="true" class="ico ico-arrow"><path d="M5 12h14m-6-6 6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></a></div>
     </div>
@@ -919,10 +936,10 @@ body:before{background:
 
   <section class="section section-steel" id="atendimento">
     <div class="container area-grid">
-      <div class="reveal"><h2>Barueri e cidades vizinhas</h2><p>Entregas para outras regiões ou mais distantes são avaliadas caso a caso. Informe o endereço da obra e a equipe confirma a disponibilidade.</p>
+      <div class="reveal"><h2 class="mt" data-t="Barueri e cidades vizinhas"><span class="mt-sh" aria-hidden="true">Barueri e cidades vizinhas</span><span class="mt-fg">Barueri e cidades vizinhas</span></h2><p>Entregas para outras regiões ou mais distantes são avaliadas caso a caso. Informe o endereço da obra e a equipe confirma a disponibilidade.</p>
         <ul class="city-chips"><li><svg viewBox="0 0 24 24" aria-hidden="true" class="ico"><path fill="none" stroke="currentColor" stroke-width="2" d="M12 21s-7-6.1-7-11.5a7 7 0 0 1 14 0C19 14.9 12 21 12 21Z"/><circle cx="12" cy="9.5" r="2.5" fill="none" stroke="currentColor" stroke-width="2"/></svg>Barueri</li><li><svg viewBox="0 0 24 24" aria-hidden="true" class="ico"><path fill="none" stroke="currentColor" stroke-width="2" d="M12 21s-7-6.1-7-11.5a7 7 0 0 1 14 0C19 14.9 12 21 12 21Z"/><circle cx="12" cy="9.5" r="2.5" fill="none" stroke="currentColor" stroke-width="2"/></svg>Jandira</li><li><svg viewBox="0 0 24 24" aria-hidden="true" class="ico"><path fill="none" stroke="currentColor" stroke-width="2" d="M12 21s-7-6.1-7-11.5a7 7 0 0 1 14 0C19 14.9 12 21 12 21Z"/><circle cx="12" cy="9.5" r="2.5" fill="none" stroke="currentColor" stroke-width="2"/></svg>Itapevi</li><li><svg viewBox="0 0 24 24" aria-hidden="true" class="ico"><path fill="none" stroke="currentColor" stroke-width="2" d="M12 21s-7-6.1-7-11.5a7 7 0 0 1 14 0C19 14.9 12 21 12 21Z"/><circle cx="12" cy="9.5" r="2.5" fill="none" stroke="currentColor" stroke-width="2"/></svg>Osasco</li><li><svg viewBox="0 0 24 24" aria-hidden="true" class="ico"><path fill="none" stroke="currentColor" stroke-width="2" d="M12 21s-7-6.1-7-11.5a7 7 0 0 1 14 0C19 14.9 12 21 12 21Z"/><circle cx="12" cy="9.5" r="2.5" fill="none" stroke="currentColor" stroke-width="2"/></svg>Carapicuíba</li><li><svg viewBox="0 0 24 24" aria-hidden="true" class="ico"><path fill="none" stroke="currentColor" stroke-width="2" d="M12 21s-7-6.1-7-11.5a7 7 0 0 1 14 0C19 14.9 12 21 12 21Z"/><circle cx="12" cy="9.5" r="2.5" fill="none" stroke="currentColor" stroke-width="2"/></svg>Cotia</li><li><svg viewBox="0 0 24 24" aria-hidden="true" class="ico"><path fill="none" stroke="currentColor" stroke-width="2" d="M12 21s-7-6.1-7-11.5a7 7 0 0 1 14 0C19 14.9 12 21 12 21Z"/><circle cx="12" cy="9.5" r="2.5" fill="none" stroke="currentColor" stroke-width="2"/></svg>Santana de Parnaíba</li></ul>
         <p class="hours-pill"><svg viewBox="0 0 24 24" aria-hidden="true" class="ico"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 7v5l3 2" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg> Atendimento de segunda a sexta, das 8h às 17h48</p></div>
-      <div class="quote-card reveal"><h3>Orçamento rápido</h3><p>Preencha e a mensagem já vai pronta para o WhatsApp da Nova Aço.</p><form class="quote-form" data-quote-form id="orcamento-home" novalidate>
+      <div class="quote-card reveal"><h3 class="mt" data-t="Orçamento rápido"><span class="mt-sh" aria-hidden="true">Orçamento rápido</span><span class="mt-fg">Orçamento rápido</span></h3><p>Preencha e a mensagem já vai pronta para o WhatsApp da Nova Aço.</p><form class="quote-form" data-quote-form id="orcamento-home" novalidate>
       <div class="form-grid">
         <label>Seu nome<input name="nome" type="text" autocomplete="name" maxlength="80" required placeholder="Como podemos te chamar?"></label>
         <label>Cidade da obra<select name="cidade" required><option value="">Selecione</option><option>Barueri</option><option>Jandira</option><option>Itapevi</option><option>Osasco</option><option>Carapicuíba</option><option>Cotia</option><option>Santana de Parnaíba</option><option>Outra cidade</option></select></label>
@@ -938,7 +955,7 @@ body:before{background:
 
   <section class="section section-dark" id="avaliacoes">
     <div class="container">
-      <div class="section-head"><div><h2>O que os clientes relatam</h2></div>
+      <div class="section-head"><div><h2 class="mt" data-t="O que os clientes relatam"><span class="mt-sh" aria-hidden="true">O que os clientes relatam</span><span class="mt-fg">O que os clientes relatam</span></h2></div>
         <div class="section-head-side"><p>Avaliações públicas sobre atendimento, prazo e fornecimento da Nova Aço.</p>
         <div class="carousel-controls"><button type="button" class="round-btn" data-carousel-prev aria-label="Avaliação anterior"><svg viewBox="0 0 24 24" aria-hidden="true" class="ico"><path d="m15 5-7 7 7 7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></button><button type="button" class="round-btn" data-carousel-next aria-label="Próxima avaliação"><svg viewBox="0 0 24 24" aria-hidden="true" class="ico"><path d="m9 5 7 7-7 7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div></div></div>
       <div class="review-row" data-carousel tabindex="0" aria-label="Avaliações de clientes"><article class="review">
@@ -974,7 +991,7 @@ body:before{background:
     </div>
   </section>
 
-  <section class="cta-band"><div class="container"><div><h2>Envie seu projeto ou suas medidas</h2><p>A equipe confirma as informações necessárias para preparar o orçamento.</p></div><a class="btn btn-accent" href="https://wa.me/5511984531598?text=Ol%C3%A1%20Nova%20A%C3%A7o%21%20Gostaria%20de%20solicitar%20um%20or%C3%A7amento." target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true" class="ico"><path fill="currentColor" d="M19.05 4.91A9.82 9.82 0 0 0 12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38a9.9 9.9 0 0 0 4.74 1.21h.01c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.91-7.01Zm-7.01 15.24h-.01a8.2 8.2 0 0 1-4.19-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.2 8.2 0 0 1-1.26-4.38c0-4.54 3.7-8.23 8.24-8.23 2.2 0 4.27.86 5.82 2.42a8.18 8.18 0 0 1 2.41 5.82c0 4.54-3.7 8.23-8.22 8.23Zm4.52-6.16c-.25-.12-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.13-.16.24-.64.8-.78.97-.14.16-.29.18-.54.06-.25-.12-1.05-.39-1.99-1.23-.74-.66-1.23-1.47-1.38-1.72-.14-.25-.01-.38.11-.5.11-.11.25-.29.37-.43.13-.15.17-.25.25-.41.08-.17.04-.31-.02-.43-.06-.12-.56-1.34-.76-1.84-.2-.48-.41-.42-.56-.43h-.48c-.17 0-.43.06-.66.31-.22.25-.86.85-.86 2.07 0 1.22.89 2.4 1.01 2.56.12.17 1.75 2.67 4.23 3.74.59.26 1.05.41 1.41.52.59.19 1.13.16 1.56.1.48-.07 1.47-.6 1.67-1.18.21-.58.21-1.07.14-1.18-.06-.1-.22-.16-.47-.28Z"/></svg> Falar no WhatsApp</a></div></section>
+  <section class="cta-band"><div class="container"><div><h2 class="mt" data-t="Envie seu projeto ou suas medidas"><span class="mt-sh" aria-hidden="true">Envie seu projeto ou suas medidas</span><span class="mt-fg">Envie seu projeto ou suas medidas</span></h2><p>A equipe confirma as informações necessárias para preparar o orçamento.</p></div><a class="btn btn-accent" href="https://wa.me/5511984531598?text=Ol%C3%A1%20Nova%20A%C3%A7o%21%20Gostaria%20de%20solicitar%20um%20or%C3%A7amento." target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true" class="ico"><path fill="currentColor" d="M19.05 4.91A9.82 9.82 0 0 0 12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38a9.9 9.9 0 0 0 4.74 1.21h.01c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.91-7.01Zm-7.01 15.24h-.01a8.2 8.2 0 0 1-4.19-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.2 8.2 0 0 1-1.26-4.38c0-4.54 3.7-8.23 8.24-8.23 2.2 0 4.27.86 5.82 2.42a8.18 8.18 0 0 1 2.41 5.82c0 4.54-3.7 8.23-8.22 8.23Zm4.52-6.16c-.25-.12-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.13-.16.24-.64.8-.78.97-.14.16-.29.18-.54.06-.25-.12-1.05-.39-1.99-1.23-.74-.66-1.23-1.47-1.38-1.72-.14-.25-.01-.38.11-.5.11-.11.25-.29.37-.43.13-.15.17-.25.25-.41.08-.17.04-.31-.02-.43-.06-.12-.56-1.34-.76-1.84-.2-.48-.41-.42-.56-.43h-.48c-.17 0-.43.06-.66.31-.22.25-.86.85-.86 2.07 0 1.22.89 2.4 1.01 2.56.12.17 1.75 2.67 4.23 3.74.59.26 1.05.41 1.41.52.59.19 1.13.16 1.56.1.48-.07 1.47-.6 1.67-1.18.21-.58.21-1.07.14-1.18-.06-.1-.22-.16-.47-.28Z"/></svg> Falar no WhatsApp</a></div></section>
 </main>
 <footer class="site-footer">
   <div class="container">
