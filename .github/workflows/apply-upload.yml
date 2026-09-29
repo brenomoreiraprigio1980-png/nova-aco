@@ -1,0 +1,178 @@
+name: apply-uploaded-site
+on:
+  push:
+    branches: [staging-upload-claude-2026-09-29]
+permissions:
+  contents: write
+jobs:
+  apply:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install pillow==12.3.0 brotli
+      - name: Rebuild uploaded package exactly
+        shell: python
+        run: |
+          from PIL import Image,ImageOps
+          from pathlib import Path
+          import base64,brotli,json,io,hashlib
+
+          # Restore the exact UTF-8 text files from the uploaded ZIP payload.
+          payload=''.join(p.read_text() for p in sorted(Path('.upload').glob('payload-*')))
+          text_files=json.loads(brotli.decompress(base64.b64decode(payload)).decode('utf-8'))
+          for path,text in text_files.items():
+              p=Path(path); p.parent.mkdir(parents=True,exist_ok=True)
+              p.write_bytes(text.encode('utf-8'))
+
+          out=Path('assets/img'); out.mkdir(parents=True,exist_ok=True)
+
+          pairs=[
+            ('acompanhamento-nova-aco','assets/acompanhamento-nova-aco.jpeg',(900,1200),(480,640)),
+            ('foto-ferragens-acompanhamento','assets/foto-ferragens-acompanhamento.jpg',(900,1200),(480,640)),
+            ('obra-1','assets/obra-1.jpg',(900,1200),(480,640)),
+            ('obra-2','assets/obra-2.jpg',(900,1200),(480,640)),
+            ('produto-arame-12-nova-aco','assets/produto-arame-12-nova-aco.jpg',(900,1200),(480,640)),
+            ('produto-arames-final','assets/produto-arames-final.jpg',(1200,900),(640,480)),
+            ('produto-arames-real','assets/produto-arames-real.jpg',(900,1200),(480,640)),
+            ('produto-colunas-catalogo','assets/produto-colunas-catalogo.png',(960,1200),(512,640)),
+            ('produto-colunas-final','assets/produto-colunas-final.jpg',(900,1200),(480,640)),
+            ('produto-colunas-real','assets/produto-colunas-real.jpg',(900,1200),(480,640)),
+            ('produto-corte-dobra-final','assets/produto-corte-dobra-final.jpg',(900,1200),(480,640)),
+            ('produto-corte-dobra-real','assets/produto-corte-dobra-real.jpg',(900,1200),(480,640)),
+            ('produto-estacas-final','assets/produto-estacas-final.jpg',(1200,1064),(640,567)),
+            ('produto-estacas-realista','assets/produto-estacas-realista.png',(900,1200),(480,640)),
+            ('produto-malha-pop-real','assets/produto-malha-pop-real.jpg',(900,1200),(480,640)),
+            ('produto-pregos-final','assets/produto-pregos-final.jpg',(1200,900),(640,480)),
+            ('produto-pregos-real','assets/produto-pregos-real.jpg',(900,1200),(480,640)),
+            ('produto-sapatas-final','assets/produto-sapatas-final.jpg',(900,1200),(480,640)),
+            ('produto-sapatas-real','assets/produto-sapatas-real.jpg',(900,1200),(480,640)),
+            ('produto-sapatas-sem-dedo','assets/produto-sapatas-sem-dedo.jpg',(986,1200),(526,640)),
+            ('produto-vergalhoes-final','assets/produto-vergalhoes-final.jpg',(1200,900),(640,480)),
+            ('produto-vergalhoes-realista','assets/produto-vergalhoes-realista.png',(900,1200),(480,640)),
+            ('produto-vigas-real','assets/produto-vigas-real.jpg',(900,1200),(480,640)),
+          ]
+
+          def source_image(path):
+              im=ImageOps.exif_transpose(Image.open(path))
+              if 'A' not in im.mode:
+                  im=im.convert('RGB')
+              return im
+
+          for name,src,full_size,small_size in pairs:
+              full=source_image(src).resize(full_size,Image.Resampling.LANCZOS)
+              b=io.BytesIO(); full.save(b,'WEBP',quality=78,method=6,exact=False)
+              full_bytes=b.getvalue()
+              (out/f'{name}.webp').write_bytes(full_bytes)
+
+              decoded=Image.open(io.BytesIO(full_bytes))
+              small=decoded.resize(small_size,Image.Resampling.LANCZOS)
+              b=io.BytesIO(); small.save(b,'WEBP',quality=71,method=6,exact=False)
+              (out/f'{name}-sm.webp').write_bytes(b.getvalue())
+
+          # Special WebP outputs.
+          im=ImageOps.exif_transpose(Image.open('assets/capa-logo-azul.png')).resize((900,1599),Image.Resampling.BICUBIC)
+          b=io.BytesIO(); im.save(b,'WEBP',quality=80,method=4,exact=False)
+          (out/'capa-logo-azul.webp').write_bytes(b.getvalue())
+
+          logo=ImageOps.exif_transpose(Image.open('assets/logo-metalica-transparente.png')).resize((520,207),Image.Resampling.BICUBIC)
+          b=io.BytesIO(); logo.save(b,'WEBP',quality=90,method=4,exact=False)
+          (out/'logo-nova-aco.webp').write_bytes(b.getvalue())
+
+          # PNG outputs.
+          b=io.BytesIO(); logo.save(b,'PNG',optimize=True,compress_level=0)
+          (out/'logo-nova-aco.png').write_bytes(b.getvalue())
+
+          fav=ImageOps.exif_transpose(Image.open('assets/favicon-nova-aco.png')).resize((192,192),Image.Resampling.BICUBIC)
+          b=io.BytesIO(); fav.save(b,'PNG',optimize=True,compress_level=0)
+          (out/'favicon-192.png').write_bytes(b.getvalue())
+
+          # JPEG cover.
+          cover=ImageOps.exif_transpose(Image.open('assets/capa-nova-aco.png')).convert('RGB').resize((1672,941),Image.Resampling.LANCZOS)
+          b=io.BytesIO(); cover.save(b,'JPEG',quality=82,progressive=True,optimize=False,subsampling=2)
+          (out/'capa-nova-aco.jpg').write_bytes(b.getvalue())
+
+          expected={
+            'PACOTE-SITE.md':'f6c8193da0b68c8f28ac7958f1a90aedda1864bb499819aaba52b51a2fe756dd',
+            'acompanhamento/index.html':'537aa4245050e43d1e4f58f03d83a09f20f7179545b70fe57b0458087324b6dd',
+            'assets/img/acompanhamento-nova-aco-sm.webp':'3c3e23509782a43321d682b1879b0bdda1c93f3992b50cb26ab7d1057591da16',
+            'assets/img/acompanhamento-nova-aco.webp':'6966c40919420c15462a370af3c916a3cd3a3087d79e3019401114c6d77b61b8',
+            'assets/img/capa-logo-azul.webp':'e1e479b2da9016604e4d23e0612da02022b06297f2c43e4a23393b3bfb9fbb48',
+            'assets/img/capa-nova-aco.jpg':'b4f33a9ac0bb75796afd455785447398d2211d814e2d1e6091162abbdfe84275',
+            'assets/img/favicon-192.png':'a5416d96f977b405cffe392532234605172349206659f9235855181b3c228ddd',
+            'assets/img/foto-ferragens-acompanhamento-sm.webp':'949d68e6231114ba872c84de83f69dc32dd919192f287e65a46820a4e219d64b',
+            'assets/img/foto-ferragens-acompanhamento.webp':'ba62f8321b3acddec8912c9bd3f0bad586162a2c204f1dc399027e5dc8fd12d1',
+            'assets/img/logo-nova-aco.png':'874b244f977514c9abda067feab4b45ddc58fa6fa6df7704236ef1531a71ab7c',
+            'assets/img/logo-nova-aco.webp':'ea9e7d76b298446fe307c1128ab80c847016db7e35e924a7f6199a6a49367ef3',
+            'assets/img/obra-1-sm.webp':'868ecdf69590e75cea884359513e2599dfde84423e658724b8e19f5600bc4b78',
+            'assets/img/obra-1.webp':'f7c27cf6da7713be6d7a1764bdb18cd98031a7645c458eb4f92484dc1016d03a',
+            'assets/img/obra-2-sm.webp':'eae00c8de8f0dfaafaafddce0864d6b0bb445cf3cfcab11a90e2871df2f74abe',
+            'assets/img/obra-2.webp':'bf6afd6cd09c3750958e7efcaa8274059ac51c47cbd35817e2b4e16e6743b665',
+            'assets/img/produto-arame-12-nova-aco-sm.webp':'44581bd84663f073cda3c7857b68677c3753c1e7dc5a638e099b7156ebe0254b',
+            'assets/img/produto-arame-12-nova-aco.webp':'0c673c0a5c578435525d89f0ad5a94e4b789a8db92e05dce1aa0934578eef08e',
+            'assets/img/produto-arames-final-sm.webp':'9efe17129f8b4a650dfe3c6cf36d35f1361302b84b2ba7a2f32f34a3a1fe38cb',
+            'assets/img/produto-arames-final.webp':'be0bf7c8249e303e8d5f087546ee07e552b04da1fe36bf7e914c986a0749c3b7',
+            'assets/img/produto-arames-real-sm.webp':'f50efc0b3c44bad1e97c742105b85c3cb980e827162710d31d87e24692fcb6fe',
+            'assets/img/produto-arames-real.webp':'0708512085404cc2d869dcf74027983118ee4cb1f257bf44884151f894a14134',
+            'assets/img/produto-colunas-catalogo-sm.webp':'7dcf3af2c0291c566f27e93a2c033ab7a2f8f3829a84ac1512f4771e4999f4ac',
+            'assets/img/produto-colunas-catalogo.webp':'5416a6a7c6ece65a4222aff6381e2444cce03a2644d03f93935508a136201f49',
+            'assets/img/produto-colunas-final-sm.webp':'9d28847364bb3570cca4a39eedb520797420abaf7ebb61a8dee76fe2be5663b0',
+            'assets/img/produto-colunas-final.webp':'02b9376ddedea8322c06dd940732275637f2c312045934906b4c94f5637f1428',
+            'assets/img/produto-colunas-real-sm.webp':'f18f2d2f7fe83309b96c918084ace9da79b8f3807b78c8f6ca12847b5295fdf6',
+            'assets/img/produto-colunas-real.webp':'541a9a2fd16c46be7514a369a5eaf3d18dd5aa4bac2b2994fe9e76ea4ab78ac5',
+            'assets/img/produto-corte-dobra-final-sm.webp':'d5bbccfb8dc49d0272fef774aba42f8948ed716e114cb60dc46bb0c7f092d3fb',
+            'assets/img/produto-corte-dobra-final.webp':'f47560e6a681824ff2bb9ed6935801e257f7ed347d5388fc14ffcc45d7f17e78',
+            'assets/img/produto-corte-dobra-real-sm.webp':'b8da5e231915c118c9d7889cc23e276c91df6044aaf223acff5f1a6c6519abfa',
+            'assets/img/produto-corte-dobra-real.webp':'58b48f1d14226f050619501a6ae42d4ac1bff4a1e71dd7211b223e9812b5f367',
+            'assets/img/produto-estacas-final-sm.webp':'3d83b2fe88e5a452921aef5abac4662c539ce6fa2868a134e3bd4f74439520d1',
+            'assets/img/produto-estacas-final.webp':'c891690ccb0ec8438eb706e35d5180b26642de1a38c50f34ce936ef66fa1936a',
+            'assets/img/produto-estacas-realista-sm.webp':'0ce53dd578d2117b8b9ab63360c6feedb0403113c5e621568fb82027eaccad2c',
+            'assets/img/produto-estacas-realista.webp':'8b36b85871f35af043a4286ba348c2391ffdf692a721c38be5720edfe166f71a',
+            'assets/img/produto-malha-pop-real-sm.webp':'9337d7c7ea097ccc1bdcec1124e9b16a946f1b4563a1f6e710ca28057a36002d',
+            'assets/img/produto-malha-pop-real.webp':'cbdd78ed77be30060f0c5a46737889d2b6923dc2b85c9b85337e899c80e31ee3',
+            'assets/img/produto-pregos-final-sm.webp':'c11340891c53cb4ebeb7e842403d61d85fea906ba6680b06d6324794309f2694',
+            'assets/img/produto-pregos-final.webp':'8fbe7c1c2579bd5f7a915a4e6cbf00aba117b605376a3fec9b830d8c8b88c95d',
+            'assets/img/produto-pregos-real-sm.webp':'e982522d1772bd4b4824f070795715f6de705ad89005bd559d1504fc9c085ef5',
+            'assets/img/produto-pregos-real.webp':'673346b28004a9e6da147bad0bbe4d96366c969c36ba731f94eb84f373369f5a',
+            'assets/img/produto-sapatas-final-sm.webp':'2744454f0d28d80aea0aedb04f93910a1d1105a311b0c89bc49f070b1d7ffa84',
+            'assets/img/produto-sapatas-final.webp':'dd469c831e9109ce66383a513b13e92e01572562ff10882fd2f388b87f7c2d5a',
+            'assets/img/produto-sapatas-real-sm.webp':'3c3e23509782a43321d682b1879b0bdda1c93f3992b50cb26ab7d1057591da16',
+            'assets/img/produto-sapatas-real.webp':'6966c40919420c15462a370af3c916a3cd3a3087d79e3019401114c6d77b61b8',
+            'assets/img/produto-sapatas-sem-dedo-sm.webp':'a07dbe7df9091aab550f6ec16c8719cbc8bbbff23ae31830a386ebf78eb4c625',
+            'assets/img/produto-sapatas-sem-dedo.webp':'4dd073cfb13742803885ad9d514b3f7c36587cfb191637c966e3279ad041628c',
+            'assets/img/produto-vergalhoes-final-sm.webp':'c903f4ac10ce33aa667d101a421171460510edc311b37b5edfd9ab2b097cc1fa',
+            'assets/img/produto-vergalhoes-final.webp':'798cd401cbb9b0edb0d6c80ecd6bc73030205741f898c2a62146e3ef94f86c35',
+            'assets/img/produto-vergalhoes-realista-sm.webp':'a6f967d087d339a51d1310b7f55f37ee1a3a2597c1f961a496b5f3ebc655d586',
+            'assets/img/produto-vergalhoes-realista.webp':'11be2425fba64150cb69e65df533105824f1221664de2f2cf521bce2f6d17c0d',
+            'assets/img/produto-vigas-real-sm.webp':'949d68e6231114ba872c84de83f69dc32dd919192f287e65a46820a4e219d64b',
+            'assets/img/produto-vigas-real.webp':'ba62f8321b3acddec8912c9bd3f0bad586162a2c204f1dc399027e5dc8fd12d1',
+            'assets/site.css':'480cb0c5df645d096a9128a4432858a1bac4e0eb5335ad94b5b2c5b64452748b',
+            'assets/site.js':'b2ea7d7a8ecacd8f9c803087f17bfc96a84fd8518afa1c11ce3a1f20f149056e',
+            'contato/index.html':'88ba67c2799e0fdf644e5da190f7ff8eb208ad594d015bf8a0d295c7d20984c0',
+            'index.html':'c0d7a29099536d984d475816a3bb1eae780c24eee34983b8e85172babf7cbc2b',
+            'produtos/index.html':'2d21c6524f3d090ddc31f07d93b06d4be22f5678f8092422a1835c290125a07f',
+            'quem-somos/index.html':'f5e32be785022929611e4426c34066cbfc86fce9b238acbc71acde48383b7c1c',
+          }
+
+          failures=[]
+          for path,want in expected.items():
+              p=Path(path)
+              got=hashlib.sha256(p.read_bytes()).hexdigest() if p.exists() else 'MISSING'
+              if got!=want:
+                  failures.append((path,got,want))
+          if failures:
+              print('VALIDATION_FAILED',len(failures))
+              for x in failures: print(x)
+              raise SystemExit(1)
+          print('VALIDATION_OK',len(expected),'FILES')
+      - name: Commit validated package on staging
+        run: |
+          git config user.name "brenomoreiraprigio1980-png"
+          git config user.email "brenomoreiraprigio.1980@gmail.com"
+          git add PACOTE-SITE.md index.html quem-somos/index.html produtos/index.html acompanhamento/index.html contato/index.html assets/site.css assets/site.js assets/img
+          git commit -m "Valida pacote enviado para publicação"
+          git push origin HEAD:staging-upload-claude-2026-09-29
