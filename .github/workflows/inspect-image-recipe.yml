@@ -1,0 +1,45 @@
+name: inspect-image-recipe
+on:
+  push:
+    branches: [staging-upload-claude-2026-09-29]
+permissions:
+  contents: read
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install pillow
+      - name: Find exact WebP recipe
+        shell: python
+        run: |
+          from PIL import Image, ImageOps
+          from pathlib import Path
+          import hashlib, io
+          src=ImageOps.exif_transpose(Image.open("assets/produto-vigas-real.jpg")).convert("RGB")
+          target=(900,1200)
+          expected="ba62f8321b3acddec8912c9bd3f0bad586162a2c204f1dc399027e5dc8fd12d1"
+          candidates=[]
+          for resize_mode in ("resize","thumbnail"):
+            for res_name,res in [("LANCZOS",Image.Resampling.LANCZOS),("BICUBIC",Image.Resampling.BICUBIC)]:
+              if resize_mode=="resize":
+                im=src.resize(target,res)
+              else:
+                im=src.copy(); im.thumbnail((1200,1200),res)
+              if im.size!=target: continue
+              for q in range(65,101):
+                for method in range(0,7):
+                  for exact in (False,True):
+                    b=io.BytesIO()
+                    im.save(b,"WEBP",quality=q,method=method,exact=exact)
+                    h=hashlib.sha256(b.getvalue()).hexdigest()
+                    if h==expected:
+                      print("EXACT_MATCH",resize_mode,res_name,q,method,exact,len(b.getvalue()))
+                      raise SystemExit(0)
+                    candidates.append((abs(len(b.getvalue())-237052),resize_mode,res_name,q,method,exact,len(b.getvalue()),h))
+          candidates.sort()
+          print("NO_EXACT_MATCH")
+          for row in candidates[:20]: print("CLOSE_SIZE",row)
