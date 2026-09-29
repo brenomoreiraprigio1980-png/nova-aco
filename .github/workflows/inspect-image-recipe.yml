@@ -12,34 +12,104 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - run: python -m pip install pillow
-      - name: Find exact WebP recipe
+      - run: python -m pip install pillow==12.3.0
+      - name: Verify exact image recipe
         shell: python
         run: |
           from PIL import Image, ImageOps
           from pathlib import Path
           import hashlib, io
-          src=ImageOps.exif_transpose(Image.open("assets/produto-vigas-real.jpg")).convert("RGB")
-          target=(900,1200)
-          expected="ba62f8321b3acddec8912c9bd3f0bad586162a2c204f1dc399027e5dc8fd12d1"
-          candidates=[]
-          for resize_mode in ("resize","thumbnail"):
-            for res_name,res in [("LANCZOS",Image.Resampling.LANCZOS),("BICUBIC",Image.Resampling.BICUBIC)]:
-              if resize_mode=="resize":
-                im=src.resize(target,res)
-              else:
-                im=src.copy(); im.thumbnail((1200,1200),res)
-              if im.size!=target: continue
-              for q in range(65,101):
-                for method in range(0,7):
-                  for exact in (False,True):
-                    b=io.BytesIO()
-                    im.save(b,"WEBP",quality=q,method=method,exact=exact)
-                    h=hashlib.sha256(b.getvalue()).hexdigest()
-                    if h==expected:
-                      print("EXACT_MATCH",resize_mode,res_name,q,method,exact,len(b.getvalue()))
-                      raise SystemExit(0)
-                    candidates.append((abs(len(b.getvalue())-237052),resize_mode,res_name,q,method,exact,len(b.getvalue()),h))
-          candidates.sort()
-          print("NO_EXACT_MATCH")
-          for row in candidates[:20]: print("CLOSE_SIZE",row)
+
+          specs = {
+            'acompanhamento-nova-aco-sm.webp': ('assets/acompanhamento-nova-aco.jpeg',(480,640),'3c3e23509782a43321d682b1879b0bdda1c93f3992b50cb26ab7d1057591da16'),
+            'acompanhamento-nova-aco.webp': ('assets/acompanhamento-nova-aco.jpeg',(900,1200),'6966c40919420c15462a370af3c916a3cd3a3087d79e3019401114c6d77b61b8'),
+            'capa-logo-azul.webp': ('assets/capa-logo-azul.png',(900,1599),'e1e479b2da9016604e4d23e0612da02022b06297f2c43e4a23393b3bfb9fbb48'),
+            'foto-ferragens-acompanhamento-sm.webp': ('assets/foto-ferragens-acompanhamento.jpg',(480,640),'949d68e6231114ba872c84de83f69dc32dd919192f287e65a46820a4e219d64b'),
+            'foto-ferragens-acompanhamento.webp': ('assets/foto-ferragens-acompanhamento.jpg',(900,1200),'ba62f8321b3acddec8912c9bd3f0bad586162a2c204f1dc399027e5dc8fd12d1'),
+            'logo-nova-aco.webp': ('assets/logo-metalica-transparente.png',(520,207),'ea9e7d76b298446fe307c1128ab80c847016db7e35e924a7f6199a6a49367ef3'),
+            'obra-1-sm.webp': ('assets/obra-1.jpg',(480,640),'868ecdf69590e75cea884359513e2599dfde84423e658724b8e19f5600bc4b78'),
+            'obra-1.webp': ('assets/obra-1.jpg',(900,1200),'f7c27cf6da7713be6d7a1764bdb18cd98031a7645c458eb4f92484dc1016d03a'),
+            'obra-2-sm.webp': ('assets/obra-2.jpg',(480,640),'eae00c8de8f0dfaafaafddce0864d6b0bb445cf3cfcab11a90e2871df2f74abe'),
+            'obra-2.webp': ('assets/obra-2.jpg',(900,1200),'bf6afd6cd09c3750958e7efcaa8274059ac51c47cbd35817e2b4e16e6743b665'),
+            'produto-arame-12-nova-aco-sm.webp': ('assets/produto-arame-12-nova-aco.jpg',(480,640),'44581bd84663f073cda3c7857b68677c3753c1e7dc5a638e099b7156ebe0254b'),
+            'produto-arame-12-nova-aco.webp': ('assets/produto-arame-12-nova-aco.jpg',(900,1200),'0c673c0a5c578435525d89f0ad5a94e4b789a8db92e05dce1aa0934578eef08e'),
+            'produto-arames-final-sm.webp': ('assets/produto-arames-final.jpg',(640,480),'9efe17129f8b4a650dfe3c6cf36d35f1361302b84b2ba7a2f32f34a3a1fe38cb'),
+            'produto-arames-final.webp': ('assets/produto-arames-final.jpg',(1200,900),'be0bf7c8249e303e8d5f087546ee07e552b04da1fe36bf7e914c986a0749c3b7'),
+            'produto-arames-real-sm.webp': ('assets/produto-arames-real.jpg',(480,640),'f50efc0b3c44bad1e97c742105b85c3cb980e827162710d31d87e24692fcb6fe'),
+            'produto-arames-real.webp': ('assets/produto-arames-real.jpg',(900,1200),'0708512085404cc2d869dcf74027983118ee4cb1f257bf44884151f894a14134'),
+            'produto-colunas-catalogo-sm.webp': ('assets/produto-colunas-catalogo.png',(512,640),'7dcf3af2c0291c566f27e93a2c033ab7a2f8f3829a84ac1512f4771e4999f4ac'),
+            'produto-colunas-catalogo.webp': ('assets/produto-colunas-catalogo.png',(960,1200),'5416a6a7c6ece65a4222aff6381e2444cce03a2644d03f93935508a136201f49'),
+            'produto-colunas-final-sm.webp': ('assets/produto-colunas-final.jpg',(480,640),'9d28847364bb3570cca4a39eedb520797420abaf7ebb61a8dee76fe2be5663b0'),
+            'produto-colunas-final.webp': ('assets/produto-colunas-final.jpg',(900,1200),'02b9376ddedea8322c06dd940732275637f2c312045934906b4c94f5637f1428'),
+            'produto-colunas-real-sm.webp': ('assets/produto-colunas-real.jpg',(480,640),'f18f2d2f7fe83309b96c918084ace9da79b8f3807b78c8f6ca12847b5295fdf6'),
+            'produto-colunas-real.webp': ('assets/produto-colunas-real.jpg',(900,1200),'541a9a2fd16c46be7514a369a5eaf3d18dd5aa4bac2b2994fe9e76ea4ab78ac5'),
+            'produto-corte-dobra-final-sm.webp': ('assets/produto-corte-dobra-final.jpg',(480,640),'d5bbccfb8dc49d0272fef774aba42f8948ed716e114cb60dc46bb0c7f092d3fb'),
+            'produto-corte-dobra-final.webp': ('assets/produto-corte-dobra-final.jpg',(900,1200),'f47560e6a681824ff2bb9ed6935801e257f7ed347d5388fc14ffcc45d7f17e78'),
+            'produto-corte-dobra-real-sm.webp': ('assets/produto-corte-dobra-real.jpg',(480,640),'b8da5e231915c118c9d7889cc23e276c91df6044aaf223acff5f1a6c6519abfa'),
+            'produto-corte-dobra-real.webp': ('assets/produto-corte-dobra-real.jpg',(900,1200),'58b48f1d14226f050619501a6ae42d4ac1bff4a1e71dd7211b223e9812b5f367'),
+            'produto-estacas-final-sm.webp': ('assets/produto-estacas-final.jpg',(640,567),'3d83b2fe88e5a452921aef5abac4662c539ce6fa2868a134e3bd4f74439520d1'),
+            'produto-estacas-final.webp': ('assets/produto-estacas-final.jpg',(1200,1064),'c891690ccb0ec8438eb706e35d5180b26642de1a38c50f34ce936ef66fa1936a'),
+            'produto-estacas-realista-sm.webp': ('assets/produto-estacas-realista.png',(480,640),'0ce53dd578d2117b8b9ab63360c6feedb0403113c5e621568fb82027eaccad2c'),
+            'produto-estacas-realista.webp': ('assets/produto-estacas-realista.png',(900,1200),'8b36b85871f35af043a4286ba348c2391ffdf692a721c38be5720edfe166f71a'),
+            'produto-malha-pop-real-sm.webp': ('assets/produto-malha-pop-real.jpg',(480,640),'9337d7c7ea097ccc1bdcec1124e9b16a946f1b4563a1f6e710ca28057a36002d'),
+            'produto-malha-pop-real.webp': ('assets/produto-malha-pop-real.jpg',(900,1200),'cbdd78ed77be30060f0c5a46737889d2b6923dc2b85c9b85337e899c80e31ee3'),
+            'produto-pregos-final-sm.webp': ('assets/produto-pregos-final.jpg',(640,480),'c11340891c53cb4ebeb7e842403d61d85fea906ba6680b06d6324794309f2694'),
+            'produto-pregos-final.webp': ('assets/produto-pregos-final.jpg',(1200,900),'8fbe7c1c2579bd5f7a915a4e6cbf00aba117b605376a3fec9b830d8c8b88c95d'),
+            'produto-pregos-real-sm.webp': ('assets/produto-pregos-real.jpg',(480,640),'e982522d1772bd4b4824f070795715f6de705ad89005bd559d1504fc9c085ef5'),
+            'produto-pregos-real.webp': ('assets/produto-pregos-real.jpg',(900,1200),'673346b28004a9e6da147bad0bbe4d96366c969c36ba731f94eb84f373369f5a'),
+            'produto-sapatas-final-sm.webp': ('assets/produto-sapatas-final.jpg',(480,640),'2744454f0d28d80aea0aedb04f93910a1d1105a311b0c89bc49f070b1d7ffa84'),
+            'produto-sapatas-final.webp': ('assets/produto-sapatas-final.jpg',(900,1200),'dd469c831e9109ce66383a513b13e92e01572562ff10882fd2f388b87f7c2d5a'),
+            'produto-sapatas-real-sm.webp': ('assets/produto-sapatas-real.jpg',(480,640),'3c3e23509782a43321d682b1879b0bdda1c93f3992b50cb26ab7d1057591da16'),
+            'produto-sapatas-real.webp': ('assets/produto-sapatas-real.jpg',(900,1200),'6966c40919420c15462a370af3c916a3cd3a3087d79e3019401114c6d77b61b8'),
+            'produto-sapatas-sem-dedo-sm.webp': ('assets/produto-sapatas-sem-dedo.jpg',(526,640),'a07dbe7df9091aab550f6ec16c8719cbc8bbbff23ae31830a386ebf78eb4c625'),
+            'produto-sapatas-sem-dedo.webp': ('assets/produto-sapatas-sem-dedo.jpg',(986,1200),'4dd073cfb13742803885ad9d514b3f7c36587cfb191637c966e3279ad041628c'),
+            'produto-vergalhoes-final-sm.webp': ('assets/produto-vergalhoes-final.jpg',(640,480),'c903f4ac10ce33aa667d101a421171460510edc311b37b5edfd9ab2b097cc1fa'),
+            'produto-vergalhoes-final.webp': ('assets/produto-vergalhoes-final.jpg',(1200,900),'798cd401cbb9b0edb0d6c80ecd6bc73030205741f898c2a62146e3ef94f86c35'),
+            'produto-vergalhoes-realista-sm.webp': ('assets/produto-vergalhoes-realista.png',(480,640),'a6f967d087d339a51d1310b7f55f37ee1a3a2597c1f961a496b5f3ebc655d586'),
+            'produto-vergalhoes-realista.webp': ('assets/produto-vergalhoes-realista.png',(900,1200),'11be2425fba64150cb69e65df533105824f1221664de2f2cf521bce2f6d17c0d'),
+            'produto-vigas-real-sm.webp': ('assets/produto-vigas-real.jpg',(480,640),'949d68e6231114ba872c84de83f69dc32dd919192f287e65a46820a4e219d64b'),
+            'produto-vigas-real.webp': ('assets/produto-vigas-real.jpg',(900,1200),'ba62f8321b3acddec8912c9bd3f0bad586162a2c204f1dc399027e5dc8fd12d1'),
+          }
+
+          ok=0; bad=[]
+          for name,(srcpath,size,expected) in specs.items():
+            im=ImageOps.exif_transpose(Image.open(srcpath))
+            if "A" not in im.mode: im=im.convert("RGB")
+            im=im.resize(size,Image.Resampling.LANCZOS)
+            b=io.BytesIO(); im.save(b,"WEBP",quality=78,method=6,exact=False)
+            h=hashlib.sha256(b.getvalue()).hexdigest()
+            if h==expected:
+              ok+=1
+            else:
+              bad.append((name,len(b.getvalue()),h,expected))
+          print("WEBP_MATCHES",ok,"OF",len(specs))
+          for x in bad: print("WEBP_MISMATCH",x)
+
+          def find_png(label,sources,size,expected):
+            for srcpath in sources:
+              src=ImageOps.exif_transpose(Image.open(srcpath))
+              for res_name,res in [("LANCZOS",Image.Resampling.LANCZOS),("BICUBIC",Image.Resampling.BICUBIC)]:
+                im=src.resize(size,res)
+                for optimize in (False,True):
+                  for level in range(0,10):
+                    b=io.BytesIO(); im.save(b,"PNG",optimize=optimize,compress_level=level)
+                    if hashlib.sha256(b.getvalue()).hexdigest()==expected:
+                      print("PNG_EXACT",label,srcpath,res_name,optimize,level,len(b.getvalue()))
+                      return
+            print("PNG_NO_MATCH",label)
+
+          find_png("favicon",["assets/favicon-nova-aco.png"],(192,192),"a5416d96f977b405cffe392532234605172349206659f9235855181b3c228ddd")
+          find_png("logo",["assets/logo-metalica-transparente.png","assets/logo-transparent.png"],(520,207),"874b244f977514c9abda067feab4b45ddc58fa6fa6df7704236ef1531a71ab7c")
+
+          src=ImageOps.exif_transpose(Image.open("assets/capa-nova-aco.png")).convert("RGB").resize((1672,941),Image.Resampling.LANCZOS)
+          found=False
+          for q in range(65,101):
+            for progressive in (False,True):
+              for optimize in (False,True):
+                for subsampling in (0,1,2):
+                  b=io.BytesIO()
+                  src.save(b,"JPEG",quality=q,progressive=progressive,optimize=optimize,subsampling=subsampling)
+                  if hashlib.sha256(b.getvalue()).hexdigest()=="b4f33a9ac0bb75796afd455785447398d2211d814e2d1e6091162abbdfe84275":
+                    print("JPEG_EXACT",q,progressive,optimize,subsampling,len(b.getvalue()))
+                    found=True; raise SystemExit(0)
+          print("JPEG_NO_MATCH")
