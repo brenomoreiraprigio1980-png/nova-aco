@@ -18,7 +18,7 @@
 <meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Anton&family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet">
 <link rel="icon" type="image/png" sizes="512x512" href="/assets/favicon-nova-aco.png?v=20260929">
 <link rel="apple-touch-icon" href="/assets/favicon-nova-aco.png?v=20260929">
 <link rel="preload" as="image" href="/assets/logo-metalica-transparente.png">
@@ -50,11 +50,11 @@
   --shadow-sm:0 10px 26px rgba(8,40,68,.09);
   --max:1200px;
   --head:"Anton",Impact,"Arial Narrow",sans-serif;
-  --ui:"Space Grotesk","DM Sans",Arial,sans-serif;
+  --ui:Arial,Helvetica,sans-serif;
 }
 *{box-sizing:border-box}
 html{scroll-behavior:smooth;scroll-padding-top:150px}
-body{margin:0;background:var(--paper);color:var(--ink);font-family:"DM Sans",Arial,sans-serif;font-size:17px;line-height:1.65;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:Arial,Helvetica,sans-serif;font-size:17px;line-height:1.65;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
 img,video,iframe{display:block;max-width:100%}
 a{color:inherit;text-decoration:none}
 button,input,textarea,select{font:inherit;color:inherit}
@@ -629,17 +629,52 @@ body{font-feature-settings:"kern" 1,"liga" 1}
 .service-point strong,.timeline strong,.step strong,.fact-list strong{font-size:1.02rem}
 .tile span{font-size:1rem}
 
-/* Fundo geral do site: luz azul suave, fixa atrás do conteúdo */
-body{background:#eef4f8}
+/* Fundo geral do site: degradê suave em tons de azul-céu, fixo atrás do conteúdo */
+body{background:#f3f7fb}
 body:before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;
   background:
-    radial-gradient(60vw 50vh at 8% 12%,rgba(92,196,255,.22),transparent 70%),
-    radial-gradient(55vw 55vh at 95% 40%,rgba(31,111,178,.16),transparent 70%),
-    radial-gradient(70vw 50vh at 40% 105%,rgba(140,202,240,.22),transparent 70%),
-    linear-gradient(115deg,transparent 30%,rgba(255,255,255,.55) 45%,transparent 60%),
-    linear-gradient(180deg,#f6f9fc 0%,#e9f1f7 50%,#dfeaf2 100%)}
-.section-white{background:rgba(255,255,255,.55)}
-.section-blue,.section-steel{background:linear-gradient(160deg,rgba(214,232,244,.55),rgba(236,243,248,.35) 55%,rgba(205,224,238,.5))}
+    radial-gradient(45vmax 40vmax at 0% 0%,rgba(125,196,245,.42),transparent 62%),
+    radial-gradient(40vmax 38vmax at 100% 22%,rgba(170,205,240,.45),transparent 62%),
+    radial-gradient(45vmax 40vmax at 18% 88%,rgba(190,228,250,.55),transparent 62%),
+    radial-gradient(38vmax 34vmax at 92% 100%,rgba(118,170,225,.30),transparent 62%),
+    radial-gradient(30vmax 26vmax at 55% 45%,rgba(255,255,255,.85),transparent 70%),
+    linear-gradient(160deg,#eef5fb 0%,#f7fafd 45%,#e9f1f9 100%)}
+.section-white{background:rgba(255,255,255,.35)}
+.section-blue,.section-steel{background:rgba(226,238,248,.35)}
+
+/* Página de contato: tipografia mais cuidada */
+.contact-card{padding:18px 20px;gap:16px}
+.contact-card h3{margin:0 0 3px;color:#3b83bd;font:600 .72rem/1 var(--ui);letter-spacing:.16em}
+.contact-card span{font:600 1.02rem/1.35 Arial,Helvetica,sans-serif;color:#0d2a45;letter-spacing:0;overflow-wrap:anywhere}
+.contact-card.highlight span{font-size:1.15rem;color:#fff}
+.contact-card>.ico:first-child{width:44px;height:44px}
+.contact-block h2{margin:0 0 8px;font:400 2rem/1 var(--head);letter-spacing:.02em;
+  background:linear-gradient(100deg,#0a2b50,#1f6fb2);-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent}
+.contact-block h3{font:600 .78rem/1.2 var(--ui);letter-spacing:.14em;color:#3b83bd;margin-bottom:10px}
+.contact-block p{font-size:1rem;line-height:1.6;color:#44607a}
+.faq summary{font:600 1rem/1.45 Arial,Helvetica,sans-serif;color:#0d2a45}
+.faq details p{font-size:.98rem;line-height:1.65}
+.review-form label,.quote-form label,.quote-form legend{font:600 .86rem Arial,Helvetica,sans-serif;letter-spacing:.01em}
+@media(max-width:620px){
+  .contact-card span{font-size:.98rem}
+  .contact-block h2{font-size:1.8rem}
+}
+
+/* Capa com foto do pátio */
+.hero-media img{width:100%;height:100%;object-fit:cover;object-position:40% 60%}
+.hero:after{background:
+  linear-gradient(90deg,rgba(3,12,26,.92) 0%,rgba(4,22,46,.78) 40%,rgba(6,36,68,.30) 72%,rgba(6,36,68,.10) 100%),
+  linear-gradient(0deg,rgba(3,12,26,.55) 0%,transparent 35%)}
+@media(max-width:620px){
+  .hero-media img{object-position:22% center}
+  .hero:after{background:linear-gradient(180deg,rgba(3,12,26,.55) 0%,rgba(4,20,40,.80) 50%,rgba(3,12,26,.94) 100%)}
+}
+/* Textos em Arial */
+body{font-family:Arial,Helvetica,sans-serif}
+.frame-video{width:100%;height:520px;object-fit:cover;display:block}
+@media(min-width:1600px){.frame-video{height:620px}}
+@media(max-width:960px){.frame-video{height:420px}}
+@media(max-width:620px){.frame-video{height:360px}}
 </style>
 <script>document.documentElement.classList.add('js')</script>
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "LocalBusiness", "name": "Nova Aço", "url": "https://novaacoarmado.com.br/", "image": "https://novaacoarmado.com.br/assets/capa-nova-aco.png", "logo": "https://novaacoarmado.com.br/assets/logo-metalica-transparente.png", "telephone": "+5511984531598", "email": "novaco2505@gmail.com", "address": {"@type": "PostalAddress", "streetAddress": "Rua Macapá, 46 - Jardim do Líbano", "addressLocality": "Barueri", "addressRegion": "SP", "postalCode": "06448-200", "addressCountry": "BR"}, "openingHoursSpecification": [{"@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"], "opens": "08:00", "closes": "17:48"}], "areaServed": ["Barueri", "Jandira", "Itapevi", "Osasco", "Carapicuíba", "Cotia", "Santana de Parnaíba"], "sameAs": ["https://www.instagram.com/nova_aco_armado/"], "brand": [{"@type": "Brand", "name": "Gerdau"}, {"@type": "Brand", "name": "ArcelorMittal"}, {"@type": "Brand", "name": "Cimec"}]}</script>
@@ -676,12 +711,12 @@ body:before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;
         <a class="btn btn-outline" href="https://wa.me/5511984531598?text=Ol%C3%A1%20Nova%20A%C3%A7o%21%20Quero%20or%C3%A7ar%20vigas." target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true" class="ico"><path fill="currentColor" d="M19.05 4.91A9.82 9.82 0 0 0 12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38a9.9 9.9 0 0 0 4.74 1.21h.01c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.91-7.01Zm-7.01 15.24h-.01a8.2 8.2 0 0 1-4.19-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.2 8.2 0 0 1-1.26-4.38c0-4.54 3.7-8.23 8.24-8.23 2.2 0 4.27.86 5.82 2.42a8.18 8.18 0 0 1 2.41 5.82c0 4.54-3.7 8.23-8.22 8.23Zm4.52-6.16c-.25-.12-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.13-.16.24-.64.8-.78.97-.14.16-.29.18-.54.06-.25-.12-1.05-.39-1.99-1.23-.74-.66-1.23-1.47-1.38-1.72-.14-.25-.01-.38.11-.5.11-.11.25-.29.37-.43.13-.15.17-.25.25-.41.08-.17.04-.31-.02-.43-.06-.12-.56-1.34-.76-1.84-.2-.48-.41-.42-.56-.43h-.48c-.17 0-.43.06-.66.31-.22.25-.86.85-.86 2.07 0 1.22.89 2.4 1.01 2.56.12.17 1.75 2.67 4.23 3.74.59.26 1.05.41 1.41.52.59.19 1.13.16 1.56.1.48-.07 1.47-.6 1.67-1.18.21-.58.21-1.07.14-1.18-.06-.1-.22-.16-.47-.28Z"/></svg> Consultar orçamento</a></div>
     </article>
     <article class="product-card reveal" id="colunas" data-group="estrutura">
-      <div class="product-photo" data-gallery><img src="/assets/produto-colunas-catalogo.png" alt="Colunas armadas Nova Aço" loading="lazy" decoding="async" data-gallery-main><div class="thumbs"><button type="button" class="thumb active" data-thumb data-src="/assets/produto-colunas-catalogo.png" data-srcset="" data-alt="Colunas armadas Nova Aço" aria-label="Ver foto 1"><img src="/assets/produto-colunas-catalogo.png" alt="" loading="lazy"></button><button type="button" class="thumb" data-thumb data-src="/assets/produto-colunas-real.jpg" data-srcset="" data-alt="Colunas armadas identificadas Nova Aço" aria-label="Ver foto 2"><img src="/assets/produto-colunas-real.jpg" alt="" loading="lazy"></button><button type="button" class="thumb" data-thumb data-src="/assets/produto-colunas-final.jpg" data-srcset="" data-alt="Armações de colunas Nova Aço" aria-label="Ver foto 3"><img src="/assets/produto-colunas-final.jpg" alt="" loading="lazy"></button></div></div>
+      <div class="product-photo" data-gallery><img src="/assets/produto-colunas-catalogo.png" alt="Colunas armadas Nova Aço" loading="lazy" decoding="async" data-gallery-main><div class="thumbs"><button type="button" class="thumb active" data-thumb data-src="/assets/produto-colunas-catalogo.png" data-srcset="" data-alt="Colunas armadas Nova Aço" aria-label="Ver foto 1"><img src="/assets/produto-colunas-catalogo.png" alt="" loading="lazy"></button><button type="button" class="thumb" data-thumb data-src="/assets/produto-colunas-final.jpg" data-srcset="" data-alt="Armações de colunas Nova Aço" aria-label="Ver foto 2"><img src="/assets/produto-colunas-final.jpg" alt="" loading="lazy"></button></div></div>
       <div class="product-copy"><p class="product-tag">Estrutura</p><h2>Colunas</h2><p>Armações para pilares e colunas, preparadas para facilitar a execução no canteiro conforme o pedido.</p>
         <a class="btn btn-outline" href="https://wa.me/5511984531598?text=Ol%C3%A1%20Nova%20A%C3%A7o%21%20Quero%20or%C3%A7ar%20colunas." target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true" class="ico"><path fill="currentColor" d="M19.05 4.91A9.82 9.82 0 0 0 12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38a9.9 9.9 0 0 0 4.74 1.21h.01c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.91-7.01Zm-7.01 15.24h-.01a8.2 8.2 0 0 1-4.19-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.2 8.2 0 0 1-1.26-4.38c0-4.54 3.7-8.23 8.24-8.23 2.2 0 4.27.86 5.82 2.42a8.18 8.18 0 0 1 2.41 5.82c0 4.54-3.7 8.23-8.22 8.23Zm4.52-6.16c-.25-.12-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.13-.16.24-.64.8-.78.97-.14.16-.29.18-.54.06-.25-.12-1.05-.39-1.99-1.23-.74-.66-1.23-1.47-1.38-1.72-.14-.25-.01-.38.11-.5.11-.11.25-.29.37-.43.13-.15.17-.25.25-.41.08-.17.04-.31-.02-.43-.06-.12-.56-1.34-.76-1.84-.2-.48-.41-.42-.56-.43h-.48c-.17 0-.43.06-.66.31-.22.25-.86.85-.86 2.07 0 1.22.89 2.4 1.01 2.56.12.17 1.75 2.67 4.23 3.74.59.26 1.05.41 1.41.52.59.19 1.13.16 1.56.1.48-.07 1.47-.6 1.67-1.18.21-.58.21-1.07.14-1.18-.06-.1-.22-.16-.47-.28Z"/></svg> Consultar orçamento</a></div>
     </article>
     <article class="product-card reveal" id="sapatas" data-group="estrutura">
-      <div class="product-photo" data-gallery><img src="/assets/produto-sapatas-final.jpg" alt="Sapatas armadas Nova Aço" loading="lazy" decoding="async" data-gallery-main><div class="thumbs"><button type="button" class="thumb active" data-thumb data-src="/assets/produto-sapatas-final.jpg" data-srcset="" data-alt="Sapatas armadas Nova Aço" aria-label="Ver foto 1"><img src="/assets/produto-sapatas-final.jpg" alt="" loading="lazy"></button><button type="button" class="thumb" data-thumb data-src="/assets/produto-sapatas-sem-dedo.jpg" data-srcset="" data-alt="Detalhe de sapata armada Nova Aço" aria-label="Ver foto 2"><img src="/assets/produto-sapatas-sem-dedo.jpg" alt="" loading="lazy"></button></div></div>
+      <div class="product-photo" data-gallery><img src="/assets/produto-sapatas-final.jpg" alt="Sapatas armadas Nova Aço" loading="lazy" decoding="async" data-gallery-main></div>
       <div class="product-copy"><p class="product-tag">Estrutura</p><h2>Sapatas</h2><p>Armações para sapatas e fundações conforme medidas e especificações fornecidas para o pedido.</p>
         <a class="btn btn-outline" href="https://wa.me/5511984531598?text=Ol%C3%A1%20Nova%20A%C3%A7o%21%20Quero%20or%C3%A7ar%20sapatas." target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true" class="ico"><path fill="currentColor" d="M19.05 4.91A9.82 9.82 0 0 0 12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38a9.9 9.9 0 0 0 4.74 1.21h.01c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.91-7.01Zm-7.01 15.24h-.01a8.2 8.2 0 0 1-4.19-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.2 8.2 0 0 1-1.26-4.38c0-4.54 3.7-8.23 8.24-8.23 2.2 0 4.27.86 5.82 2.42a8.18 8.18 0 0 1 2.41 5.82c0 4.54-3.7 8.23-8.22 8.23Zm4.52-6.16c-.25-.12-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.13-.16.24-.64.8-.78.97-.14.16-.29.18-.54.06-.25-.12-1.05-.39-1.99-1.23-.74-.66-1.23-1.47-1.38-1.72-.14-.25-.01-.38.11-.5.11-.11.25-.29.37-.43.13-.15.17-.25.25-.41.08-.17.04-.31-.02-.43-.06-.12-.56-1.34-.76-1.84-.2-.48-.41-.42-.56-.43h-.48c-.17 0-.43.06-.66.31-.22.25-.86.85-.86 2.07 0 1.22.89 2.4 1.01 2.56.12.17 1.75 2.67 4.23 3.74.59.26 1.05.41 1.41.52.59.19 1.13.16 1.56.1.48-.07 1.47-.6 1.67-1.18.21-.58.21-1.07.14-1.18-.06-.1-.22-.16-.47-.28Z"/></svg> Consultar orçamento</a></div>
     </article>
@@ -696,7 +731,7 @@ body:before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;
         <a class="btn btn-outline" href="https://wa.me/5511984531598?text=Ol%C3%A1%20Nova%20A%C3%A7o%21%20Quero%20or%C3%A7ar%20ferragens%20armadas." target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true" class="ico"><path fill="currentColor" d="M19.05 4.91A9.82 9.82 0 0 0 12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38a9.9 9.9 0 0 0 4.74 1.21h.01c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.91-7.01Zm-7.01 15.24h-.01a8.2 8.2 0 0 1-4.19-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.2 8.2 0 0 1-1.26-4.38c0-4.54 3.7-8.23 8.24-8.23 2.2 0 4.27.86 5.82 2.42a8.18 8.18 0 0 1 2.41 5.82c0 4.54-3.7 8.23-8.22 8.23Zm4.52-6.16c-.25-.12-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.13-.16.24-.64.8-.78.97-.14.16-.29.18-.54.06-.25-.12-1.05-.39-1.99-1.23-.74-.66-1.23-1.47-1.38-1.72-.14-.25-.01-.38.11-.5.11-.11.25-.29.37-.43.13-.15.17-.25.25-.41.08-.17.04-.31-.02-.43-.06-.12-.56-1.34-.76-1.84-.2-.48-.41-.42-.56-.43h-.48c-.17 0-.43.06-.66.31-.22.25-.86.85-.86 2.07 0 1.22.89 2.4 1.01 2.56.12.17 1.75 2.67 4.23 3.74.59.26 1.05.41 1.41.52.59.19 1.13.16 1.56.1.48-.07 1.47-.6 1.67-1.18.21-.58.21-1.07.14-1.18-.06-.1-.22-.16-.47-.28Z"/></svg> Consultar orçamento</a></div>
     </article>
     <article class="product-card reveal" id="corte-dobra" data-group="estrutura">
-      <div class="product-photo" data-gallery><img src="/assets/produto-corte-dobra-final.jpg" alt="Serviço de corte e dobra de aço" loading="lazy" decoding="async" data-gallery-main><div class="thumbs"><button type="button" class="thumb active" data-thumb data-src="/assets/produto-corte-dobra-final.jpg" data-srcset="" data-alt="Serviço de corte e dobra de aço" aria-label="Ver foto 1"><img src="/assets/produto-corte-dobra-final.jpg" alt="" loading="lazy"></button><button type="button" class="thumb" data-thumb data-src="/assets/produto-corte-dobra-real.jpg" data-srcset="" data-alt="Estribos cortados e dobrados Nova Aço" aria-label="Ver foto 2"><img src="/assets/produto-corte-dobra-real.jpg" alt="" loading="lazy"></button></div></div>
+      <div class="product-photo" data-gallery><img src="/assets/produto-corte-dobra-final.jpg" alt="Serviço de corte e dobra de aço" loading="lazy" decoding="async" data-gallery-main></div>
       <div class="product-copy"><p class="product-tag">Serviço</p><h2>Corte e dobra</h2><p>Preparação das barras e peças para atender às medidas solicitadas pelo cliente.</p>
         <a class="btn btn-outline" href="https://wa.me/5511984531598?text=Ol%C3%A1%20Nova%20A%C3%A7o%21%20Quero%20consultar%20corte%20e%20dobra." target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true" class="ico"><path fill="currentColor" d="M19.05 4.91A9.82 9.82 0 0 0 12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38a9.9 9.9 0 0 0 4.74 1.21h.01c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.91-7.01Zm-7.01 15.24h-.01a8.2 8.2 0 0 1-4.19-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.2 8.2 0 0 1-1.26-4.38c0-4.54 3.7-8.23 8.24-8.23 2.2 0 4.27.86 5.82 2.42a8.18 8.18 0 0 1 2.41 5.82c0 4.54-3.7 8.23-8.22 8.23Zm4.52-6.16c-.25-.12-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.13-.16.24-.64.8-.78.97-.14.16-.29.18-.54.06-.25-.12-1.05-.39-1.99-1.23-.74-.66-1.23-1.47-1.38-1.72-.14-.25-.01-.38.11-.5.11-.11.25-.29.37-.43.13-.15.17-.25.25-.41.08-.17.04-.31-.02-.43-.06-.12-.56-1.34-.76-1.84-.2-.48-.41-.42-.56-.43h-.48c-.17 0-.43.06-.66.31-.22.25-.86.85-.86 2.07 0 1.22.89 2.4 1.01 2.56.12.17 1.75 2.67 4.23 3.74.59.26 1.05.41 1.41.52.59.19 1.13.16 1.56.1.48-.07 1.47-.6 1.67-1.18.21-.58.21-1.07.14-1.18-.06-.1-.22-.16-.47-.28Z"/></svg> Consultar serviço</a></div>
     </article>
@@ -722,11 +757,11 @@ body:before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;
         <div class="material-copy"><h3>Arame 12</h3><p>Arame para amarrações e aplicações gerais do dia a dia da obra.</p><a class="text-link" href="https://wa.me/5511984531598?text=Ol%C3%A1%20Nova%20A%C3%A7o%21%20Quero%20or%C3%A7ar%20arame%2012." target="_blank" rel="noopener">Consultar <svg viewBox="0 0 24 24" aria-hidden="true" class="ico ico-arrow"><path d="M5 12h14m-6-6 6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></a></div>
       </article>
       <article class="material reveal" id="arames" data-group="materiais">
-        <div class="product-photo" data-gallery><img src="/assets/produto-arame-recozido-novo.jpg" alt="Rolo de arame recozido" loading="lazy" decoding="async" data-gallery-main><div class="thumbs"><button type="button" class="thumb active" data-thumb data-src="/assets/produto-arame-recozido-novo.jpg" data-srcset="" data-alt="Rolo de arame recozido" aria-label="Ver foto 1"><img src="/assets/produto-arame-recozido-novo.jpg" alt="" loading="lazy"></button><button type="button" class="thumb" data-thumb data-src="/assets/produto-arames-real.jpg" data-srcset="" data-alt="Rolos de arame recozido na Nova Aço" aria-label="Ver foto 2"><img src="/assets/produto-arames-real.jpg" alt="" loading="lazy"></button><button type="button" class="thumb" data-thumb data-src="/assets/produto-arames-final.jpg" data-srcset="" data-alt="Rolo de arame recozido" aria-label="Ver foto 3"><img src="/assets/produto-arames-final.jpg" alt="" loading="lazy"></button></div></div>
+        <div class="product-photo" data-gallery><img src="/assets/produto-arame-recozido-novo.jpg" alt="Rolo de arame recozido" loading="lazy" decoding="async" data-gallery-main></div>
         <div class="material-copy"><h3>Arame recozido</h3><p>Arame recozido e opções para amarração das ferragens.</p><a class="text-link" href="https://wa.me/5511984531598?text=Ol%C3%A1%20Nova%20A%C3%A7o%21%20Quero%20or%C3%A7ar%20arame%20recozido." target="_blank" rel="noopener">Consultar <svg viewBox="0 0 24 24" aria-hidden="true" class="ico ico-arrow"><path d="M5 12h14m-6-6 6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></a></div>
       </article>
       <article class="material reveal" id="pregos" data-group="materiais">
-        <div class="product-photo" data-gallery><img src="/assets/produto-pregos-novo.jpg" alt="Pregos para obra" loading="lazy" decoding="async" data-gallery-main><div class="thumbs"><button type="button" class="thumb active" data-thumb data-src="/assets/produto-pregos-novo.jpg" data-srcset="" data-alt="Pregos para obra" aria-label="Ver foto 1"><img src="/assets/produto-pregos-novo.jpg" alt="" loading="lazy"></button><button type="button" class="thumb" data-thumb data-src="/assets/produto-pregos-real.jpg" data-srcset="" data-alt="Pacotes de pregos Gerdau" aria-label="Ver foto 2"><img src="/assets/produto-pregos-real.jpg" alt="" loading="lazy"></button><button type="button" class="thumb" data-thumb data-src="/assets/produto-pregos-final.jpg" data-srcset="" data-alt="Pregos" aria-label="Ver foto 3"><img src="/assets/produto-pregos-final.jpg" alt="" loading="lazy"></button></div></div>
+        <div class="product-photo" data-gallery><img src="/assets/produto-pregos-novo.jpg" alt="Pregos para obra" loading="lazy" decoding="async" data-gallery-main><div class="thumbs"><button type="button" class="thumb active" data-thumb data-src="/assets/produto-pregos-novo.jpg" data-srcset="" data-alt="Pregos para obra" aria-label="Ver foto 1"><img src="/assets/produto-pregos-novo.jpg" alt="" loading="lazy"></button><button type="button" class="thumb" data-thumb data-src="/assets/produto-pregos-real.jpg" data-srcset="" data-alt="Pacotes de pregos Gerdau" aria-label="Ver foto 2"><img src="/assets/produto-pregos-real.jpg" alt="" loading="lazy"></button></div></div>
         <div class="material-copy"><h3>Pregos</h3><p>Pregos para serviços gerais da obra.</p><a class="text-link" href="https://wa.me/5511984531598?text=Ol%C3%A1%20Nova%20A%C3%A7o%21%20Quero%20or%C3%A7ar%20pregos." target="_blank" rel="noopener">Consultar <svg viewBox="0 0 24 24" aria-hidden="true" class="ico ico-arrow"><path d="M5 12h14m-6-6 6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></a></div>
       </article>
     </div>

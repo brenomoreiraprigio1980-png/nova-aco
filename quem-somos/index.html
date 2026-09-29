@@ -18,7 +18,7 @@
 <meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Anton&family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet">
 <link rel="icon" type="image/png" sizes="512x512" href="/assets/favicon-nova-aco.png?v=20260929">
 <link rel="apple-touch-icon" href="/assets/favicon-nova-aco.png?v=20260929">
 <link rel="preload" as="image" href="/assets/logo-metalica-transparente.png">
@@ -50,11 +50,11 @@
   --shadow-sm:0 10px 26px rgba(8,40,68,.09);
   --max:1200px;
   --head:"Anton",Impact,"Arial Narrow",sans-serif;
-  --ui:"Space Grotesk","DM Sans",Arial,sans-serif;
+  --ui:Arial,Helvetica,sans-serif;
 }
 *{box-sizing:border-box}
 html{scroll-behavior:smooth;scroll-padding-top:150px}
-body{margin:0;background:var(--paper);color:var(--ink);font-family:"DM Sans",Arial,sans-serif;font-size:17px;line-height:1.65;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:Arial,Helvetica,sans-serif;font-size:17px;line-height:1.65;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
 img,video,iframe{display:block;max-width:100%}
 a{color:inherit;text-decoration:none}
 button,input,textarea,select{font:inherit;color:inherit}
@@ -629,17 +629,52 @@ body{font-feature-settings:"kern" 1,"liga" 1}
 .service-point strong,.timeline strong,.step strong,.fact-list strong{font-size:1.02rem}
 .tile span{font-size:1rem}
 
-/* Fundo geral do site: luz azul suave, fixa atrás do conteúdo */
-body{background:#eef4f8}
+/* Fundo geral do site: degradê suave em tons de azul-céu, fixo atrás do conteúdo */
+body{background:#f3f7fb}
 body:before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;
   background:
-    radial-gradient(60vw 50vh at 8% 12%,rgba(92,196,255,.22),transparent 70%),
-    radial-gradient(55vw 55vh at 95% 40%,rgba(31,111,178,.16),transparent 70%),
-    radial-gradient(70vw 50vh at 40% 105%,rgba(140,202,240,.22),transparent 70%),
-    linear-gradient(115deg,transparent 30%,rgba(255,255,255,.55) 45%,transparent 60%),
-    linear-gradient(180deg,#f6f9fc 0%,#e9f1f7 50%,#dfeaf2 100%)}
-.section-white{background:rgba(255,255,255,.55)}
-.section-blue,.section-steel{background:linear-gradient(160deg,rgba(214,232,244,.55),rgba(236,243,248,.35) 55%,rgba(205,224,238,.5))}
+    radial-gradient(45vmax 40vmax at 0% 0%,rgba(125,196,245,.42),transparent 62%),
+    radial-gradient(40vmax 38vmax at 100% 22%,rgba(170,205,240,.45),transparent 62%),
+    radial-gradient(45vmax 40vmax at 18% 88%,rgba(190,228,250,.55),transparent 62%),
+    radial-gradient(38vmax 34vmax at 92% 100%,rgba(118,170,225,.30),transparent 62%),
+    radial-gradient(30vmax 26vmax at 55% 45%,rgba(255,255,255,.85),transparent 70%),
+    linear-gradient(160deg,#eef5fb 0%,#f7fafd 45%,#e9f1f9 100%)}
+.section-white{background:rgba(255,255,255,.35)}
+.section-blue,.section-steel{background:rgba(226,238,248,.35)}
+
+/* Página de contato: tipografia mais cuidada */
+.contact-card{padding:18px 20px;gap:16px}
+.contact-card h3{margin:0 0 3px;color:#3b83bd;font:600 .72rem/1 var(--ui);letter-spacing:.16em}
+.contact-card span{font:600 1.02rem/1.35 Arial,Helvetica,sans-serif;color:#0d2a45;letter-spacing:0;overflow-wrap:anywhere}
+.contact-card.highlight span{font-size:1.15rem;color:#fff}
+.contact-card>.ico:first-child{width:44px;height:44px}
+.contact-block h2{margin:0 0 8px;font:400 2rem/1 var(--head);letter-spacing:.02em;
+  background:linear-gradient(100deg,#0a2b50,#1f6fb2);-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent}
+.contact-block h3{font:600 .78rem/1.2 var(--ui);letter-spacing:.14em;color:#3b83bd;margin-bottom:10px}
+.contact-block p{font-size:1rem;line-height:1.6;color:#44607a}
+.faq summary{font:600 1rem/1.45 Arial,Helvetica,sans-serif;color:#0d2a45}
+.faq details p{font-size:.98rem;line-height:1.65}
+.review-form label,.quote-form label,.quote-form legend{font:600 .86rem Arial,Helvetica,sans-serif;letter-spacing:.01em}
+@media(max-width:620px){
+  .contact-card span{font-size:.98rem}
+  .contact-block h2{font-size:1.8rem}
+}
+
+/* Capa com foto do pátio */
+.hero-media img{width:100%;height:100%;object-fit:cover;object-position:40% 60%}
+.hero:after{background:
+  linear-gradient(90deg,rgba(3,12,26,.92) 0%,rgba(4,22,46,.78) 40%,rgba(6,36,68,.30) 72%,rgba(6,36,68,.10) 100%),
+  linear-gradient(0deg,rgba(3,12,26,.55) 0%,transparent 35%)}
+@media(max-width:620px){
+  .hero-media img{object-position:22% center}
+  .hero:after{background:linear-gradient(180deg,rgba(3,12,26,.55) 0%,rgba(4,20,40,.80) 50%,rgba(3,12,26,.94) 100%)}
+}
+/* Textos em Arial */
+body{font-family:Arial,Helvetica,sans-serif}
+.frame-video{width:100%;height:520px;object-fit:cover;display:block}
+@media(min-width:1600px){.frame-video{height:620px}}
+@media(max-width:960px){.frame-video{height:420px}}
+@media(max-width:620px){.frame-video{height:360px}}
 </style>
 <script>document.documentElement.classList.add('js')</script>
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "LocalBusiness", "name": "Nova Aço", "url": "https://novaacoarmado.com.br/", "image": "https://novaacoarmado.com.br/assets/capa-nova-aco.png", "logo": "https://novaacoarmado.com.br/assets/logo-metalica-transparente.png", "telephone": "+5511984531598", "email": "novaco2505@gmail.com", "address": {"@type": "PostalAddress", "streetAddress": "Rua Macapá, 46 - Jardim do Líbano", "addressLocality": "Barueri", "addressRegion": "SP", "postalCode": "06448-200", "addressCountry": "BR"}, "openingHoursSpecification": [{"@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"], "opens": "08:00", "closes": "17:48"}], "areaServed": ["Barueri", "Jandira", "Itapevi", "Osasco", "Carapicuíba", "Cotia", "Santana de Parnaíba"], "sameAs": ["https://www.instagram.com/nova_aco_armado/"], "brand": [{"@type": "Brand", "name": "Gerdau"}, {"@type": "Brand", "name": "ArcelorMittal"}, {"@type": "Brand", "name": "Cimec"}]}</script>
