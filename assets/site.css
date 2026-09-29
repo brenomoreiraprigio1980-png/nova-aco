@@ -58,8 +58,8 @@ h1,h2,h3{margin:0;color:var(--fg,#111a25)}
 .tt{display:grid;justify-items:start;row-gap:.08em;margin:0;font-family:var(--head);font-weight:900;text-transform:uppercase;letter-spacing:.01em;line-height:1.08;font-size:clamp(1.45rem,1rem + 1.6vw,2.25rem)}
 .tt .tl{display:grid;max-width:100%}
 .tt .tl>span{grid-area:1/1;overflow-wrap:anywhere;text-wrap:balance}
-.tt .x{color:var(--tbx);text-shadow:0 1px 0 var(--tbx),0 2px 0 var(--tbx2),var(--tt-sh);-webkit-user-select:none;user-select:none}
-.tt .ts .x{color:var(--tsx);text-shadow:0 1px 0 var(--tsx),0 2px 0 var(--tsx2),var(--tt-sh)}
+.tt .tl::before{content:attr(data-t);content:attr(data-t) / "";grid-area:1/1;overflow-wrap:anywhere;text-wrap:balance;color:var(--tbx);text-shadow:0 1px 0 var(--tbx),0 2px 0 var(--tbx2),var(--tt-sh);-webkit-user-select:none;user-select:none;pointer-events:none}
+.tt .ts::before{color:var(--tsx);text-shadow:0 1px 0 var(--tsx),0 2px 0 var(--tsx2),var(--tt-sh)}
 .tt .f{color:var(--tb2)}
 .tt .ts .f{color:var(--ts2)}
 @supports (-webkit-background-clip:text) or (background-clip:text){
@@ -67,7 +67,7 @@ h1,h2,h3{margin:0;color:var(--fg,#111a25)}
   .tt .ts .f{background-image:linear-gradient(180deg,var(--ts1) 0%,var(--ts2) 55%,var(--ts3) 100%)}
 }
 .tt-sm{font-size:clamp(1.05rem,.92rem + .5vw,1.32rem);letter-spacing:.03em;line-height:1.15}
-.tt-sm .x{text-shadow:0 1px 0 var(--tbx),var(--tt-sh)}
+.tt-sm .tl::before{text-shadow:0 1px 0 var(--tbx),var(--tt-sh)}
 
 /* ---------- linhas dos títulos: estilo, forma e orientação diferentes ---------- */
 .tt-rule{position:relative;display:block;width:176px;height:12px;margin:16px 0 0;pointer-events:none}
