@@ -443,3 +443,12 @@ img.review-avatar{object-fit:cover}
   .review{padding:24px}
   .page-hero{padding:76px 0 58px}
 }
+
+
+/* Mídias restauradas */
+.material{padding:0;overflow:hidden}
+.material img{width:100%;height:220px;object-fit:cover;background:#d5e3eb}
+.material-copy{padding:24px}
+.material-copy p{margin:10px 0 0}
+@media(max-width:900px){.material img{height:250px}}
+@media(max-width:620px){.material img{height:230px}}
