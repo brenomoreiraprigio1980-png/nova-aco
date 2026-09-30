@@ -799,3 +799,7 @@ body::before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;ba
 .gallery-pair .photo-frame{max-width:400px}
 @media (max-width:1100px){.about-feats{grid-template-columns:minmax(0,1fr)!important}}
 @media (min-width:1200px){.about-collage{max-width:600px}}
+@media (max-width:700px){
+  .page-hero .ph-art{margin-inline:0!important;width:100%;border-radius:14px!important;border:1px solid rgba(150,200,255,.3)!important}
+  .ph-grid{padding-bottom:24px!important}
+}
