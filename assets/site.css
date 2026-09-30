@@ -753,3 +753,5 @@ body::before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;ba
 .product-copy .btn-outline{background:#fff;border-color:#fff;color:#0d3a82}
 .product-copy .btn-outline:hover{background:#e3eeff;border-color:#e3eeff;color:#0d3a82}
 .material-copy .text-link{color:#fff}
+.collage-side{aspect-ratio:4/5!important}
+.collage-side img{object-position:50% 40%}
