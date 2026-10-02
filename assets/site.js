@@ -47,7 +47,7 @@
   }
 
   /* Animação de entrada
-     - lote: o que entra na tela junto aparece em sequência (90ms), na ordem visual;
+     - lote: o que entra na tela junto aparece em sequência (160ms), na ordem visual;
        o que entra sozinho aparece na hora, sem esperar atraso fixo;
      - ao terminar, o item ganha .done e recupera as transições de hover dele. */
   window.NA_READY = true;
@@ -57,7 +57,7 @@
   const show = (el, delay) => {
     if(delay) el.style.setProperty('--d', delay + 'ms');
     el.classList.add('in');
-    setTimeout(() => finish(el), delay + 800);
+    setTimeout(() => finish(el), delay + 1400);
   };
   if(reduceMotion || !('IntersectionObserver' in window)){
     reveals.forEach(el => { el.classList.add('in'); finish(el); });
@@ -66,8 +66,8 @@
       entries
         .filter(e => e.isIntersecting)
         .sort((a,b) => (a.boundingClientRect.top - b.boundingClientRect.top) || (a.boundingClientRect.left - b.boundingClientRect.left))
-        .forEach((e,i) => { ro.unobserve(e.target); show(e.target, Math.min(i,6) * 90); });
-    },{rootMargin:'0px 0px -6% 0px',threshold:.12});
+        .forEach((e,i) => { ro.unobserve(e.target); show(e.target, Math.min(i,6) * 160); });
+    },{rootMargin:'0px 0px -10% 0px',threshold:.15});
     reveals.forEach(el => ro.observe(el));
   }
 
