@@ -1195,3 +1195,52 @@ a.contact-card::after{content:"";width:28px;height:28px;border-radius:50%;border
   box-shadow:0 0 14px rgba(43,130,246,.55)}
 @media (prefers-reduced-motion:reduce){.product-card .product-photo>img,.product-copy .btn{transition:none!important;transform:none!important}}
 
+
+/* ===== Seção "Nova Aço em Barueri": distribuição em grade ===== */
+.home-page .about-home{grid-template-columns:minmax(0,1fr)!important;grid-template-areas:"copy" "feats" "ctas" "col";row-gap:0;align-items:start}
+.home-page .about-copy{grid-area:copy}
+.home-page .about-collage{grid-area:col;margin-top:40px}
+.home-page .feats{grid-area:feats}
+.home-page .cta-banners{grid-area:ctas}
+/* título dos cards sempre cabe no card ("intermediário" é longo) */
+.feat{container-type:inline-size}
+.feat h3{font-size:min(clamp(1.42rem,.9rem + 2.3vw,2.35rem),6.4cqi)}
+@media (max-width:700px){.feat h3{font-size:min(clamp(1.18rem,.55rem + 3.6vw,1.6rem),6.6cqi)}}
+
+@media (min-width:821px){
+  .home-page .about-home{grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr)!important;
+    grid-template-areas:"copy col" "feats feats" "ctas ctas";column-gap:clamp(40px,5vw,80px)!important;row-gap:0!important;align-items:center}
+  .home-page .about-copy>p{max-width:600px}
+  .home-page .about-collage{margin-top:0;justify-self:end;max-width:540px}
+  /* três diferenciais lado a lado */
+  .home-page .feats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;max-width:none;margin-top:clamp(48px,5vw,72px);align-self:stretch}
+  .home-page .feat+.feat{margin-top:0}
+  .home-page .feat{min-height:250px;padding:28px 24px}
+  .home-page .feat-copy{max-width:60%}
+  .home-page .feat--direto .feat-copy{max-width:66%}
+  .home-page .feat h3{font-size:min(2.1rem,6.4cqi)}
+  .home-page .feat p{font-size:.92rem}
+  /* faixas de ação lado a lado e mais baixas */
+  .home-page .cta-banners{grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;max-width:none;margin-top:18px}
+  .home-page .cta-banner{min-height:112px;padding:16px 22px;border-radius:18px}
+  .home-page .cta-banner-txt{font-size:clamp(1.15rem,.8rem + .9vw,1.55rem)}
+  .home-page .cta-banner-txt::after{margin-top:10px;height:2px}
+  .home-page .wa-badge{width:clamp(62px,6vw,78px)}
+}
+@media (min-width:821px) and (max-width:1100px){
+  .home-page .feat{min-height:230px;padding:22px 18px}
+  .home-page .feat-copy{max-width:66%}
+  .home-page .feat--direto .feat-copy{max-width:74%}
+  .home-page .feat p{font-size:.84rem}
+}
+/* celular: faixas um pouco menores */
+@media (max-width:700px){
+  .home-page .cta-banner{min-height:110px;padding:14px 16px}
+  .home-page .cta-banner-txt{font-size:clamp(1.08rem,.45rem + 3.6vw,1.4rem)}
+  .home-page .cta-banner-txt::after{margin-top:10px;height:2px}
+  .home-page .wa-badge{width:clamp(60px,18vw,78px)}
+}
+/* palavra longa ("intermediário") nunca é cortada */
+.feat h3 span{white-space:nowrap}
+.feat--direto .feat-copy{max-width:none!important}
+.feat--direto p{max-width:24ch}
