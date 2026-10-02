@@ -35,10 +35,10 @@
 <link rel="apple-touch-icon" href="/assets/favicon-nova-aco.png?v=20261002">
 <link rel="preload" as="image" href="/assets/img/logo-nova-aco.webp">
 <link rel="preload" as="image" type="image/webp" href="/assets/img/capa-patio.webp" imagesrcset="/assets/img/capa-patio-sm.webp 1000w, /assets/img/capa-patio.webp 1672w" imagesizes="100vw">
-<link rel="stylesheet" href="/assets/site.css?v=20261002-1">
+<link rel="stylesheet" href="/assets/site.css?v=20261002-2">
 <script>document.documentElement.classList.add('js')</script>
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "LocalBusiness", "name": "Nova Aço", "url": "https://novaacoarmado.com.br/", "image": "https://novaacoarmado.com.br/assets/capa-nova-aco.png", "logo": "https://novaacoarmado.com.br/assets/img/logo-nova-aco.png", "telephone": "+5511984531598", "email": "novaco2505@gmail.com", "address": {"@type": "PostalAddress", "streetAddress": "Rua Macapá, 46 - Jardim do Líbano", "addressLocality": "Barueri", "addressRegion": "SP", "postalCode": "06448-200", "addressCountry": "BR"}, "openingHoursSpecification": [{"@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"], "opens": "08:00", "closes": "17:48"}], "areaServed": ["Barueri", "Jandira", "Itapevi", "Osasco", "Carapicuíba", "Cotia", "Santana de Parnaíba"], "sameAs": ["https://www.instagram.com/nova_aco_armado/"], "brand": [{"@type": "Brand", "name": "Gerdau"}, {"@type": "Brand", "name": "ArcelorMittal"}, {"@type": "Brand", "name": "Simec"}]}</script>
-</head><body>
+</head><body class="home-page">
 <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
 <div class="topbar"><div class="container topbar-inner">
   <span>Seg a sex, 8h às 17h48</span>
@@ -68,11 +68,55 @@
   <section class="section tone-dark tone-alt" id="sobre">
     <div class="container about-home">
       <div class="about-copy reveal"><h2 class="tt tt-led" aria-label="Nova Aço em Barueri"><span class="tl tb" data-t="Nova Aço"><span class="f">Nova Aço</span></span> <span class="tl ts" data-t="em Barueri"><span class="f">em Barueri</span></span></h2><p>Preparamos ferragens para obras a partir das medidas e informações fornecidas pelo cliente. O atendimento acompanha o pedido desde o orçamento até a programação de entrega.</p><p>A proposta é simples: facilitar a organização da obra, evitar improvisos no canteiro e manter uma comunicação direta durante o fornecimento.</p>
-        <ul class="about-feats">
-          <li><strong>Perto da sua obra</strong><span>Pátio próprio em Barueri, com entrega na região oeste da Grande SP.</span></li>
-          <li><strong>Do seu jeito</strong><span>Mande o projeto em PDF ou DWG, a tabela de ferro ou uma lista simples.</span></li>
-          <li><strong>Sem intermediário</strong><span>Você fala direto com quem prepara o seu pedido.</span></li>
-        </ul>
+
+        <div class="home-features" aria-label="Diferenciais da Nova Aço">
+          <article class="home-feature home-feature--location">
+            <div class="home-feature-copy">
+              <h3>Perto da <span>sua obra</span></h3>
+              <p>Pátio próprio em Barueri, com entrega na região oeste da Grande SP.</p>
+            </div>
+            <div class="home-feature-media" aria-hidden="true">
+              <svg class="location-pin" viewBox="0 0 128 160" role="img" focusable="false">
+                <defs>
+                  <linearGradient id="pinGradient" x1="18" y1="10" x2="108" y2="146" gradientUnits="userSpaceOnUse">
+                    <stop offset="0" stop-color="#58aaff"/>
+                    <stop offset=".5" stop-color="#176fe8"/>
+                    <stop offset="1" stop-color="#073c9d"/>
+                  </linearGradient>
+                  <linearGradient id="pinEdge" x1="34" y1="28" x2="86" y2="112" gradientUnits="userSpaceOnUse">
+                    <stop offset="0" stop-color="#bfe2ff" stop-opacity=".95"/>
+                    <stop offset=".38" stop-color="#62b2ff" stop-opacity=".35"/>
+                    <stop offset="1" stop-color="#0c4caf" stop-opacity=".08"/>
+                  </linearGradient>
+                </defs>
+                <path d="M64 7C33.6 7 9 31.7 9 62.1c0 41.7 43.2 82.3 50.7 89.1a6.4 6.4 0 0 0 8.6 0C75.8 144.4 119 103.8 119 62.1 119 31.7 94.4 7 64 7Z" fill="url(#pinGradient)"/>
+                <path d="M64 8.5C34.5 8.5 10.7 32.4 10.7 61.9c0 40.2 40.6 79.5 50 88.1" fill="none" stroke="url(#pinEdge)" stroke-width="3" stroke-linecap="round"/>
+                <circle cx="64" cy="61" r="24" fill="#041c49"/>
+                <circle cx="64" cy="61" r="18" fill="#0b2d68"/>
+              </svg>
+            </div>
+          </article>
+
+          <article class="home-feature home-feature--project">
+            <div class="home-feature-copy">
+              <h3>Do seu <span>jeito</span></h3>
+              <p>Mande o projeto em PDF ou DWG, a tabela de ferro ou uma lista simples.</p>
+            </div>
+            <div class="home-feature-media">
+              <img src="/assets/img/foto-prancheta-obra.webp" alt="Projeto e planta usados para preparar o pedido" loading="lazy" decoding="async">
+            </div>
+          </article>
+
+          <article class="home-feature home-feature--direct">
+            <div class="home-feature-copy">
+              <h3>Sem <span>intermediário</span></h3>
+              <p>Você fala direto com quem prepara o seu pedido.</p>
+            </div>
+            <div class="home-feature-media">
+              <img src="/assets/img/produto-vergalhoes-realista.webp" alt="Vergalhões preparados para fornecimento" loading="lazy" decoding="async">
+            </div>
+          </article>
+        </div>
         <div class="cta-banners"><a class="cta-banner cta-banner--quote" href="https://wa.me/5511984531598?text=Ol%C3%A1%20Nova%20A%C3%A7o%21%20Gostaria%20de%20solicitar%20um%20or%C3%A7amento." target="_blank" rel="noopener" aria-label="Pedir orçamento"><span class="cta-banner-photo" aria-hidden="true"><img src="/assets/img/faixa-aco-sm.webp" srcset="/assets/img/faixa-aco-sm.webp 1000w, /assets/img/faixa-aco.webp 1672w" sizes="(max-width: 700px) 60vw, 340px" alt="" width="1672" height="941" loading="lazy" decoding="async"></span><span class="cta-banner-txt"><span>Pedir</span><span class="cta-banner-hl">orçamento</span></span></a><a class="cta-banner cta-banner--company" href="/quem-somos/" aria-label="Conheça a empresa"><span class="cta-banner-photo" aria-hidden="true"><img src="/assets/img/foto-camiseta-obra-sm.webp" srcset="/assets/img/foto-camiseta-obra-sm.webp 512w, /assets/img/foto-camiseta-obra.webp 960w" sizes="(max-width: 700px) 60vw, 340px" alt="" width="960" height="1200" loading="lazy" decoding="async"></span><span class="cta-banner-txt"><span>Conheça</span><span class="cta-banner-hl">a empresa</span></span></a></div>
       </div>
       <div class="about-collage reveal">
