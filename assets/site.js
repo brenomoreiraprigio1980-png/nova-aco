@@ -52,14 +52,13 @@
      - ao terminar, o item ganha .done e recupera as transições de hover dele. */
   window.NA_READY = true;
   const reveals = [...document.querySelectorAll('.reveal, .stagger > .tile, [data-reveal-group] > *')];
-  const reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const finish = el => { el.classList.add('done'); el.style.removeProperty('--d'); };
   const show = (el, delay) => {
     if(delay) el.style.setProperty('--d', delay + 'ms');
     el.classList.add('in');
     setTimeout(() => finish(el), delay + 1400);
   };
-  if(reduceMotion || !('IntersectionObserver' in window)){
+  if(!('IntersectionObserver' in window)){
     reveals.forEach(el => { el.classList.add('in'); finish(el); });
   } else {
     const ro = new IntersectionObserver(entries => {

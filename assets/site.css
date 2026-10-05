@@ -503,10 +503,12 @@ legend{padding:0;margin:0 0 10px;font:700 .85rem/1.2 var(--ui);color:var(--fg)}
   .brand-list li{padding:10px 14px;font-size:.92rem}
 }
 
+/* Com "efeitos de animação" desligados no Windows/macOS o site continua animado,
+   só que mais suave: a entrada vira um esmaecer com deslocamento curto. */
 @media (prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
-  .js .reveal,.js .stagger>.tile,.js [data-reveal-group]>*{opacity:1!important;transform:none!important;transition:none!important}
-  .btn,.fab{transition:none}
+  .js .reveal:not(.done),.js .stagger>.tile:not(.done),.js [data-reveal-group]>:not(.done){
+    transform:translate3d(0,10px,0);transition:opacity .9s ease-out,transform .9s ease-out;transition-delay:var(--d,0ms)}
 }
 
 /* títulos nas partes claras: degradê metálico em dois tons de azul */
@@ -904,10 +906,7 @@ body::before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;ba
 
 /* ===== Botão "Pedir orçamento": logo do WhatsApp no lugar da foto ===== */
 
-@media (prefers-reduced-motion:reduce){
-  
-  .feat-media img,.feat-copy::before{transition:none!important;transform:none!important}
-}
+
 
 /* ===== Cards de produtos: foto inteira + painel azul inclinado no rodapé ===== */
 .tiles{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
@@ -1095,7 +1094,6 @@ a.contact-card::after{content:"";width:28px;height:28px;border-radius:50%;border
 }
 @media (prefers-reduced-motion:reduce){
   .wa-badge::after{animation:none;opacity:0}
-  .tile-img img,.material .product-photo>img,.collage-main img,.collage-side img,.cta-banner-photo img,.cta-banner-txt::after,.wa-badge{transition:none!important;transform:none!important}
 }
 
 
@@ -1165,7 +1163,7 @@ a.contact-card::after{content:"";width:28px;height:28px;border-radius:50%;border
 .chip-scroll a.active{color:#fff!important;border-color:rgba(160,210,255,.9)!important;
   background:linear-gradient(180deg,rgba(255,255,255,.14),rgba(255,255,255,0) 50%),linear-gradient(135deg,#2e8cf6,#145fcc)!important;
   box-shadow:0 0 14px rgba(43,130,246,.55)}
-@media (prefers-reduced-motion:reduce){.product-card .product-photo>img,.product-copy .btn{transition:none!important;transform:none!important}}
+
 
 
 /* ===== Seção "Nova Aço em Barueri": distribuição em grade ===== */
@@ -1276,7 +1274,7 @@ a.contact-card::after{content:"";width:28px;height:28px;border-radius:50%;border
   .qs-copy>span{font-size:clamp(.78rem,.6rem + 1vw,.9rem)}
   .qs-go{right:12px;width:36px;height:36px;margin-top:-18px;background-size:12px}
 }
-@media (prefers-reduced-motion:reduce){.qs-media img,.qs-copy::before,.qs-go{transition:none!important;transform:none!important;opacity:1!important}}
+
 
 
 /* ===== Fundo uniforme: um único azul suave atrás do site todo ===== */
@@ -1330,8 +1328,7 @@ body::after{
   body::before{animation-duration:40s}
 }
 @media(prefers-reduced-motion:reduce){
-  body::before,body::after{animation:none!important;transform:none!important;transition:none!important}
-  .js body::after{opacity:.09!important}
+  body::after{animation:none!important;transform:none!important}
 }
 .section,.cta-band,.brands,.hero,.page-hero,.service-bar,
 .section.tone-dark,.section.tone-alt,.section.reviews-blue,.cta-band.tone-dark,.cta-band.tone-alt,
@@ -1380,5 +1377,5 @@ body::after{
   .pic-card .pic-cap{padding:56px 16px 16px}
   .pic-cap span{font-size:.84rem}
 }
-@media (prefers-reduced-motion:reduce){.pic-card img,.pic-card video,.pic-cap strong::after{transition:none!important;transform:none!important}}
+
 
