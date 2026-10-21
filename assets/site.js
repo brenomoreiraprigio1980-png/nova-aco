@@ -198,3 +198,31 @@
     });
   }
 })();
+
+/* Vídeo Reels da home: toca mudo quando aparece na tela, pausa ao sair */
+(() => {
+  const v = document.querySelector('[data-reel]');
+  if(!v) return;
+  const src = v.querySelector('source[data-src]');
+  const sound = document.querySelector('[data-reel-sound]');
+  const playBtn = document.querySelector('[data-reel-play]');
+  const reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  let loaded = false, userPaused = reduce;
+  const load = () => { if(loaded || !src) return; src.src = src.dataset.src; v.load(); loaded = true; };
+  const syncPlay = () => { if(playBtn){ playBtn.classList.toggle('is-paused', v.paused); playBtn.setAttribute('aria-label', v.paused ? 'Reproduzir vídeo' : 'Pausar vídeo'); } };
+  const play = () => { load(); v.play().catch(() => {}); };
+  v.addEventListener('play', syncPlay); v.addEventListener('pause', syncPlay); syncPlay();
+  if(playBtn) playBtn.addEventListener('click', () => { if(v.paused){ userPaused = false; play(); } else { userPaused = true; v.pause(); } });
+  if(sound) sound.addEventListener('click', () => {
+    v.muted = !v.muted;
+    sound.setAttribute('aria-pressed', String(!v.muted));
+    sound.setAttribute('aria-label', v.muted ? 'Ativar som' : 'Desativar som');
+    if(!v.muted && v.paused){ userPaused = false; play(); }
+  });
+  if('IntersectionObserver' in window){
+    new IntersectionObserver(es => es.forEach(e => {
+      if(e.isIntersecting){ load(); if(!userPaused) play(); }
+      else if(!v.paused) v.pause();
+    }), {rootMargin:'200px 0px', threshold:0.35}).observe(v);
+  } else { load(); }
+})();
