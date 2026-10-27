@@ -41,50 +41,55 @@
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "LocalBusiness", "name": "Nova Aço", "url": "https://novaacoarmado.com.br/", "image": "https://novaacoarmado.com.br/assets/capa-nova-aco.png", "logo": "https://novaacoarmado.com.br/assets/img/logo-nova-aco.png", "telephone": "+5511984531598", "email": "novaco2505@gmail.com", "address": {"@type": "PostalAddress", "streetAddress": "Rua Macapá, 46 - Jardim do Líbano", "addressLocality": "Barueri", "addressRegion": "SP", "postalCode": "06448-200", "addressCountry": "BR"}, "openingHoursSpecification": [{"@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"], "opens": "08:00", "closes": "17:48"}], "areaServed": ["Barueri", "Jandira", "Itapevi", "Osasco", "Carapicuíba", "Cotia", "Santana de Parnaíba"], "sameAs": ["https://www.instagram.com/nova_aco_armado/"], "brand": [{"@type": "Brand", "name": "Gerdau"}, {"@type": "Brand", "name": "ArcelorMittal"}, {"@type": "Brand", "name": "Simec"}]}</script>
 <style id="nova-promo-styles">
 html.na-promo-open{overflow:hidden}
-.na-promo{width:min(900px,calc(100% - 48px));max-width:900px;max-height:calc(100dvh - 40px);margin:auto;padding:0;border:1px solid #6684a4;border-radius:8px;background:#06162d;color:#e4edf6;box-shadow:0 26px 110px #000b;overflow:auto;overscroll-behavior:contain}
+.na-promo{width:min(940px,calc(100% - 48px));max-width:940px;max-height:calc(100dvh - 40px);margin:auto;padding:0;border:2px solid #469aff;border-radius:8px;background:#06162d;color:#e4edf6;box-shadow:0 0 36px rgba(37,120,219,.38),0 26px 110px #000b;overflow:auto;overscroll-behavior:contain}
 .na-promo::backdrop{background:rgba(1,7,17,.86)}
 .na-promo[open]{animation:na-offer-in .2s ease-out}
-.na-promo-layout{position:relative;min-height:570px;isolation:isolate;overflow:hidden;background:#06162d}
+.na-promo-layout{position:relative;min-height:610px;isolation:isolate;overflow:hidden;background:#06162d}
 .na-promo-visual{position:absolute;inset:0;z-index:-1}
 .na-promo-photo{display:block;width:100%;height:100%;object-fit:cover;object-position:70% 65%}
 .na-promo-visual::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,#06162d 0%,rgba(6,22,45,.96) 32%,rgba(6,22,45,.76) 52%,rgba(6,22,45,.08) 100%)}
-.na-promo-copy{position:relative;display:flex;flex-direction:column;justify-content:center;width:60%;min-height:570px;min-width:0;padding:40px 44px}
+.na-promo-copy{position:relative;display:flex;flex-direction:column;justify-content:center;width:60%;min-height:610px;min-width:0;padding:40px 44px}
 .na-promo-close{position:absolute;z-index:3;top:14px;right:14px;display:grid;place-items:center;width:38px;height:38px;padding:0;border:1px solid #a9bbd3;border-radius:4px;background:#06162d;color:#edf3fa;font:400 27px/1 Arial,sans-serif;cursor:pointer}
 .na-promo-close:hover{background:#174578}
 .na-promo-close:focus-visible,.na-promo-cta:focus-visible{outline:3px solid #9ac9ff;outline-offset:4px}
-.na-promo-label{align-self:flex-start;margin:0 0 20px;padding:0;color:#91c4ff;font:800 .75rem/1.3 var(--ui);letter-spacing:.17em}
+.na-promo-label{align-self:flex-start;margin:0 0 22px;padding:10px 16px;background:#2479df;color:#f2f6fc;border-left:4px solid #d7eaff;font:900 1.02rem/1.25 var(--ui);letter-spacing:.08em;box-shadow:0 5px 24px rgba(25,102,200,.35)}
 .na-promo h2{margin:0 0 16px;color:#e9eff6;font:900 2.75rem/1.02 var(--head);text-transform:uppercase;letter-spacing:-.02em}
 .na-promo-spec{margin:0;color:#b7c8da;font:400 .98rem/1.6 var(--ui)}
 .na-promo-spec strong{color:#e0eaf5;font-weight:700}
 .na-promo-price{display:flex;align-items:baseline;gap:10px;white-space:nowrap;margin:22px 0 0;color:#e3edf7;font-family:Arial,Helvetica,sans-serif;line-height:1;font-variant-numeric:lining-nums tabular-nums}
 .na-promo-price span{font-size:1.55rem;font-weight:700}
-.na-promo-price strong{font-size:6.9rem;letter-spacing:-.065em;font-weight:800;background:linear-gradient(180deg,#f1f5fa 20%,#b2c4d8 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
+.na-promo-price strong{font-size:9.4rem;letter-spacing:-.065em;font-weight:800;background:linear-gradient(180deg,#f8fbff 12%,#e1edfa 45%,#a1bddb 60%,#eef6ff 85%);-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 0 14px rgba(68,151,255,.25))}
 .na-promo-unit{display:block;margin:4px 0 24px;color:#a9bfd6;font:400 .85rem/1.4 var(--ui)}
-.na-promo .na-promo-cta{display:flex;align-items:center;justify-content:center;min-height:52px;width:100%;max-width:340px;padding:14px 18px;border:1px solid #6aa5ed;border-radius:4px;background:#1966c8;color:#f0f5fb;font:700 .95rem/1.3 var(--ui);text-align:center;transition:background .2s}
+.na-promo .na-promo-cta{display:flex;align-items:center;justify-content:center;min-height:56px;width:100%;max-width:370px;padding:14px 18px;border:1px solid #9acfff;border-radius:4px;background:linear-gradient(180deg,#348eff,#1160c7);box-shadow:0 0 22px rgba(36,121,223,.38),inset 0 1px 0 #c4e2ff55;color:#f0f5fb;font:800 1rem/1.3 var(--ui);letter-spacing:.03em;text-align:center;transition:background .2s}
 .na-promo .na-promo-cta:hover{background:#2479e4}
 .na-promo-terms{margin:13px 0 0;max-width:340px;color:#9eb2c9;font:400 .75rem/1.55 var(--ui)}
 #na-promo-reopen[hidden]{display:none!important}
 @keyframes na-offer-in{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
 @media(max-width:740px){
  .na-promo{width:calc(100% - 24px);max-height:calc(100dvh - 24px);border-radius:7px}
- .na-promo-layout{min-height:min(670px,calc(100dvh - 26px))}
+ .na-promo-layout{min-height:min(710px,calc(100dvh - 28px))}
  .na-promo-visual{height:64%;bottom:auto}
  .na-promo-photo{object-position:50% 80%}
  .na-promo-visual::after{background:linear-gradient(180deg,rgba(6,22,45,.08) 0%,rgba(6,22,45,.03) 43%,rgba(6,22,45,.55) 72%,#06162d 100%)}
  .na-promo-copy{position:static;justify-content:flex-end;width:100%;min-height:inherit;padding:80px 26px 24px}
- .na-promo-label{position:absolute;top:24px;left:24px;max-width:calc(100% - 92px);margin:0;padding:8px 10px;background:#0b2a52;color:#e1eeff;font-size:.64rem;letter-spacing:.12em}
+ .na-promo-label{position:absolute;top:24px;left:24px;max-width:calc(100% - 92px);margin:0;padding:8px 10px;background:#2479df;color:#f2f6fc;font-size:.76rem;letter-spacing:.06em}
  .na-promo h2{max-width:300px;font-size:2rem;margin-bottom:12px}
  .na-promo h2 br{display:none}
  .na-promo-spec{font-size:.86rem;line-height:1.5}
  .na-promo-price{margin-top:14px;gap:8px}
- .na-promo-price strong{font-size:5.6rem}
+ .na-promo-price strong{font-size:6.6rem}
  .na-promo-price span{font-size:1.25rem}
  .na-promo-unit{font-size:.79rem;margin:3px 0 18px}
- .na-promo .na-promo-cta{min-height:50px;max-width:none;font-size:.9rem}
+ .na-promo .na-promo-cta{min-height:52px;max-width:none;font-size:.94rem}
  .na-promo-terms{font-size:.71rem;line-height:1.5;margin-top:11px;max-width:none}
 }
-@media(max-width:360px){.na-promo-copy{padding-inline:22px}.na-promo h2{font-size:1.75rem}.na-promo-price strong{font-size:5rem}}
+@media(max-width:360px){.na-promo-copy{padding-inline:22px}.na-promo h2{font-size:1.75rem}.na-promo-price strong{font-size:5.7rem}}
 @media(prefers-reduced-motion:reduce){.na-promo[open]{animation:none}}
+
+.na-promo-deadline{position:absolute;z-index:2;right:24px;top:78px;padding:12px 15px;background:#0b2a52;border:1px solid #84bbff;text-align:center;color:#e9f3ff;box-shadow:0 8px 20px #0004}
+.na-promo-deadline span{display:block;font:800 .65rem/1.2 var(--ui);letter-spacing:.12em}
+.na-promo-deadline strong{display:block;margin-top:4px;font:900 2.3rem/1 var(--ui);letter-spacing:-.04em}
+@media(max-width:740px){.na-promo-deadline{top:82px;right:22px;padding:10px 12px}.na-promo-deadline strong{font-size:1.8rem}.na-promo-deadline span{font-size:.59rem}}
 </style>
 </head><body class="home-page">
 <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
@@ -245,6 +250,7 @@ html.na-promo-open{overflow:hidden}
 <dialog class="na-promo" id="oferta-relampago" aria-labelledby="na-promo-title" aria-describedby="na-promo-spec na-promo-terms">
   <button class="na-promo-close" type="button" aria-label="Fechar promoção" autofocus>×</button>
   <div class="na-promo-layout">
+    <div class="na-promo-deadline" aria-hidden="true"><span>SÓ ATÉ</span><strong>31/10</strong></div>
     <div class="na-promo-visual"><img class="na-promo-photo" src="/assets/img/oferta-ferragens-reais.webp" alt="Ferragens armadas da Nova Aço com etiqueta azul da empresa" width="1080" height="1440" fetchpriority="high" decoding="async"></div>
     <div class="na-promo-copy">
       <span class="na-promo-label">OFERTA RELÂMPAGO</span>
@@ -252,7 +258,7 @@ html.na-promo-open{overflow:hidden}
       <p class="na-promo-spec" id="na-promo-spec"><strong>4 ferros de 10 mm</strong><br>Estribos de até <strong>12 × 25 cm</strong></p>
       <div class="na-promo-price" aria-label="22 reais e 90 centavos"><span>R$</span><strong>22,90</strong></div>
       <span class="na-promo-unit">por metro linear</span>
-      <a class="na-promo-cta" href="https://wa.me/5511984531598?text=Ol%C3%A1%2C%20Nova%20A%C3%A7o!%20Quero%20aproveitar%20a%20promo%C3%A7%C3%A3o%20de%20colunas%20e%20vigas%20por%20R%24%2022%2C90%20por%20metro%20linear%2C%20com%204%20ferros%20de%2010%20mm%20e%20estribos%20at%C3%A9%2012%20%C3%97%2025%20cm." target="_blank" rel="noopener">Quero aproveitar a oferta</a>
+      <a class="na-promo-cta" href="https://wa.me/5511984531598?text=Ol%C3%A1%2C%20Nova%20A%C3%A7o!%20Quero%20aproveitar%20a%20promo%C3%A7%C3%A3o%20de%20colunas%20e%20vigas%20por%20R%24%2022%2C90%20por%20metro%20linear%2C%20com%204%20ferros%20de%2010%20mm%20e%20estribos%20at%C3%A9%2012%20%C3%97%2025%20cm." target="_blank" rel="noopener">APROVEITAR AGORA</a>
       <p class="na-promo-terms" id="na-promo-terms">Pagamento à vista. Válido até <time datetime="2026-10-31">31/10/2026</time>.</p>
     </div>
   </div>
