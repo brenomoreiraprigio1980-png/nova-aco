@@ -1412,3 +1412,13 @@ body::after{
   .reel-points{gap:8px}
   .reel-points li{font-size:.72rem;letter-spacing:.14em;padding:9px 11px}
 }
+
+/* Marcas dos materiais comercializados */
+.brand-list.brand-list--logos{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.brand-list.brand-list--logos li{display:flex;align-items:center;justify-content:center;min-height:88px;padding:16px;background:#081a34;border:1px solid rgba(200,215,232,.24);border-radius:8px}
+.brand-list--logos img{display:block;max-width:100%;width:143px;height:auto;object-fit:contain}
+.brand-list--logos .brand-logo-arcelormittal{width:158px;max-height:60px}
+.brand-list--logos .brand-logo-wide{grid-column:1/-1}
+.brand-list--logos .brand-logo-wide img{width:270px;max-height:60px}
+@media(max-width:560px){.brand-list.brand-list--logos{gap:10px}.brand-list.brand-list--logos li{min-height:80px;padding:14px}}
+.brand-list.brand-list--logos .brand-logo-light{background:#edf1f5;border-color:#d7e2ef}
