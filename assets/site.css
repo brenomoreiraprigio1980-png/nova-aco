@@ -129,8 +129,9 @@ h1,h2,h3{margin:0;color:var(--fg,#111a25)}
 
 /* ---------- topo ---------- */
 .topbar{background:#050c18;color:#9fb2c6;font:600 .78rem/1 var(--ui);letter-spacing:.02em}
-.topbar-inner{display:flex;justify-content:flex-end;align-items:center;gap:24px;min-height:34px}
-.topbar-links{display:inline-flex;gap:20px}
+.topbar-inner{display:flex;flex-wrap:wrap;justify-content:flex-end;align-items:center;gap:8px 24px;min-height:34px;padding-block:7px}
+.topbar-links{display:inline-flex;flex-wrap:wrap;justify-content:flex-end;gap:8px 18px}
+.topbar-links a{white-space:nowrap;line-height:1.4}
 .topbar a{color:#e4edf7}
 .topbar a:hover{color:#fff;text-decoration:underline}
 .site-header{position:sticky;top:0;z-index:60;background:rgba(8,20,38,.95);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);border-bottom:1px solid rgba(120,170,230,.16);transition:box-shadow .25s ease}
@@ -452,6 +453,7 @@ legend{padding:0;margin:0 0 10px;font:700 .85rem/1.2 var(--ui);color:var(--fg)}
   .container{width:min(calc(100% - 32px),var(--max))}
   .topbar-hide{display:none}
   .topbar-inner{justify-content:space-between}
+  .topbar-links{justify-content:flex-start;gap:8px 14px}
   :root{--header-h:70px}
   .brand img{width:150px}
   .section{padding:56px 0}
@@ -1053,6 +1055,7 @@ body::before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;ba
 
 /* ===== Contato: cards com ícone ===== */
 .contact-cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.contact-card-sales{grid-column:1/-1}
 .contact-card{position:relative;display:grid;grid-template-columns:auto minmax(0,1fr);align-items:center;gap:14px;padding:18px 18px;
   border-radius:16px;color:#fff;
   background:linear-gradient(150deg,rgba(30,82,158,.42) 0%,rgba(8,30,70,.62) 100%);

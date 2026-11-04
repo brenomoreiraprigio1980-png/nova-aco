@@ -1,6 +1,6 @@
 (() => {
   document.documentElement.classList.add('js');
-  const WA = '5511984531598';
+  const WA = '5511984734755';
 
   /* Menu mobile */
   const menu = document.querySelector('.menu-button');
